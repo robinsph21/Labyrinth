@@ -1,7 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!--
+    External Citation
+         Date:        1/25/19
+         Problem:     Get rid of title bar from screen
+         Resource:    https://stackoverflow.com/questions/26492522/how-do-i-remove-the-title-bar-in-android-studio#35612115
+         Solution:    Use suggested method as described
+     -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
