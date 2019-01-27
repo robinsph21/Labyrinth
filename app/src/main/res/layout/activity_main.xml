@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="match_parent"
-        android:layout_weight="2.25"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/gui_left_background">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/mainMenuButton"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="Main Menu" />
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/main_menu_button" />
         </LinearLayout>
 
         <LinearLayout
@@ -36,20 +40,24 @@
             <ImageView
                 android:id="@+id/player1Deck"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:padding="15dp"
+                android:layout_height="190dp"
                 android:layout_gravity="center"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:layout_weight="1"
+                android:background="@drawable/card_back_red"
+                app:srcCompat="@drawable/number_3"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="5dp"/>
 
             <ImageView
                 android:id="@+id/currentTreasure"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:padding="15dp"
+                android:layout_height="190dp"
                 android:layout_gravity="center"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:layout_weight="1"
+                android:background="@drawable/card_front"
+                app:srcCompat="@drawable/card_book"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -61,32 +69,35 @@
             <ImageView
                 android:id="@+id/player2Deck"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:layout_height="125dp"
                 android:layout_gravity="center"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_back_yellow"
+                app:srcCompat="@drawable/nnumber_1" />
 
             <ImageView
                 android:id="@+id/player3Deck"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:layout_height="125dp"
                 android:layout_gravity="center"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_back_green"
+                app:srcCompat="@drawable/number_4" />
 
             <ImageView
                 android:id="@+id/player4Deck"
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:layout_height="125dp"
                 android:layout_gravity="center"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_back_blue"
+                app:srcCompat="@drawable/number_2" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,14 +106,36 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/currentTileBorder"
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="190dp"
                 android:layout_gravity="center"
-                android:layout_weight="9"
-                android:padding="10dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/currentTileBorder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="190dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="40dp"
+                    android:background="@drawable/tile_holder_placeholder" />
+
+                <ImageView
+                    android:id="@+id/currentTile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginRight="49dp"
+                    android:layout_marginBottom="27dp"
+                    android:layout_marginTop="5dp"
+                    android:scaleX=".85"
+                    android:scaleY=".85"
+                    android:background="@drawable/tile_corner" />
+
+            </FrameLayout>
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -117,7 +150,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Clockwise" />
+                    android:layout_marginRight="21dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_clockwise"/>
 
                 <Button
                     android:id="@+id/rotateCounterClockwise"
@@ -125,7 +161,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Counter" />
+                    android:layout_marginRight="21dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_counterclockwise" />
             </LinearLayout>
         </LinearLayout>
 
@@ -139,811 +178,875 @@
                 android:id="@+id/endTurn"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="End Turn" />
+                android:layout_gravity="center"
+                android:background="@drawable/end_turn_button"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="5dp" />
 
             <Button
                 android:id="@+id/reset"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Reset" />
+                android:layout_gravity="center"
+                android:background="@drawable/reset_button"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="25dp"/>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight=".5"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@color/colorAccent" />
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/vertical_spiral_border" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="800dp"
         android:layout_height="match_parent"
-        android:layout_weight="9"
+        android:background="@drawable/gui_right_background"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_11"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_top_left_corner"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_21"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_top_side"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_31"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/board_top_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_down" />
 
             <ImageView
                 android:id="@+id/cell_41"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/board_top_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_51"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/board_top_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_down" />
 
             <ImageView
                 android:id="@+id/cell_61"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/board_top_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_71"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/board_top_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_down" />
 
             <ImageView
                 android:id="@+id/cell_81"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/board_top_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_91"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/board_top_right_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_12"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_left_side"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_22"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/red_entry"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_32"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_42"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="270"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/item_book" />
 
             <ImageView
                 android:id="@+id/cell_52"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_62"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="270"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/item_keys" />
 
             <ImageView
                 android:id="@+id/cell_72"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_82"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/yellow_entry"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_92"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_right_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_13"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_left_side"
+                android:clickable="true"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_right" />
 
             <ImageView
                 android:id="@+id/cell_23"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/tile_stright"
+                android:clickable="true"
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_33"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_43"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_53"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_63"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pawn_yellow" />
 
             <ImageView
                 android:id="@+id/cell_73"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_83"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_93"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_right_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_left" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_14"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_left_side"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_24"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/tile_intersection"
+                android:clickable="true"
+                android:rotation="180"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pawn_red" />
 
             <ImageView
                 android:id="@+id/cell_34"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_44"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="180"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/item_emerald" />
 
             <ImageView
                 android:id="@+id/cell_54"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_64"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="270"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/item_moneybag" />
 
             <ImageView
                 android:id="@+id/cell_74"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_84"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="0"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_94"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_right_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_15"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_left_side"
+                android:clickable="true"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_right" />
 
             <ImageView
                 android:id="@+id/cell_25"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/tile_stright"
+                android:clickable="true"
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_35"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_45"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_55"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pawn_blue" />
 
             <ImageView
                 android:id="@+id/cell_65"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_75"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_85"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_95"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_right_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_left" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_16"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_left_side"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_26"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/tile_intersection"
+                android:clickable="true"
+                android:rotation="180"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_36"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_46"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/item_candle" />
 
             <ImageView
                 android:id="@+id/cell_56"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_66"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/item_crown" />
 
             <ImageView
                 android:id="@+id/cell_76"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_86"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="0"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_96"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_right_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_17"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_left_side"
+                android:clickable="true"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_right" />
 
             <ImageView
                 android:id="@+id/cell_27"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/tile_stright"
+                android:clickable="true"
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_37"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="270"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_47"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_57"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_67"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_77"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="190"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_87"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_97"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_right_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_left" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_18"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_left_side"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_28"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/green_entry"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_38"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_48"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pawn_green" />
 
             <ImageView
                 android:id="@+id/cell_58"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_68"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_intersection"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_78"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_88"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/blue_entry"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_98"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_right_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/cell_19"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:clickable="true"
+                android:scaleType="fitXY"
+                android:background="@drawable/board_bottom_left_corner" />
 
             <ImageView
                 android:id="@+id/cell_29"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:background="@drawable/board_bottom_side"
+                android:clickable="true"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_39"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_bottom_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_up" />
 
             <ImageView
                 android:id="@+id/cell_49"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_bottom_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_59"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_bottom_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_up" />
 
             <ImageView
                 android:id="@+id/cell_69"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_bottom_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_79"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_bottom_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/arrow_up" />
 
             <ImageView
                 android:id="@+id/cell_89"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/board_bottom_side"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_99"
@@ -951,8 +1054,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:padding="5dp"
-                app:srcCompat="@color/colorPrimaryDark" />
+                android:scaleType="fitXY"
+                android:background="@drawable/board_bottom_right_corner" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
