@@ -852,7 +852,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:rotation="190"
+                android:rotation="180"
                 android:scaleType="fitXY" />
 
             <ImageView
