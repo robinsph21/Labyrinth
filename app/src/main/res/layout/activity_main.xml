@@ -145,15 +145,15 @@
                 android:padding="15dp">
 
                 <Button
-                    android:id="@+id/roateClockwise"
+                    android:id="@+id/rotateClockwise"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginRight="21dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/button_clockwise"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="21dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_clockwise" />
 
                 <Button
                     android:id="@+id/rotateCounterClockwise"
@@ -230,7 +230,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/board_top_left_corner"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -239,7 +240,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/board_top_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -258,7 +260,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/board_top_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -277,7 +280,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/board_top_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -296,7 +300,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/board_top_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -305,7 +310,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/board_top_right_corner"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
         </LinearLayout>
 
@@ -321,7 +327,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_left_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -397,7 +404,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_right_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
         </LinearLayout>
 
@@ -507,7 +515,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_left_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -588,7 +597,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_right_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
         </LinearLayout>
 
@@ -699,7 +709,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_left_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -778,7 +789,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_right_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
         </LinearLayout>
 
@@ -888,7 +900,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_left_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -963,7 +976,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_right_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
         </LinearLayout>
 
@@ -978,9 +992,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:scaleType="fitXY"
-                android:background="@drawable/board_bottom_left_corner" />
+                android:background="@drawable/board_bottom_left_corner"
+                android:clickable="false"
+                android:longClickable="false"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_29"
@@ -988,7 +1003,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_bottom_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -1007,7 +1023,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_bottom_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -1026,7 +1043,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_bottom_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -1045,7 +1063,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/board_bottom_side"
-                android:clickable="true"
+                android:clickable="false"
+                android:longClickable="false"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -1053,9 +1072,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:scaleType="fitXY"
-                android:background="@drawable/board_bottom_right_corner" />
+                android:background="@drawable/board_bottom_right_corner"
+                android:clickable="false"
+                android:longClickable="false"
+                android:scaleType="fitXY" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
