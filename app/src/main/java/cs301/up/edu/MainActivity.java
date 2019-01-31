@@ -3,9 +3,10 @@ package cs301.up.edu;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import cs301.up.edu.xmlObjects.Board;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 1; j < 10; j++) {
                 ImageView imageObj = findViewById(getResources()
                         .getIdentifier("cell_" + i + j, "id", this.getPackageName()));
-                ourGameBoard.getBoardSpot(i, j).setXmlImage(imageObj);
+                ourGameBoard.getBoardSpot(i, j).setXmlObj(imageObj);
             }
         }
 
