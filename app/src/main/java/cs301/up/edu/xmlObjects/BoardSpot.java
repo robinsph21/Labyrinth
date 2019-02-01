@@ -9,11 +9,6 @@ public class BoardSpot extends XMLObject{
     private int locY;
     private int rotation;
 
-    public BoardSpot() {
-        this.locX = 0;
-        this.locY = 0;
-    }
-
     public BoardSpot(int locX, int locY) {
         this.locX = locX;
         this.locY = locY;
