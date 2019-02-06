@@ -10,8 +10,12 @@ public class XMLObject implements View.OnClickListener{
 
     }
 
+    public XMLObject(View v) {
+        setXmlObj(v);
+    }
+
     public View getXmlObj() {
-        return xmlObj;
+        return this.xmlObj;
     }
 
     public void setXmlObj(View xmlObj) {
@@ -20,6 +24,6 @@ public class XMLObject implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-
+        //Do Nothing
     }
 }

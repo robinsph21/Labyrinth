@@ -1,6 +1,5 @@
 package cs301.up.edu.xmlObjects;
 
-
 import android.view.View;
 
 public class BoardSpot extends XMLObject{
@@ -15,15 +14,15 @@ public class BoardSpot extends XMLObject{
     }
 
     public int getLocX() {
-        return locX;
+        return this.locX;
     }
 
     public int getLocY() {
-        return locY;
+        return this.locY;
     }
 
     public int getRotation() {
-        return rotation;
+        return this.rotation;
     }
 
     public void setRotation(int rotation) {

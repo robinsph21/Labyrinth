@@ -6,7 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import cs301.up.edu.xmlObjects.Board;
+import cs301.up.edu.xmlObjects.CurrentTile;
+import cs301.up.edu.xmlObjects.EndTurn;
+import cs301.up.edu.xmlObjects.MainMenu;
+import cs301.up.edu.xmlObjects.PlayerDeck;
+import cs301.up.edu.xmlObjects.Reset;
+import cs301.up.edu.xmlObjects.Rotate;
+import cs301.up.edu.xmlObjects.TreasureGoal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,17 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Get all interaction buttons and images in menu as objects
-        Button mainMenuButton = findViewById(R.id.mainMenuButton);
-        ImageView player1Deck = findViewById(R.id.player1Deck);
-        ImageView player2Deck = findViewById(R.id.player2Deck);
-        ImageView player3Deck = findViewById(R.id.player3Deck);
-        ImageView player4Deck = findViewById(R.id.player4Deck);
-        ImageView currentTreasure = findViewById(R.id.currentTreasure);
-        Button rotateClockwise = findViewById(R.id.rotateClockwise);
-        Button rotateCounterClockwise = findViewById(R.id.rotateCounterClockwise);
-        ImageView currentTile = findViewById(R.id.currentTile);
-        Button endTurn = findViewById(R.id.endTurn);
-        Button reset = findViewById(R.id.reset);
+        MainMenu mainMenuButton = new MainMenu(findViewById(R.id.mainMenuButton));
+        PlayerDeck player1Deck = new PlayerDeck(findViewById(R.id.player1Deck), "Red");
+        PlayerDeck player2Deck = new PlayerDeck(findViewById(R.id.player2Deck), "Yellow");
+        PlayerDeck player3Deck = new PlayerDeck(findViewById(R.id.player3Deck), "Green");
+        PlayerDeck player4Deck = new PlayerDeck(findViewById(R.id.player4Deck), "Blue");
+        TreasureGoal currentTreasure = new TreasureGoal(findViewById(R.id.currentTreasure));
+        Rotate rotateClockwise = new Rotate(findViewById(R.id.rotateClockwise), true);
+        Rotate rotateCounterClockwise = new Rotate(findViewById(R.id.rotateCounterClockwise), false);
+        CurrentTile currentTile = new CurrentTile(findViewById(R.id.currentTile));
+        EndTurn endTurn = new EndTurn(findViewById(R.id.endTurn));
+        Reset reset = new Reset(findViewById(R.id.reset));
 
     }
 
