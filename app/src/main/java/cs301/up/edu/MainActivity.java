@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         EndTurn endTurn = new EndTurn(findViewById(R.id.endTurn));
         Reset reset = new Reset(findViewById(R.id.reset));
 
-        Player player1 = new Player(player1Deck, currentTile, currentTreasure);
-        Player player2 = new Player(player2Deck, null, null);
-        Player player3 = new Player(player3Deck, null, null);
-        Player player4 = new Player(player4Deck, null, null);
+        Player player1 = new Player(player1Deck, currentTile, currentTreasure,null);
+        Player player2 = new Player(player2Deck, null, null,null);
+        Player player3 = new Player(player3Deck, null, null,null);
+        Player player4 = new Player(player4Deck, null, null,null);
 
     }
 

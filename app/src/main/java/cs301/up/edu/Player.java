@@ -9,16 +9,17 @@ public class Player {
     private PlayerDeck deck;
     private CurrentTile tile;
     private TreasureGoal goal;
+    private String [] myTreasures = new String[6];
 
-    public Player(PlayerDeck deck, CurrentTile tile, TreasureGoal goal) {
+
+    public Player(PlayerDeck deck, CurrentTile tile, TreasureGoal goal, String[] myTreasures) {
         this.deck = deck;
         this.tile = tile;
         this.goal = goal;
+        this.myTreasures = myTreasures;
     }
 
-    public PlayerDeck getDeck() {
-        return this.deck;
-    }
+    public PlayerDeck getDeck() { return this.deck; }
 
     public CurrentTile getTile() {
         return this.tile;
