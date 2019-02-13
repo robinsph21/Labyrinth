@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -338,7 +339,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/red_entry"
                 android:clickable="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pawn_red" />
 
             <ImageView
                 android:id="@+id/cell_32"
@@ -354,18 +356,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_book"
                 android:clickable="true"
-                android:rotation="270"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/item_book" />
+                android:rotation="180"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_52"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_moth"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -374,11 +375,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_coins"
                 android:clickable="true"
-                android:rotation="270"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/item_keys" />
+                android:rotation="180"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_72"
@@ -396,7 +396,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/yellow_entry"
                 android:clickable="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pawn_yellow" />
 
             <ImageView
                 android:id="@+id/cell_92"
@@ -440,7 +441,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_corner"
+                android:background="@drawable/tile_goblet"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -458,8 +459,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
+                android:rotation="90"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -467,17 +469,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/pawn_yellow" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_73"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_corner"
+                android:background="@drawable/tile_shield"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -524,18 +525,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_map"
                 android:clickable="true"
-                android:rotation="180"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/pawn_red" />
+                android:rotation="90"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_34"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -545,18 +545,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_crown"
                 android:clickable="true"
                 android:rotation="180"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/item_emerald" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_54"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_corner"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -565,18 +564,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_keys"
                 android:clickable="true"
                 android:rotation="270"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/item_moneybag" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_74"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -586,9 +584,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_skull"
                 android:clickable="true"
-                android:rotation="0"
+                android:rotation="270"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -633,9 +631,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:rotation="90"
+                android:rotation="270"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -643,8 +641,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_corner"
+                android:background="@drawable/tile_urn"
                 android:clickable="true"
+                android:rotation="0"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -652,10 +651,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_bow"
                 android:clickable="true"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/pawn_blue" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_65"
@@ -671,7 +669,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -681,7 +679,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_owl"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -718,9 +716,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_ring"
                 android:clickable="true"
-                android:rotation="180"
+                android:rotation="90"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -738,11 +736,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_chest"
                 android:clickable="true"
                 android:rotation="90"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/item_candle" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_56"
@@ -758,19 +755,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_gem"
                 android:clickable="true"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/item_crown" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_76"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_fox"
                 android:clickable="true"
-                android:rotation="90"
+                android:rotation="0"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -778,9 +774,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_sword"
                 android:clickable="true"
-                android:rotation="0"
+                android:rotation="270"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -837,6 +833,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/tile_stright"
                 android:clickable="true"
+                android:rotation="90"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -844,7 +841,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_bat"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -853,8 +850,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_spider"
                 android:clickable="true"
+                android:rotation="90"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -864,7 +862,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/tile_corner"
                 android:clickable="true"
-                android:rotation="180"
+                android:rotation="90"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -872,9 +870,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_ghost"
                 android:clickable="true"
-                android:rotation="90"
+                android:rotation="0"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -911,7 +909,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/green_entry"
                 android:clickable="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pawn_green" />
 
             <ImageView
                 android:id="@+id/cell_38"
@@ -927,18 +926,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_candles"
                 android:clickable="true"
-                android:rotation="90"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/pawn_green" />
+                android:rotation="0"
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_58"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_mouse"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -947,9 +945,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_intersection"
+                android:background="@drawable/tile_helmet"
                 android:clickable="true"
-                android:rotation="90"
+                android:rotation="0"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -968,7 +966,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/blue_entry"
                 android:clickable="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pawn_blue" />
 
             <ImageView
                 android:id="@+id/cell_98"
