@@ -1,4 +1,4 @@
-package cs301.up.edu;
+package cs301.up.edu.xmlObjects;
 
 import cs301.up.edu.xmlObjects.BoardEdge;
 import cs301.up.edu.xmlObjects.BoardSpot;

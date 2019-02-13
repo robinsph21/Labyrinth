@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import cs301.up.edu.xmlObjects.Board;
 import cs301.up.edu.xmlObjects.CurrentTile;
 import cs301.up.edu.xmlObjects.EndTurn;
 import cs301.up.edu.xmlObjects.MainMenu;
