@@ -2,7 +2,7 @@ package cs301.up.edu.state;
 
 public class GameState {
 
-    private int playerTurn;
+    private Player playerTurn;
     private Tile [][] gameBoard = new Tile[7][7];
 
 
@@ -15,7 +15,7 @@ public class GameState {
 
     }
 
-    public int getPlayerTurn() {
+    public Player getPlayerTurn() {
         return this.playerTurn;
     }
 
