@@ -1,10 +1,10 @@
 package cs301.up.edu.state;
 
-public class Tile {
+import cs301.up.edu.enums.Player;
+import cs301.up.edu.enums.TileType;
+import cs301.up.edu.enums.TreasureType;
 
-    enum TileType {
-        STRAIGHT, T, CORNER;
-    }
+public class Tile {
 
     private final TileType type;
     private int rotation;
@@ -75,7 +75,7 @@ public class Tile {
                     default: return new boolean[]{false, false, false, false};
                 }
             }
-            case T: {
+            case INTERSECTION: {
                 switch (rotation) {
                     case 0: return new boolean[]{true, true, false, true};
                     case 90: return new boolean[]{true, true, true, false};

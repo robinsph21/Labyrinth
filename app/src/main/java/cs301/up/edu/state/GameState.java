@@ -1,5 +1,7 @@
 package cs301.up.edu.state;
 
+import cs301.up.edu.enums.Player;
+
 public class GameState {
 
     private Player playerTurn;
