@@ -6,7 +6,7 @@ import cs301.up.edu.xmlObjects.BoardTile;
 
 public class Board {
 
-    private static final int LENGTH = 10;
+    private static final int LENGTH = 9;
     private BoardSpot[][] gameBoard = new BoardSpot[LENGTH][LENGTH];
 
     /**
@@ -50,31 +50,31 @@ public class Board {
      *      ----- ----- ----- ----- ----- ----- ----- ----- -----
      *      {   } {   } { C } {   } { C } {   } { C } {   } {   }
      *      ----- ----- ----- ----- ----- ----- ----- ----- -----
-     *                                                          (9,9)
+     *                                                          (8,8)
      */
     public Board() {
-        for (int i = 1; i < 10; i++) {
-            for (int j = 1; j < 10; j++) {
-                if (i == 1 || i == 9) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (i == 0 || i == 8) {
                     /*Make appropriate top and bottom rows BoardEdge clickable*/
                     switch (j) {
-                        case 3:
+                        case 2:
                             gameBoard[i][j] = new BoardEdge(i, j, true);
-                        case 5:
+                        case 4:
                             gameBoard[i][j] = new BoardEdge(i, j, true);
-                        case 7:
+                        case 6:
                             gameBoard[i][j] = new BoardEdge(i, j, true);
                         default:
                             gameBoard[i][j] = new BoardEdge(i, j, false);
                     }
-                } else if (j == 1 || j == 9) {
+                } else if (j == 0 || j == 8) {
                     switch (i) {
                         /*Make appropriate left and right columns BoardEdge clickable*/
-                        case 3:
+                        case 2:
                             gameBoard[i][j] = new BoardEdge(i, j, true);
-                        case 5:
+                        case 4:
                             gameBoard[i][j] = new BoardEdge(i, j, true);
-                        case 7:
+                        case 6:
                             gameBoard[i][j] = new BoardEdge(i, j, true);
                         default:
                             gameBoard[i][j] = new BoardEdge(i, j, false);
@@ -82,7 +82,7 @@ public class Board {
                 }
                 else {
                     /*Make appropriate BoardTiles fixed*/
-                    if ((i % 2 == 0) && (j % 2 == 0)) {
+                    if ((i % 2 == 1) && (j % 2 == 1)) {
                         gameBoard[i][j] = new BoardTile(i, j, true);
                     } else {
                         gameBoard[i][j] = new BoardTile(i, j, false);

@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
          */
         //Create an array to store our tiles of the board in java
         Board ourGameBoard = new Board();
-        for (int i = 1; i < 10; i++) {
-            for (int j = 1; j < 10; j++) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 ImageView imageObj = findViewById(getResources()
                         .getIdentifier("cell_" + i + j, "id", this.getPackageName()));
                 ourGameBoard.getBoardSpot(i, j).setXmlObj(imageObj);
