@@ -29,7 +29,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/main_menu_button" />
+                android:background="@drawable/button_main_menu" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +76,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/card_back_yellow"
-                app:srcCompat="@drawable/nnumber_1" />
+                app:srcCompat="@drawable/number_1" />
 
             <ImageView
                 android:id="@+id/player3Deck"
@@ -120,7 +120,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="40dp"
-                    android:background="@drawable/tile_holder_placeholder" />
+                    android:background="@drawable/current_tile_holder" />
 
                 <ImageView
                     android:id="@+id/currentTile"
@@ -180,22 +180,22 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:background="@drawable/end_turn_button"
                 android:layout_marginLeft="25dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_end_turn" />
 
             <Button
                 android:id="@+id/reset"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:background="@drawable/reset_button"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="25dp"/>
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_reset" />
         </LinearLayout>
     </LinearLayout>
 
@@ -337,7 +337,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/red_entry"
+                android:background="@drawable/entry_red"
                 android:clickable="true"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/pawn_red" />
@@ -359,7 +359,8 @@
                 android:background="@drawable/tile_book"
                 android:clickable="true"
                 android:rotation="180"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/highlight" />
 
             <ImageView
                 android:id="@+id/cell_52"
@@ -394,7 +395,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/yellow_entry"
+                android:background="@drawable/entry_yellow"
                 android:clickable="true"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/pawn_yellow" />
@@ -459,9 +460,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_bat"
                 android:clickable="true"
-                android:rotation="90"
+                android:rotation="180"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -621,7 +622,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -679,7 +680,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_owl"
+                android:background="@drawable/tile_corner"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -811,9 +812,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_ghost"
                 android:clickable="true"
-                android:rotation="90"
+                android:rotation="180"
                 android:scaleType="fitXY" />
 
             <ImageView
@@ -821,7 +822,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_corner"
+                android:background="@drawable/tile_owl"
                 android:clickable="true"
                 android:rotation="270"
                 android:scaleType="fitXY" />
@@ -841,7 +842,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_bat"
+                android:background="@drawable/tile_stright"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -870,7 +871,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_ghost"
+                android:background="@drawable/tile_dragon"
                 android:clickable="true"
                 android:rotation="0"
                 android:scaleType="fitXY" />
@@ -907,7 +908,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/green_entry"
+                android:background="@drawable/entry_green"
                 android:clickable="true"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/pawn_green" />
@@ -964,7 +965,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/blue_entry"
+                android:background="@drawable/entry_blue"
                 android:clickable="true"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/pawn_blue" />
