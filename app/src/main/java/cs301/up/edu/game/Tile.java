@@ -1,4 +1,4 @@
-package cs301.up.edu.state;
+package cs301.up.edu.game;
 
 import cs301.up.edu.enums.Player;
 import cs301.up.edu.enums.TileType;

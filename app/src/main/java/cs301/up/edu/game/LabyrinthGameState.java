@@ -1,19 +1,19 @@
-package cs301.up.edu.state;
+package cs301.up.edu.game;
 
 import cs301.up.edu.enums.Player;
 
-public class GameState {
+public class LabyrinthGameState {
 
     private Player playerTurn;
     private Tile [][] gameBoard = new Tile[7][7];
 
 
-    public GameState() {
+    public LabyrinthGameState() {
 
     }
 
     //Clone Constructor
-    public GameState(GameState state) {
+    public LabyrinthGameState(LabyrinthGameState state) {
 
     }
 
