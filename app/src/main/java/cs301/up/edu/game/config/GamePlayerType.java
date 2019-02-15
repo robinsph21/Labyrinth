@@ -1,6 +1,6 @@
-package edu.up.cs301.game.config;
+package cs301.up.edu.game.config;
 
-import edu.up.cs301.game.GamePlayer;
+import cs301.up.edu.game.GamePlayer;
 
 /**
  * class GamePlayerType

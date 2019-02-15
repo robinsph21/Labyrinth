@@ -1,4 +1,4 @@
-package edu.up.cs301.game.config;
+package cs301.up.edu.game.config;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.Log;
 
-import edu.up.cs301.game.GameMainActivity;
-import edu.up.cs301.game.GamePlayer;
-import edu.up.cs301.game.ProxyPlayer;
+import cs301.up.edu.game.GamePlayer;
+import cs301.up.edu.game.ProxyPlayer;
 
 /**
  * GameConfig class

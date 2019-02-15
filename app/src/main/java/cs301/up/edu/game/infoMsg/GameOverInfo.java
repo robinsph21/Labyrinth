@@ -1,4 +1,6 @@
-package edu.up.cs301.game.infoMsg;
+package cs301.up.edu.game.infoMsg;
+
+import cs301.up.edu.game.infoMsg.GameInfo;
 
 /**
  * A message from the game to a player that tells the player that

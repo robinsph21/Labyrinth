@@ -1,8 +1,8 @@
-package edu.up.cs301.game.actionMsg;
+package cs301.up.edu.game.actionMsg;
 
 import java.io.Serializable;
 
-import edu.up.cs301.game.GamePlayer;
+import cs301.up.edu.game.GamePlayer;
 
 /**
  * An action for a generic game.  A game action is something that a player

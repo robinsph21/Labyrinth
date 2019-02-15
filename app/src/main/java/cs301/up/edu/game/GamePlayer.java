@@ -1,6 +1,6 @@
-package edu.up.cs301.game;
+package cs301.up.edu.game;
 
-import edu.up.cs301.game.infoMsg.GameInfo;
+import cs301.up.edu.game.infoMsg.GameInfo;
 
 /**
  * A player who plays a (generic) game. Each class that implements a player for

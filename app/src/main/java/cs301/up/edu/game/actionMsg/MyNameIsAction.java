@@ -1,6 +1,6 @@
-package edu.up.cs301.game.actionMsg;
+package cs301.up.edu.game.actionMsg;
 
-import edu.up.cs301.game.GamePlayer;
+import cs301.up.edu.game.GamePlayer;
 
 /**
  * An action by which the player tells the game its name

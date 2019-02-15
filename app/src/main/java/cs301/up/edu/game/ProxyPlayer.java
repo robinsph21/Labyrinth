@@ -1,9 +1,9 @@
-package edu.up.cs301.game;
+package cs301.up.edu.game;
 
-import edu.up.cs301.game.actionMsg.GameAction;
-import edu.up.cs301.game.infoMsg.BindGameInfo;
-import edu.up.cs301.game.infoMsg.GameInfo;
-import edu.up.cs301.game.util.NetworkObjectPasser;
+import cs301.up.edu.game.actionMsg.GameAction;
+import cs301.up.edu.game.infoMsg.BindGameInfo;
+import cs301.up.edu.game.infoMsg.GameInfo;
+import cs301.up.edu.game.util.NetworkObjectPasser;
 import android.util.Log;
 
 /**

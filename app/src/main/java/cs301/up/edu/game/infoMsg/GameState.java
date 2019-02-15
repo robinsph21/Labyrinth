@@ -1,4 +1,4 @@
-package edu.up.cs301.game.infoMsg;
+package cs301.up.edu.game.infoMsg;
 
 /**
  * The state of the game. This class should be subclassed so that it holds

@@ -1,4 +1,4 @@
-package edu.up.cs301.game.util;
+package cs301.up.edu.game.util;
 
 import java.io.IOException;
 import java.io.InputStream;

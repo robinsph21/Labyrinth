@@ -1,6 +1,7 @@
-package edu.up.cs301.game.infoMsg;
+package cs301.up.edu.game.infoMsg;
 
-import edu.up.cs301.game.util.GameTimer;
+import cs301.up.edu.game.infoMsg.GameInfo;
+import cs301.up.edu.game.util.GameTimer;
 
 /**
  * The a message from to a player (typically sent by a timer) that the timer's

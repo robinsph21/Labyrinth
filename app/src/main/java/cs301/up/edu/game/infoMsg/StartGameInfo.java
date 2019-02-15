@@ -1,4 +1,4 @@
-package edu.up.cs301.game.infoMsg;
+package cs301.up.edu.game.infoMsg;
 
 /**
  * The a message from the game to a player that game is ready to start.

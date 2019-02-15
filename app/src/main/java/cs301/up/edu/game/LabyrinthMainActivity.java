@@ -1,10 +1,11 @@
-package cs301.up.edu;
+package cs301.up.edu.game;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import cs301.up.edu.R;
 import cs301.up.edu.xmlObjects.Board;
 import cs301.up.edu.xmlObjects.CurrentTile;
 import cs301.up.edu.xmlObjects.EndTurn;
@@ -14,7 +15,7 @@ import cs301.up.edu.xmlObjects.Reset;
 import cs301.up.edu.xmlObjects.Rotate;
 import cs301.up.edu.xmlObjects.TreasureGoal;
 
-public class MainActivity extends AppCompatActivity {
+public class LabyrinthMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
