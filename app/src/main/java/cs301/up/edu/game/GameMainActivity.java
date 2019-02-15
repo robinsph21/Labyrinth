@@ -82,4 +82,9 @@ public class GameMainActivity extends AppCompatActivity {
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
     }
+
+
+    //TODO: DELETE LATER
+    public void setGameOver(boolean b) {
+    }
 }

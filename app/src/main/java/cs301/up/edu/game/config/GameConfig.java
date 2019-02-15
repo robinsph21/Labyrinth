@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.util.Log;
 
+import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.ProxyPlayer;
 
