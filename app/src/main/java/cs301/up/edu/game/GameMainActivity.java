@@ -15,7 +15,7 @@ import cs301.up.edu.xmlObjects.Reset;
 import cs301.up.edu.xmlObjects.Rotate;
 import cs301.up.edu.xmlObjects.TreasureGoal;
 
-public class LabyrinthMainActivity extends AppCompatActivity {
+public class GameMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
