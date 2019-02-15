@@ -1,4 +1,4 @@
-package cs301.up.edu.game;
+package cs301.up.edu.labyrinth;
 
 import cs301.up.edu.enums.Player;
 import cs301.up.edu.enums.TileType;
