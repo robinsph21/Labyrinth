@@ -33,7 +33,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
 	public GameConfig createDefaultConfig() {
 		
 		// Define the allowed player types
-		ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
+		ArrayList<GamePlayerType> playerTypes = new ArrayList<>();
 		
 		// a human player player type (player type 0)
 		playerTypes.add(new GamePlayerType("Local Human Player") {
@@ -42,28 +42,31 @@ public class LabyrinthMainActivity extends GameMainActivity {
 			}});
 		
 		// a computer player type (player type 1)
-		playerTypes.add(new GamePlayerType("Computer Player") {
+		playerTypes.add(new GamePlayerType("Computer Player Easy") {
 			public GamePlayer createPlayer(String name) {
-				return new LabyrinthComputerPlayer1(name);
+				return new LabyrinthComputerPlayer2(name);
 			}});
 		
 		// a computer player type (player type 2)
-		playerTypes.add(new GamePlayerType("Computer Player (GUI)") {
+		playerTypes.add(new GamePlayerType("Computer Player Hard") {
 			public GamePlayer createPlayer(String name) {
 				return new LabyrinthComputerPlayer2(name);
 			}});
 
-		// Create a game configuration class for Counter:
+
+		// Create a game configuration class for Labyrinth:
 		// - player types as given above
-		// - from 1 to 2 players
+		// - 4 Players
 		// - name of game is "Counter Game"
 		// - port number as defined above
-		GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Counter Game",
+		GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Labyrinth Game",
 				PORT_NUMBER);
 
 		// Add the default players to the configuration
 		defaultConfig.addPlayer("Human", 0); // player 1: a human player
-		defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
+		defaultConfig.addPlayer("Computer 1", 1); // player 2: an easy computer player
+		defaultConfig.addPlayer("Computer 2", 1); // player 3: an easy computer player
+		defaultConfig.addPlayer("Computer 3", 2); // player 4: a hard computer player
 		
 		// Set the default remote-player setup:
 		// - player name: "Remote Player"
