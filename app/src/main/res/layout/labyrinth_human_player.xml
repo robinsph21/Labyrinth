@@ -210,7 +210,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/vertical_spiral_border" />
+            android:background="@drawable/vertical_spiral_border" />
     </LinearLayout>
 
     <LinearLayout

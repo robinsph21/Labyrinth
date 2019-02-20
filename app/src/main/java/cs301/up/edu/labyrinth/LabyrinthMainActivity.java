@@ -1,5 +1,8 @@
 package cs301.up.edu.labyrinth;
 
+import android.os.Bundle;
+import android.view.View;
+
 import java.util.ArrayList;
 
 import cs301.up.edu.game.GameMainActivity;
@@ -20,6 +23,19 @@ public class LabyrinthMainActivity extends GameMainActivity {
 	// the port number that this game will use when playing over the network
 	private static final int PORT_NUMBER = 2234;
 
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		//Remove layout borders from tablet
+		View decorView = getWindow().getDecorView();
+		int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+				View.SYSTEM_UI_FLAG_FULLSCREEN |
+				View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+		decorView.setSystemUiVisibility(uiOptions);
+	}
+
+
 	/**
 	 * Create the default configuration for this game:
 	 * - one human player vs. one computer player
@@ -29,7 +45,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
 	 * @return
 	 * 		the new configuration object, representing the default configuration
 	 */
-	//TODO:@Override
+	@Override
 	public GameConfig createDefaultConfig() {
 		
 		// Define the allowed player types
@@ -59,7 +75,8 @@ public class LabyrinthMainActivity extends GameMainActivity {
 		// - 4 Players
 		// - name of game is "Counter Game"
 		// - port number as defined above
-		GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "Labyrinth Game",
+		GameConfig defaultConfig = new GameConfig(playerTypes, 4,
+				4, "Labyrinth Game",
 				PORT_NUMBER);
 
 		// Add the default players to the configuration
@@ -84,7 +101,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
 	 * @return
 	 * 		the local game, a counter game
 	 */
-	//TODO:@Override
+	@Override
 	public LocalGame createLocalGame() {
 		return new LabyrinthLocalGame();
 	}

@@ -6,7 +6,6 @@ import cs301.up.edu.R;
 import cs301.up.edu.game.actionMsg.GameAction;
 import cs301.up.edu.game.infoMsg.GameInfo;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
@@ -115,7 +114,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickList
         myActivity = activity;
 
         // Load the layout resource for our GUI
-        activity.setContentView(R.layout.activity_main);
+        activity.setContentView(R.layout.labyrinth_human_player);
 
 
 
