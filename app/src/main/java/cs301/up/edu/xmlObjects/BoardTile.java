@@ -2,10 +2,12 @@ package cs301.up.edu.xmlObjects;
 
 import android.view.View;
 
+import cs301.up.edu.enums.TreasureType;
+
 public class BoardTile extends BoardSpot {
 
     private boolean fixed;
-    private String treasure;
+    private TreasureType treasure;
 
     public BoardTile(int locX, int locY, boolean fixed) {
         super(locX,locY);
@@ -16,11 +18,11 @@ public class BoardTile extends BoardSpot {
         return this.fixed;
     }
 
-    public String getTreasure() {
+    public TreasureType getTreasure() {
         return this.treasure;
     }
 
-    public void setTreasure(String treasure) {
+    public void setTreasure(TreasureType treasure) {
         this.treasure = treasure;
     }
 

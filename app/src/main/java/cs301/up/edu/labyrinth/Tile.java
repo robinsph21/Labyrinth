@@ -35,6 +35,14 @@ public class Tile {
         this.connections = calculateConnections();
     }
 
+    public TileType getType() {
+        return this.type;
+    }
+
+    public int getRotation() {
+        return this.rotation;
+    }
+
     public boolean[] getConnections() {
         return this.connections;
     }
@@ -56,7 +64,7 @@ public class Tile {
     }
 
     private boolean[] calculateConnections() {
-        switch (type) {
+        switch (this.type) {
             case CORNER: {
                 switch (rotation) {
                     case 0: return new boolean[]{false, false, true, true};

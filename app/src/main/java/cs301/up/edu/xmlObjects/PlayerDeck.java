@@ -2,14 +2,16 @@ package cs301.up.edu.xmlObjects;
 
 import android.view.View;
 
+import cs301.up.edu.enums.Player;
+
 public class PlayerDeck extends XMLObject {
 
     private int numCards;
-    private String color; //TODO:Change to enum
+    private Player playerColor;
 
-    public PlayerDeck(View v, String color) {
+    public PlayerDeck(View v, Player color) {
         super(v);
-        this.color = color;
+        this.playerColor = color;
         this.numCards = 6;
     }
 
@@ -21,7 +23,7 @@ public class PlayerDeck extends XMLObject {
         this.numCards = this.numCards - 1;
     }
 
-    public String getColor() {
-        return this.color;
+    public Player getColor() {
+        return this.playerColor;
     }
 }

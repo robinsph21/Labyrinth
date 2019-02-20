@@ -1,12 +1,15 @@
 package cs301.up.edu.labyrinth;
 
+import cs301.up.edu.enums.Player;
 import cs301.up.edu.game.GameHumanPlayer;
 import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.R;
 import cs301.up.edu.game.actionMsg.GameAction;
 import cs301.up.edu.game.infoMsg.GameInfo;
+import cs301.up.edu.xmlObjects.*;
+
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.view.View.OnClickListener;
 
 /**
@@ -25,9 +28,19 @@ import android.view.View.OnClickListener;
 public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickListener {
 
     /* instance variables */
+    private Board ourGameBoard;
+    private MainMenu mainMenuButton;
+    private PlayerDeck player1Deck;
+    private PlayerDeck player2Deck;
+    private PlayerDeck player3Deck;
+    private PlayerDeck player4Deck;
+    private TreasureGoal currentTreasure;
+    private Rotate rotateClockwise;
+    private Rotate rotateCounterClockwise;
+    private CurrentTile currentTile;
+    private EndTurn endTurn;
+    private Reset reset;
 
-    // The TextView the displays the current counter value
-    private TextView counterValueTextView;
 
     // the most recent game state, as given to us by the LabyrinthLocalGame
     private LabyrinthGameState state;
@@ -51,13 +64,13 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickList
      * 		the top object in the GUI's view heirarchy
      */
     public View getTopView() {
-        return null;
+        return myActivity.findViewById(R.id.topGUI);
     }
 
     /**
      * sets the counter value in the text view
      */
-    protected void updateDisplay() {
+    public void updateDisplay() {
         //Nothing
     }
 
@@ -111,12 +124,65 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickList
     public void setAsGui(GameMainActivity activity) {
 
         // remember the activity
-        myActivity = activity;
+        this.myActivity = activity;
 
         // Load the layout resource for our GUI
         activity.setContentView(R.layout.labyrinth_human_player);
 
+        /**
+         * External Citation
+         *  Date:        1/25/19
+         *  Problem:     Wanted to get rid of status bars
+         *  Resource:    https://developer.android.com/training/system-ui/
+         *                  navigation#java
+         *  Solution:    Used code from website and read possible view options
+         *                  to add immersive
+         */
+        //Remove layout borders from tablet
+        View decorView = this.myActivity.getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                View.SYSTEM_UI_FLAG_FULLSCREEN |
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
 
+
+
+        ourGameBoard = new Board();
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                ImageView imageObj = this.myActivity.findViewById(
+                        this.myActivity.getResources().getIdentifier
+                                ("cell_" + i + j, "id",
+                                this.myActivity.getPackageName()));
+                ourGameBoard.getBoardSpot(i, j).setXmlObj(imageObj);
+            }
+        }
+
+
+
+        mainMenuButton = new MainMenu(this.myActivity.findViewById
+                (R.id.mainMenuButton));
+        player1Deck = new PlayerDeck(this.myActivity.findViewById
+                (R.id.player1Deck), Player.RED);
+        player2Deck = new PlayerDeck(this.myActivity.findViewById
+                (R.id.player2Deck), Player.YELLOW);
+        player3Deck = new PlayerDeck(this.myActivity.findViewById
+                (R.id.player3Deck), Player.GREEN);
+        player4Deck = new PlayerDeck(this.myActivity.findViewById
+                (R.id.player4Deck), Player.BLUE);
+        currentTreasure = new TreasureGoal(this.myActivity.findViewById
+                (R.id.currentTreasure));
+        rotateClockwise = new Rotate(this.myActivity.findViewById
+                (R.id.rotateClockwise), true);
+        rotateCounterClockwise = new Rotate(this.myActivity.findViewById
+                (R.id.rotateCounterClockwise), false);
+        currentTile = new CurrentTile(this.myActivity.findViewById
+                (R.id.currentTile));
+        endTurn = new EndTurn(this.myActivity.findViewById
+                (R.id.endTurn));
+        reset = new Reset(this.myActivity.findViewById
+                (R.id.reset));
 
 
         // if we have a game state, "simulate" that we have just received

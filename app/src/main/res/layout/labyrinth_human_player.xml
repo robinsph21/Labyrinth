@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/topGUI">
 
     <LinearLayout
         android:layout_width="400dp"
@@ -45,7 +46,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/card_back_red"
-                app:srcCompat="@drawable/number_3"
+                android:src="@drawable/number_3"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="5dp"/>
 
@@ -56,7 +57,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/card_front"
-                app:srcCompat="@drawable/card_book"
+                android:src="@drawable/card_book"
                 android:layout_marginRight="50dp"
                 android:layout_marginLeft="5dp"/>
         </LinearLayout>
@@ -76,7 +77,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/card_back_yellow"
-                app:srcCompat="@drawable/number_1" />
+                android:src="@drawable/number_1" />
 
             <ImageView
                 android:id="@+id/player3Deck"
@@ -87,7 +88,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/card_back_green"
-                app:srcCompat="@drawable/number_4" />
+                android:src="@drawable/number_4" />
 
             <ImageView
                 android:id="@+id/player4Deck"
@@ -98,7 +99,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/card_back_blue"
-                app:srcCompat="@drawable/number_2" />
+                android:src="@drawable/number_2" />
         </LinearLayout>
 
         <LinearLayout
@@ -253,7 +254,7 @@
                 android:background="@drawable/board_top_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_down" />
+                android:src="@drawable/arrow_down" />
 
             <ImageView
                 android:id="@+id/cell_30"
@@ -273,7 +274,7 @@
                 android:background="@drawable/board_top_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_down" />
+                android:src="@drawable/arrow_down" />
 
             <ImageView
                 android:id="@+id/cell_50"
@@ -293,7 +294,7 @@
                 android:background="@drawable/board_top_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_down" />
+                android:src="@drawable/arrow_down" />
 
             <ImageView
                 android:id="@+id/cell_70"
@@ -340,7 +341,7 @@
                 android:background="@drawable/entry_red"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/pawn_red" />
+                android:src="@drawable/pawn_red" />
 
             <ImageView
                 android:id="@+id/cell_21"
@@ -360,7 +361,7 @@
                 android:clickable="true"
                 android:rotation="180"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/highlight" />
+                android:src="@drawable/highlight" />
 
             <ImageView
                 android:id="@+id/cell_41"
@@ -398,7 +399,7 @@
                 android:background="@drawable/entry_yellow"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/pawn_yellow" />
+                android:src="@drawable/pawn_yellow" />
 
             <ImageView
                 android:id="@+id/cell_81"
@@ -425,7 +426,7 @@
                 android:background="@drawable/board_left_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_right" />
+                android:src="@drawable/arrow_right" />
 
             <ImageView
                 android:id="@+id/cell_12"
@@ -502,7 +503,7 @@
                 android:background="@drawable/board_right_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_left" />
+                android:src="@drawable/arrow_left" />
         </LinearLayout>
 
         <LinearLayout
@@ -615,7 +616,7 @@
                 android:background="@drawable/board_left_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_right" />
+                android:src="@drawable/arrow_right" />
 
             <ImageView
                 android:id="@+id/cell_14"
@@ -693,7 +694,7 @@
                 android:background="@drawable/board_right_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_left" />
+                android:src="@drawable/arrow_left" />
         </LinearLayout>
 
         <LinearLayout
@@ -805,7 +806,7 @@
                 android:background="@drawable/board_left_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_right" />
+                android:src="@drawable/arrow_right" />
 
             <ImageView
                 android:id="@+id/cell_16"
@@ -884,7 +885,7 @@
                 android:background="@drawable/board_right_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_left" />
+                android:src="@drawable/arrow_left" />
         </LinearLayout>
 
         <LinearLayout
@@ -911,7 +912,7 @@
                 android:background="@drawable/entry_green"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/pawn_green" />
+                android:src="@drawable/pawn_green" />
 
             <ImageView
                 android:id="@+id/cell_27"
@@ -968,7 +969,7 @@
                 android:background="@drawable/entry_blue"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/pawn_blue" />
+                android:src="@drawable/pawn_blue" />
 
             <ImageView
                 android:id="@+id/cell_87"
@@ -1015,7 +1016,7 @@
                 android:background="@drawable/board_bottom_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_up" />
+                android:src="@drawable/arrow_up" />
 
             <ImageView
                 android:id="@+id/cell_38"
@@ -1035,7 +1036,7 @@
                 android:background="@drawable/board_bottom_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_up" />
+                android:src="@drawable/arrow_up" />
 
             <ImageView
                 android:id="@+id/cell_58"
@@ -1055,7 +1056,7 @@
                 android:background="@drawable/board_bottom_side"
                 android:clickable="true"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/arrow_up" />
+                android:src="@drawable/arrow_up" />
 
             <ImageView
                 android:id="@+id/cell_78"

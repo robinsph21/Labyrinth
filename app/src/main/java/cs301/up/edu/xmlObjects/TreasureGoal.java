@@ -2,19 +2,21 @@ package cs301.up.edu.xmlObjects;
 
 import android.view.View;
 
+import cs301.up.edu.enums.TreasureType;
+
 public class TreasureGoal extends XMLObject{
 
-    private String treasure; //TODO: Change to enum
+    private TreasureType treasure;
 
     public TreasureGoal(View v) {
         super(v);
     }
 
-    public String getTreasure() {
+    public TreasureType getTreasure() {
         return this.treasure;
     }
 
-    public void setTreasure(String treasure) {
+    public void setTreasure(TreasureType treasure) {
         this.treasure = treasure;
     }
 }

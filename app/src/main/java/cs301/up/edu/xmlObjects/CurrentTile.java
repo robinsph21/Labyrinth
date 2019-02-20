@@ -6,7 +6,7 @@ public class CurrentTile extends XMLObject {
 
     private BoardTile tile;
 
-    public  CurrentTile(View v) {
+    public CurrentTile(View v) {
         super(v);
     }
 

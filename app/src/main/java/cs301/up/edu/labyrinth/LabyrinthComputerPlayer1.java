@@ -13,7 +13,8 @@ import cs301.up.edu.game.util.Tickable;
  * @author Andrew M. Nuxoll
  * @version September 2013
  */
-public class LabyrinthComputerPlayer1 extends GameComputerPlayer implements Tickable {
+public class LabyrinthComputerPlayer1 extends GameComputerPlayer
+        implements Tickable {
 
     /**
      * Constructor for objects of class CounterComputerPlayer1

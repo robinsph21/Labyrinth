@@ -12,7 +12,7 @@ import cs301.up.edu.game.config.GameConfig;
 import cs301.up.edu.game.config.GamePlayerType;
 
 /**
- * this is the primary activity for Counter game
+ * this is the primary activity for Labyrinth game
  * 
  * @author Andrew M. Nuxoll
  * @author Steven R. Vegdahl
@@ -60,7 +60,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
 		// a computer player type (player type 1)
 		playerTypes.add(new GamePlayerType("Computer Player Easy") {
 			public GamePlayer createPlayer(String name) {
-				return new LabyrinthComputerPlayer2(name);
+				return new LabyrinthComputerPlayer1(name);
 			}});
 		
 		// a computer player type (player type 2)
@@ -73,7 +73,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
 		// Create a game configuration class for Labyrinth:
 		// - player types as given above
 		// - 4 Players
-		// - name of game is "Counter Game"
+		// - name of game is "Labyrinth Game"
 		// - port number as defined above
 		GameConfig defaultConfig = new GameConfig(playerTypes, 4,
 				4, "Labyrinth Game",
@@ -99,7 +99,7 @@ public class LabyrinthMainActivity extends GameMainActivity {
 	 * create a local game
 	 * 
 	 * @return
-	 * 		the local game, a counter game
+	 * 		the local game, a labyrinth game
 	 */
 	@Override
 	public LocalGame createLocalGame() {
