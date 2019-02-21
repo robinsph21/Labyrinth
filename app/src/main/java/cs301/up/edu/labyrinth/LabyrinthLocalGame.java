@@ -42,7 +42,7 @@ public class LabyrinthLocalGame extends LocalGame {
 	 * This ctor should be called when a new labyrinth game is started
 	 */
 	public LabyrinthLocalGame() {
-		// initialize the game state, with the counter value starting at 0
+		// initialize the game state
 		this.gameState = new LabyrinthGameState();
 	}
 

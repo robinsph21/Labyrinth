@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cs301.up.edu.enums.Arrow;
 import cs301.up.edu.enums.Player;
+import cs301.up.edu.enums.TileType;
 import cs301.up.edu.enums.TreasureType;
 import cs301.up.edu.game.infoMsg.GameState;
 
@@ -22,6 +23,18 @@ public class LabyrinthGameState extends GameState {
 
 
     public LabyrinthGameState() {
+        this.playerTurn = Player.RED;
+
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                this.gameBoard[i][j] = new Tile(TileType.STRAIGHT,
+                        0, TreasureType.NONE);
+            }
+        }
+
+        this.currentTile = new Tile(TileType.STRAIGHT, 0,
+                TreasureType.NONE);
+
 
     }
 
