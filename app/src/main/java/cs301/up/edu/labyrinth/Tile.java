@@ -1,10 +1,14 @@
 package cs301.up.edu.labyrinth;
 
+import java.io.Serializable;
+
 import cs301.up.edu.enums.Player;
 import cs301.up.edu.enums.TileType;
 import cs301.up.edu.enums.TreasureType;
 
-public class Tile {
+public class Tile implements Serializable {
+
+    private static final long serialVersionUID = 323737276246984926L;
 
     private final TileType type;
     private int rotation;

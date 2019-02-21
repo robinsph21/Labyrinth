@@ -1,6 +1,7 @@
 package cs301.up.edu.labyrinth;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cs301.up.edu.enums.Arrow;
 import cs301.up.edu.enums.Player;
@@ -14,32 +15,62 @@ public class LabyrinthGameState extends GameState {
     // to satisfy Serializable interface
     private static final long serialVersionUID = 7737393762469851826L;
 
+    // Constants
+    private final static int NUM_RANDOM_PIECES = 34;
 
+    // Instance Variables for LabyrinthState
     private Player playerTurn;
     private Tile [][] gameBoard = new Tile[7][7];
     private Tile currentTile;
-    private ArrayList<TreasureType>[] treasureDecks = new ArrayList[4];
+    private List<List<TreasureType>> treasureDecks =
+            new ArrayList<>(4);
     private Arrow disabledArrow;
 
 
     public LabyrinthGameState() {
-        this.playerTurn = Player.RED;
 
+        // First player turn is randomized
+        double randomChoice = Math.random();
+        if (randomChoice < 0.25) {
+            this.playerTurn = Player.RED;
+        } else if (randomChoice < 0.5) {
+            this.playerTurn = Player.GREEN;
+        } else if (randomChoice < 0.75) {
+            this.playerTurn = Player.BLUE;
+        } else {
+            this.playerTurn = Player.YELLOW;
+        }
+
+        // Generate arraylist of all randomized pieces for board
+        List<Tile> randomPieces = new ArrayList<>(NUM_RANDOM_PIECES);
+        for (int i = 0; i < NUM_RANDOM_PIECES; i++) {
+            new Tile(TileType.STRAIGHT, 0, TreasureType.NONE);
+        }
+
+        // Initialize Game Board
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                this.gameBoard[i][j] = new Tile(TileType.STRAIGHT,
-                        0, TreasureType.NONE);
+                if ((i % 2 != 0) || (j % 2 != 0)) {
+                    // Non-movable piece
+                } else {
+                    // Movable Piece
+                    this.gameBoard[i][j] = randomPieces.remove(0);
+                }
             }
         }
 
-        this.currentTile = new Tile(TileType.STRAIGHT, 0,
-                TreasureType.NONE);
+        // Set current tile to last piece
+        this.currentTile = randomPieces.remove(0);
 
 
     }
 
 
-    //Clone Constructor
+    /**
+     * Copy Constructor makes a deep copy of the a gamestate variable
+     *
+     * @param state The state of game that needs to be copied
+     */
     public LabyrinthGameState(LabyrinthGameState state) {
         /**
         this.playerTurn = state.getPlayerTurn();
@@ -79,10 +110,10 @@ public class LabyrinthGameState extends GameState {
 
     public int getPlayerDeckSize(Player player) {
         switch (player) {
-            case RED: return treasureDecks[0].size();
-            case YELLOW: return treasureDecks[1].size();
-            case GREEN: return treasureDecks[2].size();
-            case BLUE: return treasureDecks[3].size();
+            case RED: return treasureDecks.get(0).size();
+            case YELLOW: return treasureDecks.get(1).size();
+            case GREEN: return treasureDecks.get(2).size();
+            case BLUE: return treasureDecks.get(3).size();
             default: return -1;
         }
     }
