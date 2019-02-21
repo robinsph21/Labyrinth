@@ -16,17 +16,24 @@ public class Tile implements Serializable {
     private TreasureType treasure;
     private Player pawn;
 
-    public Tile(TileType type, int rotation, TreasureType treasure) {
+    public Tile(TileType type, int rotation, TreasureType treasure, Player pawn) {
         this.type = type;
         this.rotation = rotation;
         this.treasure = treasure;
         this.connections = calculateConnections();
-        this.pawn = null;
+        this.pawn = pawn;
     }
 
-    public Tile(TileType type, int rotation, TreasureType treasure, Player pawn) {
-        this(type, rotation, treasure);
-        this.pawn = pawn;
+    public Tile(TileType type, int rotation, TreasureType treasure) {
+        this(type, rotation, treasure, Player.None);
+    }
+
+    public Tile(TileType type, int rotation, Player pawn) {
+        this(type, rotation, TreasureType.NONE, pawn);
+    }
+
+    public Tile(TileType type, int rotation) {
+        this(type, rotation, TreasureType.NONE, Player.None);
     }
 
     public void rotateClockwise() {

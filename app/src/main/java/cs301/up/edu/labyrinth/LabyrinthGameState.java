@@ -34,25 +34,60 @@ public class LabyrinthGameState extends GameState {
         if (randomChoice < 0.25) {
             this.playerTurn = Player.RED;
         } else if (randomChoice < 0.5) {
-            this.playerTurn = Player.GREEN;
+            this.playerTurn = Player.YELLOW;
         } else if (randomChoice < 0.75) {
             this.playerTurn = Player.BLUE;
         } else {
-            this.playerTurn = Player.YELLOW;
+            this.playerTurn = Player.GREEN;
         }
 
+        // Set up Board
+        this.initBoard();
+
+        // Set up treasure decks for the 4 players
+        this.initDecks();
+
+        this.disabledArrow = Arrow.None;
+
+    }
+
+    private void initDecks() {
+
+    }
+
+    private void initBoard() {
         // Generate arraylist of all randomized pieces for board
         List<Tile> randomPieces = new ArrayList<>(NUM_RANDOM_PIECES);
+        int numIntersection = 4;
+        int numStraight = 4;
+        int numCorner = 4;
+
         for (int i = 0; i < NUM_RANDOM_PIECES; i++) {
-            new Tile(TileType.STRAIGHT, 0, TreasureType.NONE);
+            boolean pieceAdded = false;
+            double randomChoice = Math.random();
+            int randomRotation = 0; // TODO: Make this randomly 0, 90, 180, 270
+
+            if (randomChoice < 0.33 && numIntersection > 0) {
+                randomPieces.add(new Tile(TileType.INTERSECTION, randomRotation));
+                numIntersection--;
+                pieceAdded = true;
+            }
+            if (randomChoice < 0.66 && numStraight > 0 && !pieceAdded) {
+                randomPieces.add(new Tile(TileType.STRAIGHT, randomRotation));
+                numStraight--;
+                pieceAdded = true;
+            }
+            if (numStraight > 0 && !pieceAdded) {
+                randomPieces.add(new Tile(TileType.CORNER, randomRotation));
+                numCorner--;
+            }
+
         }
 
         // Initialize Game Board
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                if ((i % 2 != 0) || (j % 2 != 0)) {
-                    // Non-movable piece
-                } else {
+                if (!((i % 2 != 0) || (j % 2 != 0))) {
                     // Movable Piece
                     this.gameBoard[i][j] = randomPieces.remove(0);
                 }
@@ -62,7 +97,45 @@ public class LabyrinthGameState extends GameState {
         // Set current tile to last piece
         this.currentTile = randomPieces.remove(0);
 
+        // Non-movable pieces
+        this.gameBoard[0][0] = new Tile(
+                TileType.RED_ENTRY,
+                0,
+                TreasureType.NONE,
+                Player.RED);
 
+        this.gameBoard[6][0] = new Tile(
+                TileType.YELLOW_ENTRY,
+                0,
+                TreasureType.NONE,
+                Player.YELLOW);
+
+        this.gameBoard[6][6] = new Tile(
+                TileType.GREEN_ENTRY,
+                0,
+                TreasureType.NONE,
+                Player.GREEN);
+
+        this.gameBoard[0][6] = new Tile(
+                TileType.BLUE_ENTRY,
+                0,
+                TreasureType.NONE,
+                Player.BLUE);
+
+        this.gameBoard[0][6] = new Tile(
+                TileType.BLUE_ENTRY,
+                0,
+                TreasureType.NONE,
+                Player.BLUE);
+
+        //1st Column
+        for (int i = 2; i < 5; i = i + 2) {
+            this.gameBoard[0][i] = new Tile(
+                    TileType.INTERSECTION,
+                    180,
+                    TreasureType.NONE,
+                    Player.None);
+        }
     }
 
 
