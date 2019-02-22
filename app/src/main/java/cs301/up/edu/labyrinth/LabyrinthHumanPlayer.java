@@ -4,7 +4,6 @@ import cs301.up.edu.enums.Player;
 import cs301.up.edu.game.GameHumanPlayer;
 import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.R;
-import cs301.up.edu.game.actionMsg.GameAction;
 import cs301.up.edu.game.infoMsg.GameInfo;
 import cs301.up.edu.xmlObjects.*;
 
@@ -25,7 +24,7 @@ import android.view.View.OnClickListener;
  * @author Andrew M. Nuxoll
  * @version July 2013
  */
-public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickListener {
+public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     /* instance variables */
     private Board ourGameBoard;
@@ -73,29 +72,6 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickList
         // TODO: Modify XML objects to mirror gamestate variable
     }
 
-    /**
-     * this method gets called when the user clicks the '+' or '-' button. It
-     * creates a new LabyrinthMoveAction to return to the parent activity.
-     *
-     * @param button
-     * 		the button that was clicked
-     */
-    public void onClick(View button) {
-        // if we are not yet connected to a game, ignore
-        if (game == null) return;
-
-        // Construct the action and send it to the game
-        GameAction action = null;
-        if (true) {
-            action = new LabyrinthMoveAction(this, false);
-        }
-        else {
-            // something else was pressed: ignore
-            return;
-        }
-
-        game.sendAction(action); // send action to the game
-    }// onClick
 
     /**
      * callback method when we get a message (e.g., from the game)
@@ -158,30 +134,44 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickList
             }
         }
 
-
-
         mainMenuButton = new MainMenu(this.myActivity.findViewById
-                (R.id.mainMenuButton));
+                (R.id.mainMenuButton),
+                this, this.game);
+
         player1Deck = new PlayerDeck(this.myActivity.findViewById
                 (R.id.player1Deck), Player.RED);
+
         player2Deck = new PlayerDeck(this.myActivity.findViewById
                 (R.id.player2Deck), Player.YELLOW);
+
         player3Deck = new PlayerDeck(this.myActivity.findViewById
                 (R.id.player3Deck), Player.GREEN);
+
         player4Deck = new PlayerDeck(this.myActivity.findViewById
                 (R.id.player4Deck), Player.BLUE);
+
         currentTreasure = new TreasureGoal(this.myActivity.findViewById
                 (R.id.currentTreasure));
+
         rotateClockwise = new Rotate(this.myActivity.findViewById
-                (R.id.rotateClockwise), true);
+                (R.id.rotateClockwise), true,
+                this, this.game);
+
         rotateCounterClockwise = new Rotate(this.myActivity.findViewById
-                (R.id.rotateCounterClockwise), false);
+                (R.id.rotateCounterClockwise), false,
+                this, this.game);
+
         currentTile = new CurrentTile(this.myActivity.findViewById
                 (R.id.currentTile));
+
         endTurn = new EndTurn(this.myActivity.findViewById
-                (R.id.endTurn));
+                (R.id.endTurn),
+                this, this.game);
+
         reset = new Reset(this.myActivity.findViewById
-                (R.id.reset));
+                (R.id.reset),
+                this, this.game);
+
 
 
         // if we have a game state, "simulate" that we have just received

@@ -4,6 +4,8 @@ import cs301.up.edu.enums.Player;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.LocalGame;
 import cs301.up.edu.game.actionMsg.GameAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthMoveAction;
+
 import android.util.Log;
 
 /**
