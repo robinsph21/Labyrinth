@@ -1,5 +1,6 @@
 package cs301.up.edu.labyrinth;
 
+import cs301.up.edu.enums.Player;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.LocalGame;
 import cs301.up.edu.game.actionMsg.GameAction;
@@ -88,7 +89,17 @@ public class LabyrinthLocalGame extends LocalGame {
 	 */
 	@Override
 	protected String checkIfGameOver() {
-		return null;
+		if (this.gameState.getPlayerDeckSize(Player.RED) == 0) {
+			return "Red Player has won!";
+		} else if (this.gameState.getPlayerDeckSize(Player.YELLOW) == 0) {
+			return "Yellow Player has won!";
+		} else if (this.gameState.getPlayerDeckSize(Player.BLUE) == 0) {
+			return "Blue Player has won!";
+		} else if (this.gameState.getPlayerDeckSize(Player.GREEN) == 0) {
+			return "Green Player has won!";
+		} else {
+			return null;
+		}
 	}
 
 }// class LabyrinthLocalGame

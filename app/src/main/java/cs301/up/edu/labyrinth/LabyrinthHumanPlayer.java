@@ -41,7 +41,6 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickList
     private EndTurn endTurn;
     private Reset reset;
 
-
     // the most recent game state, as given to us by the LabyrinthLocalGame
     private LabyrinthGameState state;
 
@@ -68,10 +67,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer implements OnClickList
     }
 
     /**
-     * sets the counter value in the text view
+     * Update everything displayed on tablet
      */
     public void updateDisplay() {
-        //Nothing
+        // TODO: Modify XML objects to mirror gamestate variable
     }
 
     /**
