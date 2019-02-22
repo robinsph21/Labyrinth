@@ -7,6 +7,7 @@ import cs301.up.edu.enums.Arrow;
 import cs301.up.edu.enums.Player;
 import cs301.up.edu.enums.TileType;
 import cs301.up.edu.enums.TreasureType;
+import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.infoMsg.GameState;
 
 
@@ -260,5 +261,47 @@ public class LabyrinthGameState extends GameState {
 
     public void setDisabledArrow(Arrow disabledArrow) {
         this.disabledArrow = disabledArrow;
+    }
+
+    /**
+     * toString returns a string version of the gamestate
+     *
+     * @return String version of the gamestate
+     */
+    @Override
+    public String toString() {
+        return "Labyrinth GameState:\n";
+    }
+
+
+    /** All actions that can be taken */
+
+
+    public boolean checkMainMenu(GamePlayer player) {
+        return true;
+    }
+
+    public boolean checkRotateClockwise(GamePlayer player) {
+        return true;
+    }
+
+    public boolean checkRotateCounterClockwise(GamePlayer player) {
+        return true;
+    }
+
+    public boolean checkEndTurn(GamePlayer player) {
+        return true;
+    }
+
+    public boolean checkReset(GamePlayer player) {
+        return true;
+    }
+
+    public boolean checkSlideTile(GamePlayer player) {
+        return true;
+    }
+
+    public boolean checkMovePawn(GamePlayer player) {
+        return true;
     }
 }
