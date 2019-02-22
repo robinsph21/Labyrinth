@@ -31,12 +31,15 @@ public class LabyrinthLocalGame extends LocalGame {
 	 * can this player move
 	 * 
 	 * @return
-	 * 		true, because all player are always allowed to move at all times,
-	 * 		as this is a fully asynchronous game
+	 * 		true if playerID is the turn of the gamestate
 	 */
 	@Override
 	protected boolean canMove(int playerIdx) {
-		return true;
+		if (this.gameState.getPlayerTurn().ordinal() == playerIdx) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
