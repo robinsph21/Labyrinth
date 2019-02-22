@@ -53,7 +53,6 @@ public class LabyrinthGameState extends GameState {
         // Set up Board
         this.initBoard();
 
-
         // Set up treasure decks for the 4 players
         this.initDecks();
 
@@ -223,29 +222,37 @@ public class LabyrinthGameState extends GameState {
 
 
     /**
-     * Copy Constructor makes a deep copy of the a gamestate variable
+     * Copy Constructor makes a deep copy of the gamestate for a
+     * specific player
      *
      * @param state The state of game that needs to be copied
      */
-    public LabyrinthGameState(LabyrinthGameState state) {
-        /**
-        this.playerTurn = state.getPlayerTurn();
+    public LabyrinthGameState(LabyrinthGameState state, GamePlayer player) {
+
+        this.playerTurn = Player.valueOf(state.getPlayerTurn().name());
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                this.getGameBoard()[i][j] = new Tile(
-                        state.getGameBoard()[i][j].getType(),
-                        state.getGameBoard()[i][j].getRotation(),
-                        state.getGameBoard()[i][j].getTreasure() );
+                this.gameBoard[i][j] = new Tile(
+                        TileType.valueOf(
+                                state.gameBoard[i][j].getType().name()),
+                        state.gameBoard[i][j].getRotation(),
+                        TreasureType.valueOf(
+                                state.gameBoard[i][j].getTreasure().name()));
             }
         }
 
-        this.setCurrentTile(new Tile(
-                state.getCurrentTile().getType(),
-                state.getCurrentTile().getRotation(),
-                state.getCurrentTile().getTreasure() ) );
+        this.currentTile = new Tile(
+                TileType.valueOf(state.currentTile.getType().name()),
+                state.currentTile.getRotation(),
+                TreasureType.valueOf(state.currentTile.getTreasure().name()));
 
-        */
+        for (List<TreasureType> deck : state.treasureDecks) {
+            // TODO: Deep copy treasureDecks
+        }
+
+        this.disabledArrow = Arrow.valueOf(state.getDisabledArrow().name());
+
     }
 
     public Player getPlayerTurn() {
@@ -268,8 +275,8 @@ public class LabyrinthGameState extends GameState {
         switch (player) {
             case RED: return treasureDecks.get(0).size();
             case YELLOW: return treasureDecks.get(1).size();
-            case GREEN: return treasureDecks.get(2).size();
-            case BLUE: return treasureDecks.get(3).size();
+            case BLUE: return treasureDecks.get(2).size();
+            case GREEN: return treasureDecks.get(3).size();
             default: return -1;
         }
     }
@@ -289,7 +296,13 @@ public class LabyrinthGameState extends GameState {
      */
     @Override
     public String toString() {
-        return "Labyrinth GameState:\n";
+        return "Turn: " + this.playerTurn.name() + ";" +
+                "Disabled Arrow: " + this.disabledArrow.name() + ";" +
+                "Red Deck: " + this.treasureDecks.get(0).toString() + ";" +
+                "Yellow Deck: " + this.treasureDecks.get(1).toString() + ";" +
+                "Blue Deck: " + this.treasureDecks.get(2).toString() + ";" +
+                "Green Deck: " + this.treasureDecks.get(3).toString() + ";" +
+                "Current Tile: " + this.currentTile.toString() + ";";
     }
 
 
