@@ -227,7 +227,9 @@ public class LabyrinthGameState extends GameState {
      *
      * @param state The state of game that needs to be copied
      */
-    public LabyrinthGameState(LabyrinthGameState state, GamePlayer player) {
+    public LabyrinthGameState(LabyrinthGameState state, int playerID) {
+
+        // TODO: Based on playerID, modify gameState so that info is removed
 
         this.playerTurn = Player.valueOf(state.playerTurn.name());
 
