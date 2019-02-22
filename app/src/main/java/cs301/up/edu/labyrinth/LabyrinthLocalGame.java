@@ -92,6 +92,7 @@ public class LabyrinthLocalGame extends LocalGame {
 	 */
 	@Override
 	protected String checkIfGameOver() {
+		// TODO: Add also back to starting point
 		if (this.gameState.getPlayerDeckSize(Player.RED) == 0) {
 			return "Red Player has won!";
 		} else if (this.gameState.getPlayerDeckSize(Player.YELLOW) == 0) {

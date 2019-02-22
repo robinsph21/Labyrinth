@@ -1,8 +1,6 @@
 package cs301.up.edu.labyrinth;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class LabyrinthGameState extends GameState {
     private static final long serialVersionUID = 7737393762469851826L;
 
     // Constants
-    private final static int NUM_RANDOM_PIECES = 34;
+    private final static int NUM_RANDOM_TILES = 34;
     private final static int NUM_TREASURE_PER_PLAYER = 6;
     private final static int NUM_PLAYERS = 4;
 
@@ -64,7 +62,7 @@ public class LabyrinthGameState extends GameState {
     private void initDecks() {
         // Get an array of all TreasureTypes and convert it to a list
         TreasureType[] allTreasures = TreasureType.values();
-        List<TreasureType> treasureList = new ArrayList<>(24);
+        List<TreasureType> treasureList = new ArrayList<>(25);
         for (TreasureType type : allTreasures) {
             treasureList.add(type);
         }
@@ -85,12 +83,12 @@ public class LabyrinthGameState extends GameState {
 
     private void initBoard() {
         // Generate arraylist of all randomized pieces for board
-        List<Tile> randomPieces = new ArrayList<>(NUM_RANDOM_PIECES);
+        List<Tile> randomPieces = new ArrayList<>(NUM_RANDOM_TILES);
         int numIntersection = 6;
         int numStraight = 13;
         int numCorner = 15;
 
-        for (int i = 0; i < NUM_RANDOM_PIECES; i++) {
+        for (int i = 0; i < NUM_RANDOM_TILES; i++) {
             int randomRotation = 0; // TODO: Make this randomly 0, 90, 180, 270
 
             if (numIntersection > 0) {
@@ -146,6 +144,8 @@ public class LabyrinthGameState extends GameState {
                 0,
                 TreasureType.NONE,
                 Player.BLUE);
+
+        // TODO: Change below tiles to match fixed tiles on real board
 
         this.gameBoard[0][2] = new Tile(
                 TileType.INTERSECTION,
@@ -227,9 +227,7 @@ public class LabyrinthGameState extends GameState {
      *
      * @param state The state of game that needs to be copied
      */
-    public LabyrinthGameState(LabyrinthGameState state, int playerID) {
-
-        // TODO: Based on playerID, modify gameState so that info is removed
+    public LabyrinthGameState(LabyrinthGameState state) {
 
         this.playerTurn = Player.valueOf(state.playerTurn.name());
 
@@ -240,7 +238,8 @@ public class LabyrinthGameState extends GameState {
                                 state.gameBoard[i][j].getType().name()),
                         state.gameBoard[i][j].getRotation(),
                         TreasureType.valueOf(
-                                state.gameBoard[i][j].getTreasure().name()));
+                                state.gameBoard[i][j].getTreasure().name()),
+                        Player.valueOf(state.gameBoard[i][j].getPawn().name()));
             }
         }
 
@@ -260,6 +259,12 @@ public class LabyrinthGameState extends GameState {
 
         this.disabledArrow = Arrow.valueOf(state.getDisabledArrow().name());
 
+    }
+
+    public LabyrinthGameState(LabyrinthGameState state, int playerID) {
+        this(state);
+
+        // TODO: Remove Extra Player Info
     }
 
     public Player getPlayerTurn() {
