@@ -107,10 +107,19 @@ public class Tile implements Serializable {
                 return new boolean[]{false, false, false, false};
             }
         }
+
     }
 
     @Override
     public String toString() {
-        return "";
+        return "{ Tile Type:" + this.type.name() + "; " +
+                "Rotation: " + this.rotation + "; " +
+                "Connections: " +
+                    this.connections[0] + ", " +
+                    this.connections[1] + ", " +
+                    this.connections[2] + ", " +
+                    this.connections[3] + "; " +
+                "Treasure: " + this.treasure.name() + "; " +
+                "Player on Tile: " + this.pawn.name() + " }";
     }
 }

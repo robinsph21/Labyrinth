@@ -229,7 +229,7 @@ public class LabyrinthGameState extends GameState {
      */
     public LabyrinthGameState(LabyrinthGameState state, GamePlayer player) {
 
-        this.playerTurn = Player.valueOf(state.getPlayerTurn().name());
+        this.playerTurn = Player.valueOf(state.playerTurn.name());
 
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -247,8 +247,13 @@ public class LabyrinthGameState extends GameState {
                 state.currentTile.getRotation(),
                 TreasureType.valueOf(state.currentTile.getTreasure().name()));
 
-        for (List<TreasureType> deck : state.treasureDecks) {
-            // TODO: Deep copy treasureDecks
+
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            this.treasureDecks.add(new ArrayList<TreasureType>(6));
+            for (TreasureType treasure : state.treasureDecks.get(i)) {
+                this.treasureDecks.get(i).add(
+                        TreasureType.valueOf(treasure.name()));
+            }
         }
 
         this.disabledArrow = Arrow.valueOf(state.getDisabledArrow().name());
@@ -296,13 +301,25 @@ public class LabyrinthGameState extends GameState {
      */
     @Override
     public String toString() {
-        return "Turn: " + this.playerTurn.name() + ";" +
-                "Disabled Arrow: " + this.disabledArrow.name() + ";" +
-                "Red Deck: " + this.treasureDecks.get(0).toString() + ";" +
-                "Yellow Deck: " + this.treasureDecks.get(1).toString() + ";" +
-                "Blue Deck: " + this.treasureDecks.get(2).toString() + ";" +
-                "Green Deck: " + this.treasureDecks.get(3).toString() + ";" +
-                "Current Tile: " + this.currentTile.toString() + ";";
+        String board = convertBoardToString();
+        return "Turn: " + this.playerTurn.name() + "; " +
+                "Disabled Arrow: " + this.disabledArrow.name() + "; " +
+                "Red Deck: " + this.treasureDecks.get(0).toString() + "; " +
+                "Yellow Deck: " + this.treasureDecks.get(1).toString() + "; " +
+                "Blue Deck: " + this.treasureDecks.get(2).toString() + "; " +
+                "Green Deck: " + this.treasureDecks.get(3).toString() + "; " +
+                "Current Tile: " + this.currentTile.toString() + "; " +
+                "GameBoard: { " + board + " }" ;
+    }
+
+    private String convertBoardToString() {
+        StringBuilder returnValue = new StringBuilder();
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                returnValue.append(this.gameBoard[i][j].toString());
+            }
+        }
+        return returnValue.toString();
     }
 
 
