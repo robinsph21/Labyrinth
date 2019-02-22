@@ -1,6 +1,8 @@
 package cs301.up.edu.labyrinth;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import cs301.up.edu.enums.Arrow;
@@ -18,6 +20,7 @@ public class LabyrinthGameState extends GameState {
 
     // Constants
     private final static int NUM_RANDOM_PIECES = 34;
+    private final static int NUM_TREASURE_PER_PLAYER = 6;
 
     // Instance Variables for LabyrinthState
     private Player playerTurn;
@@ -57,7 +60,18 @@ public class LabyrinthGameState extends GameState {
     }
 
     private void initDecks() {
+        // Get an array of all TreasureTypes and convert it to a list
+        TreasureType[] allTreasures = TreasureType.values();
+        List<TreasureType> treasureList = Arrays.asList(allTreasures);
+        treasureList.remove(TreasureType.NONE);
+        Collections.shuffle(treasureList);
 
+        for (int i = 0; i < NUM_TREASURE_PER_PLAYER; i++) {
+            this.treasureDecks.get(0).add(treasureList.remove(0));
+            this.treasureDecks.get(1).add(treasureList.remove(0));
+            this.treasureDecks.get(2).add(treasureList.remove(0));
+            this.treasureDecks.get(3).add(treasureList.remove(0));
+        }
     }
 
     private void initBoard() {
@@ -69,27 +83,23 @@ public class LabyrinthGameState extends GameState {
 
         for (int i = 0; i < NUM_RANDOM_PIECES; i++) {
             boolean pieceAdded = false;
-            double randomChoice = Math.random();
             int randomRotation = 0; // TODO: Make this randomly 0, 90, 180, 270
 
-            if (randomChoice < 0.33 && numIntersection > 0) {
+            if (numIntersection > 0) {
                 // TODO: 6 Intersections Need Treasures
                 randomPieces.add(new Tile(TileType.INTERSECTION, randomRotation));
                 numIntersection--;
-                pieceAdded = true;
-            }
-            if (randomChoice < 0.66 && numStraight > 0 && !pieceAdded) {
+            } else if (numStraight > 0) {
                 randomPieces.add(new Tile(TileType.STRAIGHT, randomRotation));
                 numStraight--;
-                pieceAdded = true;
-            }
-            if (numCorner > 0 && !pieceAdded) {
+            } else if (numCorner > 0) {
                 // TODO: 6 Corners Need Treasures
                 randomPieces.add(new Tile(TileType.CORNER, randomRotation));
                 numCorner--;
             }
-
         }
+
+        Collections.shuffle(randomPieces);
 
         // Initialize Game Board
         for (int i = 0; i < 7; i++) {
