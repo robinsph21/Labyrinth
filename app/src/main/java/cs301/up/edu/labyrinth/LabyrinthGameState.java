@@ -2,6 +2,7 @@ package cs301.up.edu.labyrinth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class LabyrinthGameState extends GameState {
     // Constants
     private final static int NUM_RANDOM_PIECES = 34;
     private final static int NUM_TREASURE_PER_PLAYER = 6;
+    private final static int NUM_PLAYERS = 4;
 
     // Instance Variables for LabyrinthState
     private Player playerTurn;
@@ -51,6 +53,7 @@ public class LabyrinthGameState extends GameState {
         // Set up Board
         this.initBoard();
 
+
         // Set up treasure decks for the 4 players
         this.initDecks();
 
@@ -62,9 +65,16 @@ public class LabyrinthGameState extends GameState {
     private void initDecks() {
         // Get an array of all TreasureTypes and convert it to a list
         TreasureType[] allTreasures = TreasureType.values();
-        List<TreasureType> treasureList = Arrays.asList(allTreasures);
-        treasureList.remove(TreasureType.NONE);
+        List<TreasureType> treasureList = new ArrayList<>(24);
+        for (TreasureType type : allTreasures) {
+            treasureList.add(type);
+        }
+        treasureList.remove(0); // Delete None TreasureType
         Collections.shuffle(treasureList);
+
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            this.treasureDecks.add(new ArrayList<TreasureType>(6));
+        }
 
         for (int i = 0; i < NUM_TREASURE_PER_PLAYER; i++) {
             this.treasureDecks.get(0).add(treasureList.remove(0));
@@ -82,7 +92,6 @@ public class LabyrinthGameState extends GameState {
         int numCorner = 15;
 
         for (int i = 0; i < NUM_RANDOM_PIECES; i++) {
-            boolean pieceAdded = false;
             int randomRotation = 0; // TODO: Make this randomly 0, 90, 180, 270
 
             if (numIntersection > 0) {
@@ -104,7 +113,7 @@ public class LabyrinthGameState extends GameState {
         // Initialize Game Board
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
-                if (!((i % 2 != 0) || (j % 2 != 0))) {
+                if ((i % 2 != 0) || (j % 2 != 0)) {
                     // Movable Piece
                     this.gameBoard[i][j] = randomPieces.remove(0);
                 }
