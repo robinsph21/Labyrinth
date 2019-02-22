@@ -145,17 +145,17 @@ public class LabyrinthGameState extends GameState {
                 TreasureType.NONE,
                 Player.BLUE);
 
-        // TODO: Change below tiles to match fixed tiles on real board
+        // Below is the setting of the fixed tiles on the board
 
         this.gameBoard[0][2] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                270,
                 TreasureType.NONE,
                 Player.None);
 
         this.gameBoard[0][4] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                270,
                 TreasureType.NONE,
                 Player.None);
 
@@ -173,13 +173,13 @@ public class LabyrinthGameState extends GameState {
 
         this.gameBoard[2][4] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                270,
                 TreasureType.NONE,
                 Player.None);
 
         this.gameBoard[2][6] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                0,
                 TreasureType.NONE,
                 Player.None);
 
@@ -191,31 +191,31 @@ public class LabyrinthGameState extends GameState {
 
         this.gameBoard[4][2] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                90,
                 TreasureType.NONE,
                 Player.None);
 
         this.gameBoard[4][4] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                0,
                 TreasureType.NONE,
                 Player.None);
 
         this.gameBoard[4][6] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                0,
                 TreasureType.NONE,
                 Player.None);
 
         this.gameBoard[6][2] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                90,
                 TreasureType.NONE,
                 Player.None);
 
         this.gameBoard[6][4] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                90,
                 TreasureType.NONE,
                 Player.None);
     }
