@@ -26,7 +26,10 @@ public class LabyrinthGameState extends GameState {
             new ArrayList<>(4);
     private Arrow disabledArrow;
 
-
+    /**
+     * Constructor used to initialize a gamestate
+     *
+     */
     public LabyrinthGameState() {
 
         // First player turn is randomized
@@ -47,6 +50,7 @@ public class LabyrinthGameState extends GameState {
         // Set up treasure decks for the 4 players
         this.initDecks();
 
+        // Players can slide the first piece in anywhere they want
         this.disabledArrow = Arrow.None;
 
     }
@@ -58,9 +62,9 @@ public class LabyrinthGameState extends GameState {
     private void initBoard() {
         // Generate arraylist of all randomized pieces for board
         List<Tile> randomPieces = new ArrayList<>(NUM_RANDOM_PIECES);
-        int numIntersection = 4;
-        int numStraight = 4;
-        int numCorner = 4;
+        int numIntersection = 6;
+        int numStraight = 13;
+        int numCorner = 15;
 
         for (int i = 0; i < NUM_RANDOM_PIECES; i++) {
             boolean pieceAdded = false;
@@ -68,6 +72,7 @@ public class LabyrinthGameState extends GameState {
             int randomRotation = 0; // TODO: Make this randomly 0, 90, 180, 270
 
             if (randomChoice < 0.33 && numIntersection > 0) {
+                // TODO: 6 Intersections Need Treasures
                 randomPieces.add(new Tile(TileType.INTERSECTION, randomRotation));
                 numIntersection--;
                 pieceAdded = true;
@@ -77,7 +82,8 @@ public class LabyrinthGameState extends GameState {
                 numStraight--;
                 pieceAdded = true;
             }
-            if (numStraight > 0 && !pieceAdded) {
+            if (numCorner > 0 && !pieceAdded) {
+                // TODO: 6 Corners Need Treasures
                 randomPieces.add(new Tile(TileType.CORNER, randomRotation));
                 numCorner--;
             }
@@ -122,20 +128,77 @@ public class LabyrinthGameState extends GameState {
                 TreasureType.NONE,
                 Player.BLUE);
 
-        this.gameBoard[0][6] = new Tile(
-                TileType.BLUE_ENTRY,
-                0,
+        this.gameBoard[0][2] = new Tile(
+                TileType.INTERSECTION,
+                180,
                 TreasureType.NONE,
-                Player.BLUE);
+                Player.None);
 
-        //1st Column
-        for (int i = 2; i < 5; i = i + 2) {
-            this.gameBoard[0][i] = new Tile(
-                    TileType.INTERSECTION,
-                    180,
-                    TreasureType.NONE,
-                    Player.None);
-        }
+        this.gameBoard[0][4] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[2][0] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[2][2] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[2][4] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[2][6] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[4][0] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[4][2] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[4][4] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[4][6] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[6][2] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
+
+        this.gameBoard[6][4] = new Tile(
+                TileType.INTERSECTION,
+                180,
+                TreasureType.NONE,
+                Player.None);
     }
 
 

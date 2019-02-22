@@ -348,7 +348,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -387,7 +387,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -433,7 +433,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -452,7 +452,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -490,7 +490,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -557,7 +557,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -671,7 +671,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -728,7 +728,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -833,7 +833,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:rotation="90"
                 android:scaleType="fitXY" />
@@ -843,7 +843,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -919,7 +919,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
@@ -957,7 +957,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/tile_stright"
+                android:background="@drawable/tile_straight"
                 android:clickable="true"
                 android:scaleType="fitXY" />
 
