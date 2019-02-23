@@ -337,11 +337,7 @@ public class LabyrinthGameState extends GameState {
         return true;
     }
 
-    public boolean checkRotateClockwise(GamePlayer player) {
-        return true;
-    }
-
-    public boolean checkRotateCounterClockwise(GamePlayer player) {
+    public boolean checkRotate(GamePlayer player, boolean clockwise) {
         return true;
     }
 

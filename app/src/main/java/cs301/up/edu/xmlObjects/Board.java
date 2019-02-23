@@ -1,9 +1,5 @@
 package cs301.up.edu.xmlObjects;
 
-import cs301.up.edu.xmlObjects.BoardEdge;
-import cs301.up.edu.xmlObjects.BoardSpot;
-import cs301.up.edu.xmlObjects.BoardTile;
-
 public class Board {
 
     private static final int LENGTH = 9;

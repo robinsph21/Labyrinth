@@ -9,7 +9,6 @@ import cs301.up.edu.xmlObjects.*;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.view.View.OnClickListener;
 
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,

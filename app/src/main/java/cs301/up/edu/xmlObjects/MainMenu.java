@@ -5,7 +5,7 @@ import android.view.View;
 import cs301.up.edu.game.Game;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
-import cs301.up.edu.labyrinth.actions.LabyrinthMoveAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthMainMenuAction;
 
 public class MainMenu extends XMLObject {
 
@@ -27,7 +27,7 @@ public class MainMenu extends XMLObject {
         // Construct the action and send it to the game
         GameAction action = null;
 
-        action = new LabyrinthMoveAction(this.player);
+        action = new LabyrinthMainMenuAction(this.player);
 
         game.sendAction(action);
     }

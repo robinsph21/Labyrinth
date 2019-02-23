@@ -3,7 +3,7 @@ package cs301.up.edu.labyrinth;
 import cs301.up.edu.game.GameComputerPlayer;
 import cs301.up.edu.game.infoMsg.GameInfo;
 import cs301.up.edu.game.util.Tickable;
-import cs301.up.edu.labyrinth.actions.LabyrinthMoveAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
@@ -16,6 +16,9 @@ import cs301.up.edu.labyrinth.actions.LabyrinthMoveAction;
  */
 public class LabyrinthComputerPlayer1 extends GameComputerPlayer
         implements Tickable {
+
+    //Instance Variables
+    private LabyrinthGameState state;
 
     /**
      * Constructor for objects of class CounterComputerPlayer1
@@ -40,21 +43,20 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-        // Do nothing, as we ignore all state in deciding our next move. It
-        // depends totally on the timer and random numbers.
+        // ignore the message if it's not a CounterState message
+        if (!(info instanceof LabyrinthGameState)) return;
+
+        // update our state
+        this.state = (LabyrinthGameState)info;
     }
 
     /**
      * callback method: the timer ticked
      */
     protected void timerTicked() {
-        // 5% of the time, increment or decrement the counter
-        if (Math.random() >= 0.05) return; // do nothing 95% of the time
-
-        // "flip a coin" to determine whether to increment or decrement
-        boolean move = Math.random() >= 0.5;
+        // Calculate what to do based on state
 
         // send the move-action to the game
-        game.sendAction(new LabyrinthMoveAction(this));
+        game.sendAction(new LabyrinthMovePawnAction(this));
     }
 }

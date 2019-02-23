@@ -4,7 +4,7 @@ import cs301.up.edu.enums.Player;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.LocalGame;
 import cs301.up.edu.game.actionMsg.GameAction;
-import cs301.up.edu.labyrinth.actions.LabyrinthMoveAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
 
 import android.util.Log;
 
@@ -53,16 +53,16 @@ public class LabyrinthLocalGame extends LocalGame {
 	}
 
 	/**
-	 * The only type of GameAction that should be sent is LabyrinthMoveAction
+	 * The only type of GameAction that should be sent is LabyrinthMovePawnAction
 	 */
 	@Override
 	protected boolean makeMove(GameAction action) {
 		Log.i("action", action.getClass().toString());
 		
-		if (action instanceof LabyrinthMoveAction) {
+		if (action instanceof LabyrinthMovePawnAction) {
 		
-			// cast so that we Java knows it's a LabyrinthMoveAction
-			LabyrinthMoveAction cma = (LabyrinthMoveAction)action;
+			// cast so that we Java knows it's a LabyrinthMovePawnAction
+			LabyrinthMovePawnAction cma = (LabyrinthMovePawnAction)action;
 			
 			// denote that this was a legal/successful move
 			return true;
