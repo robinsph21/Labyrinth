@@ -1,7 +1,5 @@
 package cs301.up.edu.xmlObjects;
 
-import android.view.View;
-
 public class BoardSpot extends XMLObject{
 
     private int locX;
