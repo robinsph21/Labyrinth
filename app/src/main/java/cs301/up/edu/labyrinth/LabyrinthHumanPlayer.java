@@ -121,7 +121,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
 
 
-        ourGameBoard = new Board();
+        ourGameBoard = new Board(this, this.game);
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
