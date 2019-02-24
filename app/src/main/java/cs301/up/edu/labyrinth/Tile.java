@@ -96,10 +96,10 @@ public class Tile implements Serializable {
             }
             case INTERSECTION: {
                 switch (rotation) {
-                    case 0: return new boolean[]{true, true, false, true};
-                    case 90: return new boolean[]{true, true, true, false};
-                    case 180: return new boolean[]{false, true, true, true};
-                    case 270: return new boolean[]{true, false, true, true};
+                    case 0: return new boolean[]{true, true, true, false};
+                    case 90: return new boolean[]{false, true, true, true};
+                    case 180: return new boolean[]{true, false, true, true};
+                    case 270: return new boolean[]{true, true, false, true};
                     default: return new boolean[]{false, false, false, false};
                 }
             }
