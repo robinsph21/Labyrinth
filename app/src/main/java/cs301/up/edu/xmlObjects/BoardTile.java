@@ -2,6 +2,7 @@ package cs301.up.edu.xmlObjects;
 
 import android.view.View;
 
+import cs301.up.edu.enums.Player;
 import cs301.up.edu.enums.TreasureType;
 import cs301.up.edu.game.Game;
 import cs301.up.edu.game.GamePlayer;
@@ -14,6 +15,7 @@ public class BoardTile extends BoardSpot {
     private TreasureType treasure;
     private GamePlayer player;
     private Game game;
+    private Player pawn;
 
     public BoardTile(int locX, int locY, boolean fixed,
                      GamePlayer player, Game game) {
@@ -33,6 +35,14 @@ public class BoardTile extends BoardSpot {
 
     public void setTreasure(TreasureType treasure) {
         this.treasure = treasure;
+    }
+
+    public Player getPawn() {
+        return this.pawn;
+    }
+
+    public void setPawn(Player pawn) {
+        this.pawn = pawn;
     }
 
     @Override

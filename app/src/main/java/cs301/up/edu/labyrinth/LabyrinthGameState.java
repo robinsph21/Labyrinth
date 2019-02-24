@@ -28,7 +28,10 @@ public class LabyrinthGameState extends GameState {
     private Tile currentTile;
     private List<List<TreasureType>> treasureDecks =
             new ArrayList<>(4);
+    private int[] deckSizes = new int[4];
     private Arrow disabledArrow;
+    private boolean shiftedLabyrinthThisTurn;
+    private LabyrinthGameState prevState;
 
     /**
      * Constructor used to initialize a gamestate
@@ -53,10 +56,19 @@ public class LabyrinthGameState extends GameState {
 
         // Set up treasure decks for the 4 players
         this.initDecks();
+        this.updateDeckSizes();
 
         // Players can slide the first piece in anywhere they want
         this.disabledArrow = Arrow.None;
+        this.shiftedLabyrinthThisTurn = false;
 
+        this.prevState = null;
+    }
+
+    private void updateDeckSizes() {
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            this.deckSizes[i] = this.treasureDecks.get(i).size();
+        }
     }
 
     private void initDecks() {
@@ -257,8 +269,17 @@ public class LabyrinthGameState extends GameState {
             }
         }
 
-        this.disabledArrow = Arrow.valueOf(state.getDisabledArrow().name());
+        this.disabledArrow = Arrow.valueOf(state.disabledArrow.name());
 
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            this.deckSizes[i] = state.deckSizes[i];
+        }
+
+        this.shiftedLabyrinthThisTurn = state.shiftedLabyrinthThisTurn;
+
+        // Doesn't matter if deepcopy has a reference to itself since
+        // this variable is never used by deepcopies
+        this.prevState = state.prevState;
     }
 
     public LabyrinthGameState(LabyrinthGameState state, int playerID) {
@@ -271,34 +292,14 @@ public class LabyrinthGameState extends GameState {
         return this.playerTurn;
     }
 
-    public Tile[][] getGameBoard() {
-        return this.gameBoard;
-    }
-
-    public Tile getCurrentTile() {
-        return this.currentTile;
-    }
-
-    public void setCurrentTile(Tile currentTile) {
-        this.currentTile = currentTile;
-    }
-
     public int getPlayerDeckSize(Player player) {
         switch (player) {
-            case RED: return treasureDecks.get(0).size();
-            case YELLOW: return treasureDecks.get(1).size();
-            case BLUE: return treasureDecks.get(2).size();
-            case GREEN: return treasureDecks.get(3).size();
+            case RED: return deckSizes[0];
+            case YELLOW: return deckSizes[1];
+            case BLUE: return deckSizes[2];
+            case GREEN: return deckSizes[3];
             default: return -1;
         }
-    }
-
-    public Arrow getDisabledArrow() {
-        return disabledArrow;
-    }
-
-    public void setDisabledArrow(Arrow disabledArrow) {
-        this.disabledArrow = disabledArrow;
     }
 
     /**
@@ -333,27 +334,85 @@ public class LabyrinthGameState extends GameState {
     /** All actions that can be taken */
 
 
-    public boolean checkMainMenu(GamePlayer player) {
+    public boolean checkMainMenu(int playerID) {
+        // Always able to quit your game
         return true;
     }
 
-    public boolean checkRotate(GamePlayer player, boolean clockwise) {
+    public boolean checkRotate(int playerID, boolean clockwise) {
+        if (clockwise) {
+            this.currentTile.rotateClockwise();
+        } else {
+            this.currentTile.rotateCounterClockwise();
+        }
         return true;
     }
 
-    public boolean checkEndTurn(GamePlayer player) {
-        return true;
+    public boolean checkEndTurn(int playerID) {
+        if (this.shiftedLabyrinthThisTurn) {
+            this.shiftedLabyrinthThisTurn = false;
+            switch (this.playerTurn) {
+                case RED: this.playerTurn = Player.YELLOW; break;
+                case YELLOW: this.playerTurn = Player.BLUE; break;
+                case BLUE: this.playerTurn = Player.GREEN; break;
+                case GREEN: this.playerTurn = Player.RED; break;
+            }
+            this.prevState = new LabyrinthGameState(this);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public boolean checkReset(GamePlayer player) {
-        return true;
+    public boolean checkReset(int playerID) {
+        if (this.prevState == null) {
+            return false;
+        } else {
+            LabyrinthGameState temp = new LabyrinthGameState(this.prevState);
+            this.playerTurn = temp.playerTurn;
+            this.gameBoard = temp.gameBoard;
+            this.currentTile = temp.currentTile;
+            this.treasureDecks = temp.treasureDecks;
+            this.deckSizes = temp.deckSizes;
+            this.disabledArrow = temp.disabledArrow;
+            return true;
+        }
     }
 
-    public boolean checkSlideTile(GamePlayer player) {
-        return true;
+    public boolean checkSlideTile(int playerID, Arrow clickedArrow) {
+        if (clickedArrow != this.disabledArrow) {
+            // TODO: Slide Tiles
+
+            // TODO: If pawn moves to currentTile, move to other end
+
+            this.shiftedLabyrinthThisTurn = true;
+
+            switch (clickedArrow) {
+                case LEFT_TOP: this.disabledArrow = Arrow.RIGHT_TOP; break;
+                case LEFT_MIDDLE: this.disabledArrow = Arrow.RIGHT_MIDDLE; break;
+                case LEFT_BOTTOM: this.disabledArrow = Arrow.RIGHT_BOTTOM; break;
+
+                case RIGHT_TOP: this.disabledArrow = Arrow.LEFT_TOP; break;
+                case RIGHT_MIDDLE: this.disabledArrow = Arrow.LEFT_MIDDLE; break;
+                case RIGHT_BOTTOM: this.disabledArrow = Arrow.LEFT_BOTTOM; break;
+
+                case TOP_LEFT: this.disabledArrow = Arrow.BOTTOM_LEFT; break;
+                case TOP_MIDDLE: this.disabledArrow = Arrow.BOTTOM_MIDDLE; break;
+                case TOP_RIGHT: this.disabledArrow = Arrow.BOTTOM_RIGHT; break;
+
+                case BOTTOM_LEFT: this.disabledArrow = Arrow.TOP_LEFT; break;
+                case BOTTOM_MIDDLE: this.disabledArrow = Arrow.TOP_MIDDLE; break;
+                case BOTTOM_RIGHT: this.disabledArrow = Arrow.TOP_RIGHT; break;
+            }
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
-    public boolean checkMovePawn(GamePlayer player) {
+    public boolean checkMovePawn(int playerID) {
+        // TODO: SEE IF YOU CAN MOVE CURRENT PLAYER PAWN
         return true;
     }
 }

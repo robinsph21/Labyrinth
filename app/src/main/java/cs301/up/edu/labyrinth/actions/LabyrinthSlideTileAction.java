@@ -1,5 +1,6 @@
 package cs301.up.edu.labyrinth.actions;
 
+import cs301.up.edu.enums.Arrow;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
 
@@ -15,15 +16,18 @@ public class LabyrinthSlideTileAction extends GameAction {
 
     // to satisfy the serializable interface
     private static final long serialVersionUID = 9906886413L;
+    private Arrow thisArrow;
 
     /**
      * Constructor for the LabyrinthSlideTileAction class.
      *
      * @param player
      *            the player making the move
+     * @param thisArrow
      */
-    public LabyrinthSlideTileAction(GamePlayer player) {
+    public LabyrinthSlideTileAction(GamePlayer player, Arrow thisArrow) {
         super(player);
+        this.thisArrow = thisArrow;
     }
 
 }//class LabyrinthSlideTileAction

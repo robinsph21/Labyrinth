@@ -63,11 +63,11 @@ public class LabyrinthLocalGame extends LocalGame {
 		
 			// cast so that we Java knows it's a LabyrinthMovePawnAction
 			LabyrinthMovePawnAction cma = (LabyrinthMovePawnAction)action;
-			
-			// denote that this was a legal/successful move
-			return true;
-		}
-		else {
+
+			// TODO: Get info about action and pass to method in gamestate to check if its valid
+			boolean possible = this.gameState.checkMovePawn(getPlayerIdx(cma.getPlayer()));
+			return possible;
+		} else {
 			// denote that this was an illegal move
 			return false;
 		}
