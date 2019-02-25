@@ -30,4 +30,7 @@ public class LabyrinthSlideTileAction extends GameAction {
         this.thisArrow = thisArrow;
     }
 
+    public Arrow getThisArrow() {
+        return thisArrow;
+    }
 }//class LabyrinthSlideTileAction

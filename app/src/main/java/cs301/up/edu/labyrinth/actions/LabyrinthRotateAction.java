@@ -15,6 +15,7 @@ public class LabyrinthRotateAction extends GameAction {
 
     // to satisfy the serializable interface
     private static final long serialVersionUID = 87806886413L;
+    private boolean clockwise;
 
     /**
      * Constructor for the LabyrinthRotateAction class.
@@ -22,8 +23,13 @@ public class LabyrinthRotateAction extends GameAction {
      * @param player
      *            the player making the move
      */
-    public LabyrinthRotateAction(GamePlayer player) {
+    public LabyrinthRotateAction(GamePlayer player, boolean clockwise) {
         super(player);
+        this.clockwise = clockwise;
+    }
+
+    public boolean isClockwise() {
+        return clockwise;
     }
 
 }//class LabyrinthRotateAction

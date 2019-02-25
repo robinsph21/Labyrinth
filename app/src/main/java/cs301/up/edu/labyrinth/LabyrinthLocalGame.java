@@ -4,7 +4,12 @@ import cs301.up.edu.enums.Player;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.LocalGame;
 import cs301.up.edu.game.actionMsg.GameAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthMainMenuAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthResetAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthRotateAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
 
 import android.util.Log;
 
@@ -58,15 +63,34 @@ public class LabyrinthLocalGame extends LocalGame {
 	@Override
 	protected boolean makeMove(GameAction action) {
 		Log.i("action", action.getClass().toString());
-		
-		if (action instanceof LabyrinthMovePawnAction) {
-		
-			// cast so that we Java knows it's a LabyrinthMovePawnAction
-			LabyrinthMovePawnAction cma = (LabyrinthMovePawnAction)action;
 
+		if (action instanceof LabyrinthMainMenuAction) {
+			LabyrinthMainMenuAction act = (LabyrinthMainMenuAction) action;
+			return this.gameState.checkMainMenu(getPlayerIdx(act.getPlayer()));
+
+		} else if (action instanceof LabyrinthRotateAction) {
+			LabyrinthRotateAction act = (LabyrinthRotateAction) action;
+			return this.gameState.checkRotate(getPlayerIdx(act.getPlayer()),
+					act.isClockwise());
+
+		} else if (action instanceof LabyrinthEndTurnAction) {
+			LabyrinthEndTurnAction act = (LabyrinthEndTurnAction) action;
+			return this.gameState.checkEndTurn(getPlayerIdx(act.getPlayer()));
+
+		} else if (action instanceof LabyrinthResetAction) {
+			LabyrinthResetAction act = (LabyrinthResetAction) action;
+			return this.gameState.checkReset(getPlayerIdx(act.getPlayer()));
+
+		} else if (action instanceof LabyrinthSlideTileAction) {
+			LabyrinthSlideTileAction act = (LabyrinthSlideTileAction) action;
+			return this.gameState.checkSlideTile(getPlayerIdx(act.getPlayer()),
+					act.getThisArrow());
+
+		} else if (action instanceof LabyrinthMovePawnAction) {
+			LabyrinthMovePawnAction act = (LabyrinthMovePawnAction) action;
 			// TODO: Get info about action and pass to method in gamestate to check if its valid
-			boolean possible = this.gameState.checkMovePawn(getPlayerIdx(cma.getPlayer()));
-			return possible;
+			return this.gameState.checkMovePawn(getPlayerIdx(act.getPlayer()));
+
 		} else {
 			// denote that this was an illegal move
 			return false;
