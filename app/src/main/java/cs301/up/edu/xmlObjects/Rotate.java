@@ -32,7 +32,7 @@ public class Rotate extends XMLObject {
         // Construct the action and send it to the game
         GameAction action = null;
 
-        action = new LabyrinthRotateAction(this.player);
+        action = new LabyrinthRotateAction(this.player, this.clockwise);
 
         game.sendAction(action);
     }

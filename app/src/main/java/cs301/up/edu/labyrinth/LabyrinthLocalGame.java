@@ -89,7 +89,8 @@ public class LabyrinthLocalGame extends LocalGame {
 		} else if (action instanceof LabyrinthMovePawnAction) {
 			LabyrinthMovePawnAction act = (LabyrinthMovePawnAction) action;
 			// TODO: Get info about action and pass to method in gamestate to check if its valid
-			return this.gameState.checkMovePawn(getPlayerIdx(act.getPlayer()));
+			return this.gameState.checkMovePawn(getPlayerIdx(act.getPlayer()),
+					act.getLocX(), act.getLocY());
 
 		} else {
 			// denote that this was an illegal move

@@ -15,15 +15,26 @@ public class LabyrinthMovePawnAction extends GameAction {
 	
 	// to satisfy the serializable interface
 	private static final long serialVersionUID = 2800982462013L;
-	
+	private int locX;
+	private int locY;
+
 	/**
 	 * Constructor for the LabyrinthMovePawnAction class.
 	 * 
 	 * @param player
 	 *            the player making the move
 	 */
-	public LabyrinthMovePawnAction(GamePlayer player) {
+	public LabyrinthMovePawnAction(GamePlayer player, int locX, int locY) {
 		super(player);
+		this.locX = locX;
+		this.locY = locY;
 	}
 
+	public int getLocX() {
+		return this.locX;
+	}
+
+	public int getLocY() {
+		return this.locY;
+	}
 }//class LabyrinthMovePawnAction

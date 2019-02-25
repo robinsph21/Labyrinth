@@ -411,7 +411,7 @@ public class LabyrinthGameState extends GameState {
 
     }
 
-    public boolean checkMovePawn(int playerID) {
+    public boolean checkMovePawn(int playerID, int locX, int locY) {
         // TODO: SEE IF YOU CAN MOVE CURRENT PLAYER PAWN
         return true;
     }

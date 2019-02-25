@@ -3,7 +3,7 @@ package cs301.up.edu.labyrinth;
 import cs301.up.edu.game.GameComputerPlayer;
 import cs301.up.edu.game.infoMsg.GameInfo;
 import cs301.up.edu.game.util.Tickable;
-import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
@@ -57,6 +57,6 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer
         // Calculate what to do based on state
 
         // send the move-action to the game
-        game.sendAction(new LabyrinthMovePawnAction(this));
+        game.sendAction(new LabyrinthEndTurnAction(this));
     }
 }
