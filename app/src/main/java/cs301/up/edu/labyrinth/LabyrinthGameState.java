@@ -491,7 +491,18 @@ public class LabyrinthGameState extends GameState {
             if (found) break;
         }
         List<Tile> checkedSpots = new ArrayList<>(49);
-        return this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
+        boolean valid;
+        valid = this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
                 checkedSpots);
+        if (valid) {
+            // Remove old pawn loc
+            playerTile.setPawn(Player.None);
+
+            // Set new pawn loc
+            this.gameBoard[locX][locY].setPawn(playerTurn);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
