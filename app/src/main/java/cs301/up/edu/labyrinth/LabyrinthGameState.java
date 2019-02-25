@@ -170,84 +170,84 @@ public class LabyrinthGameState extends GameState {
         this.gameBoard[0][2] = new Tile(
                 TileType.INTERSECTION,
                 270,
-                TreasureType.NONE,
+                TreasureType.BOOK,
                 this.gameBoard,
                 0,2);
 
         this.gameBoard[0][4] = new Tile(
                 TileType.INTERSECTION,
                 270,
-                TreasureType.NONE,
+                TreasureType.COINS,
                 this.gameBoard,
                 0,4);
 
         this.gameBoard[2][0] = new Tile(
                 TileType.INTERSECTION,
                 180,
-                TreasureType.NONE,
+                TreasureType.MAP,
                 this.gameBoard,
                 2,0);
 
         this.gameBoard[2][2] = new Tile(
                 TileType.INTERSECTION,
                 180,
-                TreasureType.NONE,
+                TreasureType.CROWN,
                 this.gameBoard,
                 2,2);
 
         this.gameBoard[2][4] = new Tile(
                 TileType.INTERSECTION,
                 270,
-                TreasureType.NONE,
+                TreasureType.KEYS,
                 this.gameBoard,
                 2,4);
 
         this.gameBoard[2][6] = new Tile(
                 TileType.INTERSECTION,
                 0,
-                TreasureType.NONE,
+                TreasureType.SKULL,
                 this.gameBoard,
                 2,6);
 
         this.gameBoard[4][0] = new Tile(
                 TileType.INTERSECTION,
                 180,
-                TreasureType.NONE,
+                TreasureType.RING,
                 this.gameBoard,
                 4,0);
 
         this.gameBoard[4][2] = new Tile(
                 TileType.INTERSECTION,
                 90,
-                TreasureType.NONE,
+                TreasureType.CHEST,
                 this.gameBoard,
                 4,2);
 
         this.gameBoard[4][4] = new Tile(
                 TileType.INTERSECTION,
                 0,
-                TreasureType.NONE,
+                TreasureType.GEM,
                 this.gameBoard,
                 4,4);
 
         this.gameBoard[4][6] = new Tile(
                 TileType.INTERSECTION,
                 0,
-                TreasureType.NONE,
+                TreasureType.SWORD,
                 this.gameBoard,
                 4,6);
 
         this.gameBoard[6][2] = new Tile(
                 TileType.INTERSECTION,
                 90,
-                TreasureType.NONE,
+                TreasureType.CANDLES,
                 this.gameBoard,
                 6,2);
 
         this.gameBoard[6][4] = new Tile(
                 TileType.INTERSECTION,
                 90,
-                TreasureType.NONE,
+                TreasureType.HELMET,
                 this.gameBoard,
                 6,4);
     }
@@ -446,10 +446,57 @@ public class LabyrinthGameState extends GameState {
             // TODO: Slide Tiles / Make sure to call setLoc on all tiles moved, current becomes -1,-1
             Tile tempTile = this.currentTile; //Tile to slide in
 
-            for (int i = 0; i < 7; i++) {
-                if (clickedArrow == Arrow.BOTTOM_LEFT ||
+            switch (clickedArrow){
+                case LEFT_TOP:
+                    this.currentTile = this.gameBoard[6][1];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i ++ ) {
+                        if (i == 5) {
+                            this.gameBoard[5-i][1] = tempTile;
+                        }
+                        else {
+                            this.gameBoard[5 - i][1] = this.gameBoard[4 - i][1];
+                        }
+                        this.gameBoard[5 - 1][1].setLoc(5 - i, 1);
+                    }
+                    break;
+
+                case LEFT_MIDDLE:
+                    this.currentTile = this.gameBoard[6][3];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i ++ ) {
+                        if (i == 5) {
+                            this.gameBoard[5-i][3] = tempTile;
+                        }
+                        else {
+                            this.gameBoard[5 - i][3] = this.gameBoard[4 - i][3];
+                        }
+                        this.gameBoard[5 - 1][3].setLoc(5 - i, 3);
+                    }
+                    break;
+                case LEFT_BOTTOM:
+                    this.currentTile = this.gameBoard[6][5];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i ++ ) {
+                        if (i == 5) {
+                            this.gameBoard[5-i][5] = tempTile;
+                        }
+                        else {
+                            this.gameBoard[5 - i][5] = this.gameBoard[4 - i][5];
+                        }
+                        this.gameBoard[5 - 1][1].setLoc(5 - i, 5);
+                    }
+                    break;
+                }
+
+
+
+            /*for (int i = 0; i < 7; i++) {
+
+                                if (clickedArrow == Arrow.BOTTOM_LEFT ||
                         clickedArrow == Arrow.BOTTOM_MIDDLE ||
                         clickedArrow == Arrow.BOTTOM_RIGHT) {
+                    this.currentTile = this.gameBoard[][]
                     // Slide stuff
 
                 } else if (clickedArrow == Arrow.TOP_LEFT ||
@@ -468,7 +515,7 @@ public class LabyrinthGameState extends GameState {
                     // Slide stuff
 
                 }
-            }
+            }*/
 
 
             // TODO: If pawn moves to currentTile, move to other end
@@ -508,7 +555,7 @@ public class LabyrinthGameState extends GameState {
         boolean found = false;
         for (Tile[] row : this.gameBoard) {
             for ( Tile spot : row) {
-                if (spot.getPawn() != Player.None) {
+                if (spot.getPawn() == this.playerTurn) {
                     playerTile = spot;
                     found = true;
                     break;

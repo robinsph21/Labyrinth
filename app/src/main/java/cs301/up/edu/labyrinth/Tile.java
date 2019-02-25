@@ -85,6 +85,7 @@ public class Tile implements Serializable {
         this.y = y;
     }
 
+    //TODO: also check neghibor tile is connected to you
     public void calculateConnectedTiles() {
         for (int i = 0; i < 4; i++) {
             if (this.connections[i]) {
