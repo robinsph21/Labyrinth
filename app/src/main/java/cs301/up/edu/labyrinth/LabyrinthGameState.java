@@ -8,7 +8,6 @@ import cs301.up.edu.enums.Arrow;
 import cs301.up.edu.enums.Player;
 import cs301.up.edu.enums.TileType;
 import cs301.up.edu.enums.TreasureType;
-import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.infoMsg.GameState;
 
 
@@ -105,14 +104,17 @@ public class LabyrinthGameState extends GameState {
 
             if (numIntersection > 0) {
                 // TODO: 6 Intersections Need Treasures
-                randomPieces.add(new Tile(TileType.INTERSECTION, randomRotation));
+                randomPieces.add(new Tile(TileType.INTERSECTION, randomRotation,
+                        TreasureType.NONE, this.gameBoard));
                 numIntersection--;
             } else if (numStraight > 0) {
-                randomPieces.add(new Tile(TileType.STRAIGHT, randomRotation));
+                randomPieces.add(new Tile(TileType.STRAIGHT, randomRotation,
+                        TreasureType.NONE, this.gameBoard));
                 numStraight--;
             } else if (numCorner > 0) {
                 // TODO: 6 Corners Need Treasures
-                randomPieces.add(new Tile(TileType.CORNER, randomRotation));
+                randomPieces.add(new Tile(TileType.CORNER, randomRotation,
+                        TreasureType.NONE, this.gameBoard));
                 numCorner--;
             }
         }
@@ -136,26 +138,30 @@ public class LabyrinthGameState extends GameState {
         this.gameBoard[0][0] = new Tile(
                 TileType.RED_ENTRY,
                 0,
-                TreasureType.NONE,
-                Player.RED);
+                Player.RED,
+                this.gameBoard,
+                0,0);
 
         this.gameBoard[6][0] = new Tile(
                 TileType.YELLOW_ENTRY,
                 0,
-                TreasureType.NONE,
-                Player.YELLOW);
+                Player.YELLOW,
+                this.gameBoard,
+                6,0);
 
         this.gameBoard[6][6] = new Tile(
                 TileType.GREEN_ENTRY,
                 0,
-                TreasureType.NONE,
-                Player.GREEN);
+                Player.GREEN,
+                this.gameBoard,
+                6,6);
 
         this.gameBoard[0][6] = new Tile(
                 TileType.BLUE_ENTRY,
                 0,
-                TreasureType.NONE,
-                Player.BLUE);
+                Player.BLUE,
+                this.gameBoard,
+                0,6);
 
         // Below is the setting of the fixed tiles on the board
 
@@ -163,73 +169,85 @@ public class LabyrinthGameState extends GameState {
                 TileType.INTERSECTION,
                 270,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                0,2);
 
         this.gameBoard[0][4] = new Tile(
                 TileType.INTERSECTION,
                 270,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                0,4);
 
         this.gameBoard[2][0] = new Tile(
                 TileType.INTERSECTION,
                 180,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                2,0);
 
         this.gameBoard[2][2] = new Tile(
                 TileType.INTERSECTION,
                 180,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                2,2);
 
         this.gameBoard[2][4] = new Tile(
                 TileType.INTERSECTION,
                 270,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                2,4);
 
         this.gameBoard[2][6] = new Tile(
                 TileType.INTERSECTION,
                 0,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                2,6);
 
         this.gameBoard[4][0] = new Tile(
                 TileType.INTERSECTION,
                 180,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                4,0);
 
         this.gameBoard[4][2] = new Tile(
                 TileType.INTERSECTION,
                 90,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                4,2);
 
         this.gameBoard[4][4] = new Tile(
                 TileType.INTERSECTION,
                 0,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                4,4);
 
         this.gameBoard[4][6] = new Tile(
                 TileType.INTERSECTION,
                 0,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                4,6);
 
         this.gameBoard[6][2] = new Tile(
                 TileType.INTERSECTION,
                 90,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                6,2);
 
         this.gameBoard[6][4] = new Tile(
                 TileType.INTERSECTION,
                 90,
                 TreasureType.NONE,
-                Player.None);
+                this.gameBoard,
+                6,4);
     }
 
 
@@ -251,14 +269,18 @@ public class LabyrinthGameState extends GameState {
                         state.gameBoard[i][j].getRotation(),
                         TreasureType.valueOf(
                                 state.gameBoard[i][j].getTreasure().name()),
-                        Player.valueOf(state.gameBoard[i][j].getPawn().name()));
+                        Player.valueOf(state.gameBoard[i][j].getPawn().name()),
+                        this.gameBoard,
+                        i,j);
             }
         }
 
         this.currentTile = new Tile(
                 TileType.valueOf(state.currentTile.getType().name()),
                 state.currentTile.getRotation(),
-                TreasureType.valueOf(state.currentTile.getTreasure().name()));
+                TreasureType.valueOf(state.currentTile.getTreasure().name()),
+                this.gameBoard,
+                -1, -1);
 
 
         for (int i = 0; i < NUM_PLAYERS; i++) {
@@ -381,7 +403,15 @@ public class LabyrinthGameState extends GameState {
 
     public boolean checkSlideTile(int playerID, Arrow clickedArrow) {
         if (clickedArrow != this.disabledArrow) {
-            // TODO: Slide Tiles
+            // TODO: Slide Tiles / Make sure to call setLoc
+
+            //Update each tiles connections after sliding
+            for (Tile[] row : gameBoard) {
+                for (Tile spot : row) {
+                    spot.calculateConnections();
+                    spot.calculateConnectedTiles();
+                }
+            }
 
             // TODO: If pawn moves to currentTile, move to other end
 

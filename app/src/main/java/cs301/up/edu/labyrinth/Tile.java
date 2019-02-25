@@ -13,37 +13,49 @@ public class Tile implements Serializable {
     private final TileType type;
     private int rotation;
     private boolean[] connections = new boolean[4]; //Left, Up, Right, Down
+    private Tile[] connectedTiles = new Tile[4];
     private TreasureType treasure;
+    private int x;
+    private int y;
     private Player pawn;
+    private Tile[][] board;
 
-    public Tile(TileType type, int rotation, TreasureType treasure, Player pawn) {
+    public Tile(TileType type, int rotation, TreasureType treasure, Player pawn,
+                Tile[][] board, int x, int y) {
         this.type = type;
         this.rotation = rotation;
         this.treasure = treasure;
-        this.connections = calculateConnections();
+        this.x = x;
+        this.y = y;
+        this.board = board;
         this.pawn = pawn;
+        this.calculateConnections();
+        this.calculateConnectedTiles();
     }
 
-    public Tile(TileType type, int rotation, TreasureType treasure) {
-        this(type, rotation, treasure, Player.None);
+    public Tile(TileType type, int rotation, TreasureType treasure,
+                Tile[][] board, int x, int y) {
+        this(type, rotation, treasure, Player.None, board, x, y);
     }
 
-    public Tile(TileType type, int rotation, Player pawn) {
-        this(type, rotation, TreasureType.NONE, pawn);
+    public Tile(TileType type, int rotation, TreasureType treasure,
+                Tile[][] board) {
+        this(type, rotation, treasure, Player.None, board, -1, -1);
     }
 
-    public Tile(TileType type, int rotation) {
-        this(type, rotation, TreasureType.NONE, Player.None);
+    public Tile(TileType type, int rotation, Player pawn, Tile[][] board,
+                int x, int y) {
+        this(type, rotation, TreasureType.NONE, pawn, board, x, y);
     }
 
     public void rotateClockwise() {
         this.rotation = (this.rotation + 90) % 360;
-        this.connections = calculateConnections();
+        this.calculateConnections();
     }
 
     public void rotateCounterClockwise() {
         this.rotation = (this.rotation + 270) % 360;
-        this.connections = calculateConnections();
+        this.calculateConnections();
     }
 
     public TileType getType() {
@@ -52,10 +64,6 @@ public class Tile implements Serializable {
 
     public int getRotation() {
         return this.rotation;
-    }
-
-    public boolean[] getConnections() {
-        return this.connections;
     }
 
     public Player getPawn() {
@@ -74,37 +82,88 @@ public class Tile implements Serializable {
         this.treasure = treasure;
     }
 
-    private boolean[] calculateConnections() {
+    public void setLoc(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void calculateConnectedTiles() {
+        for (int i = 0; i < 4; i++) {
+            if (this.connections[i]) {
+                int [] loc = new int[2];
+                switch (i) {
+                    case 0: loc[0] = this.x - 1;
+                            loc[1] = this.y;
+                            break;
+                    case 1: loc[0] = this.x;
+                            loc[1] = this.y - 1;
+                            break;
+                    case 2: loc[0] = this.x + 1;
+                            loc[1] = this.y;
+                            break;
+                    case 3: loc[0] = this.x;
+                            loc[1] = this.y + 1;
+                            break;
+                }
+                if ((loc[0] >= 0 && loc[0] <= 6) &&
+                        (loc[1] >= 0 && loc[1] <= 6)) {
+                    this.connectedTiles[i] = this.board[loc[0]][loc[1]];
+                } else {
+                    this.connectedTiles[i] = null;
+                }
+            } else {
+                this.connectedTiles[i] = null;
+            }
+        }
+    }
+
+    public void calculateConnections() {
         switch (this.type) {
             case CORNER: {
                 switch (rotation) {
-                    case 0: return new boolean[]{false, false, true, true};
-                    case 90: return new boolean[]{true, false, false, true};
-                    case 180: return new boolean[]{true, true, false, false};
-                    case 270: return new boolean[]{false, true, true, false};
-                    default: return new boolean[]{false, false, false, false};
+                    case 0: this.connections = new boolean[]
+                            {false, false, true, true}; break;
+                    case 90: this.connections = new boolean[]
+                            {true, false, false, true}; break;
+                    case 180: this.connections = new boolean[]
+                            {true, true, false, false}; break;
+                    case 270: this.connections = new boolean[]
+                            {false, true, true, false}; break;
+                    default: this.connections = new boolean[]
+                            {false, false, false, false}; break;
                 }
             }
             case STRAIGHT: {
                 switch (rotation) {
-                    case 0: return new boolean[]{true, false, true, false};
-                    case 90: return new boolean[]{false, true, false, true};
-                    case 180: return new boolean[]{true, false, true, false};
-                    case 270: return new boolean[]{false, true, false, true};
-                    default: return new boolean[]{false, false, false, false};
+                    case 0: this.connections = new boolean[]
+                            {true, false, true, false}; break;
+                    case 90: this.connections = new boolean[]
+                            {false, true, false, true}; break;
+                    case 180: this.connections = new boolean[]
+                            {true, false, true, false}; break;
+                    case 270: this.connections = new boolean[]
+                            {false, true, false, true}; break;
+                    default: this.connections = new boolean[]
+                            {false, false, false, false}; break;
                 }
             }
             case INTERSECTION: {
                 switch (rotation) {
-                    case 0: return new boolean[]{true, true, true, false};
-                    case 90: return new boolean[]{false, true, true, true};
-                    case 180: return new boolean[]{true, false, true, true};
-                    case 270: return new boolean[]{true, true, false, true};
-                    default: return new boolean[]{false, false, false, false};
+                    case 0: this.connections = new boolean[]
+                            {true, true, true, false}; break;
+                    case 90: this.connections = new boolean[]
+                            {false, true, true, true}; break;
+                    case 180: this.connections = new boolean[]
+                            {true, false, true, true}; break;
+                    case 270: this.connections = new boolean[]
+                            {true, true, false, true}; break;
+                    default: this.connections = new boolean[]
+                            {false, false, false, false}; break;
                 }
             }
             default: {
-                return new boolean[]{false, false, false, false};
+                this.connections = new boolean[]{false, false, false, false};
+                break;
             }
         }
 
