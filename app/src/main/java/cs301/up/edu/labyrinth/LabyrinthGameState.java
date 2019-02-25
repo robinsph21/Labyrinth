@@ -445,6 +445,7 @@ public class LabyrinthGameState extends GameState {
         if (clickedArrow != this.disabledArrow) {
             // TODO: Slide Tiles / Make sure to call setLoc on all tiles moved, current becomes -1,-1
             Tile tempTile = this.currentTile; //Tile to slide in
+
             for (int i = 0; i < 7; i++) {
                 if (clickedArrow == Arrow.BOTTOM_LEFT ||
                         clickedArrow == Arrow.BOTTOM_MIDDLE ||
