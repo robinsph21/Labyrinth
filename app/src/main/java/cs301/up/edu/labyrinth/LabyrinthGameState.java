@@ -375,7 +375,7 @@ public class LabyrinthGameState extends GameState {
             checkedSpots.addAll(connectedTiles);
             return true;
         } else {
-            ArrayList<Boolean> checks = new ArrayList<>(4);
+            List<Boolean> checks = new ArrayList<>(4);
             for (Tile spot : connectedTiles) {
                 if (spot != null) {
                     if (searchConnectedTile(spot, search, checkedSpots)) {
