@@ -1,6 +1,7 @@
 package cs301.up.edu.labyrinth;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -354,6 +355,41 @@ public class LabyrinthGameState extends GameState {
         return returnValue.toString();
     }
 
+    private void updateTiles() {
+        for (Tile[] row : this.gameBoard) {
+            for (Tile spot : row) {
+                spot.calculateConnections();
+                spot.calculateConnectedTiles();
+            }
+        }
+    }
+
+    private boolean searchConnectedTile(Tile orig, Tile search,
+                                        List<Tile> checkedSpots) {
+
+        List<Tile> connectedTiles = Arrays.asList(orig.getConnectedTiles());
+
+        if (checkedSpots.contains(orig)) {
+            return false;
+        } else if (connectedTiles.contains(search)) {
+            checkedSpots.addAll(connectedTiles);
+            return true;
+        } else {
+            ArrayList<Boolean> checks = new ArrayList<>(4);
+            for (Tile spot : connectedTiles) {
+                if (spot != null) {
+                    if (searchConnectedTile(spot, search, checkedSpots)) {
+                        checks.add(Boolean.TRUE);
+                    } else {
+                        checks.add(Boolean.FALSE);
+                    }
+                    checkedSpots.add(spot);
+                }
+            }
+            return checks.contains(Boolean.TRUE);
+        }
+    }
+
 
     /** All actions that can be taken */
 
@@ -366,8 +402,10 @@ public class LabyrinthGameState extends GameState {
     public boolean checkRotate(int playerID, boolean clockwise) {
         if (clockwise) {
             this.currentTile.rotateClockwise();
+            this.updateTiles();
         } else {
             this.currentTile.rotateCounterClockwise();
+            this.updateTiles();
         }
         return true;
     }
@@ -403,23 +441,14 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
-    public void updateTiles() {
-        for (Tile[] row : this.gameBoard) {
-            for (Tile spot : row) {
-                spot.calculateConnections();
-                spot.calculateConnectedTiles();
-            }
-        }
-    }
-
     public boolean checkSlideTile(int playerID, Arrow clickedArrow) {
         if (clickedArrow != this.disabledArrow) {
-            // TODO: Slide Tiles / Make sure to call setLoc
+            // TODO: Slide Tiles / Make sure to call setLoc on all tiles moved, current becomes -1,-1
+
+            // TODO: If pawn moves to currentTile, move to other end
 
             //Update each tiles connections after sliding
             this.updateTiles();
-
-            // TODO: If pawn moves to currentTile, move to other end
 
             this.shiftedLabyrinthThisTurn = true;
 
@@ -448,7 +477,21 @@ public class LabyrinthGameState extends GameState {
     }
 
     public boolean checkMovePawn(int playerID, int locX, int locY) {
-        // TODO: SEE IF YOU CAN MOVE CURRENT PLAYER PAWN
-        return true;
+        // Find Player Tile
+        Tile playerTile = null;
+        boolean found = false;
+        for (Tile[] row : this.gameBoard) {
+            for ( Tile spot : row) {
+                if (spot.getPawn() != Player.None) {
+                    playerTile = spot;
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+        }
+        List<Tile> checkedSpots = new ArrayList<>(49);
+        return this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
+                checkedSpots);
     }
 }

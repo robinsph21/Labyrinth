@@ -50,12 +50,10 @@ public class Tile implements Serializable {
 
     public void rotateClockwise() {
         this.rotation = (this.rotation + 90) % 360;
-        this.calculateConnections();
     }
 
     public void rotateCounterClockwise() {
         this.rotation = (this.rotation + 270) % 360;
-        this.calculateConnections();
     }
 
     public TileType getType() {
@@ -115,6 +113,10 @@ public class Tile implements Serializable {
                 this.connectedTiles[i] = null;
             }
         }
+    }
+
+    public Tile[] getConnectedTiles() {
+        return this.connectedTiles;
     }
 
     public void calculateConnections() {
