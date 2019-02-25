@@ -127,6 +127,7 @@ public class LabyrinthGameState extends GameState {
                 if ((i % 2 != 0) || (j % 2 != 0)) {
                     // Movable Piece
                     this.gameBoard[i][j] = randomPieces.remove(0);
+                    this.gameBoard[i][j].setLoc(i,j);
                 }
             }
         }
