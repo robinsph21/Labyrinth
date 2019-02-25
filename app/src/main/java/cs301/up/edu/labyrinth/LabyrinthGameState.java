@@ -283,6 +283,7 @@ public class LabyrinthGameState extends GameState {
                 this.gameBoard,
                 -1, -1);
 
+        this.updateTiles();
 
         for (int i = 0; i < NUM_PLAYERS; i++) {
             this.treasureDecks.add(new ArrayList<TreasureType>(6));
@@ -402,17 +403,21 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    public void updateTiles() {
+        for (Tile[] row : this.gameBoard) {
+            for (Tile spot : row) {
+                spot.calculateConnections();
+                spot.calculateConnectedTiles();
+            }
+        }
+    }
+
     public boolean checkSlideTile(int playerID, Arrow clickedArrow) {
         if (clickedArrow != this.disabledArrow) {
             // TODO: Slide Tiles / Make sure to call setLoc
 
             //Update each tiles connections after sliding
-            for (Tile[] row : gameBoard) {
-                for (Tile spot : row) {
-                    spot.calculateConnections();
-                    spot.calculateConnectedTiles();
-                }
-            }
+            this.updateTiles();
 
             // TODO: If pawn moves to currentTile, move to other end
 
