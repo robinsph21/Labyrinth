@@ -444,6 +444,31 @@ public class LabyrinthGameState extends GameState {
     public boolean checkSlideTile(int playerID, Arrow clickedArrow) {
         if (clickedArrow != this.disabledArrow) {
             // TODO: Slide Tiles / Make sure to call setLoc on all tiles moved, current becomes -1,-1
+            Tile tempTile = this.currentTile; //Tile to slide in
+            for (int i = 0; i < 7; i++) {
+                if (clickedArrow == Arrow.BOTTOM_LEFT ||
+                        clickedArrow == Arrow.BOTTOM_MIDDLE ||
+                        clickedArrow == Arrow.BOTTOM_RIGHT) {
+                    // Slide stuff
+
+                } else if (clickedArrow == Arrow.TOP_LEFT ||
+                        clickedArrow == Arrow.TOP_MIDDLE ||
+                        clickedArrow == Arrow.TOP_RIGHT) {
+                    // Slide stuff
+
+                } else if (clickedArrow == Arrow.LEFT_TOP ||
+                        clickedArrow == Arrow.LEFT_MIDDLE ||
+                        clickedArrow == Arrow.LEFT_BOTTOM) {
+                    // Slide stuff
+
+                } else if (clickedArrow == Arrow.RIGHT_TOP ||
+                        clickedArrow == Arrow.RIGHT_MIDDLE ||
+                        clickedArrow == Arrow.RIGHT_BOTTOM) {
+                    // Slide stuff
+
+                }
+            }
+
 
             // TODO: If pawn moves to currentTile, move to other end
 
@@ -490,6 +515,7 @@ public class LabyrinthGameState extends GameState {
             }
             if (found) break;
         }
+
         List<Tile> checkedSpots = new ArrayList<>(49);
         boolean valid;
         valid = this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
