@@ -1,6 +1,6 @@
 package cs301.up.edu.labyrinth.actions;
 
-import cs301.up.edu.enums.Arrow;
+import cs301.up.edu.labyrinth.enums.Arrow;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
 

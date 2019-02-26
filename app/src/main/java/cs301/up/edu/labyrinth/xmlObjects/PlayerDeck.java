@@ -1,8 +1,8 @@
-package cs301.up.edu.xmlObjects;
+package cs301.up.edu.labyrinth.xmlObjects;
 
 import android.view.View;
 
-import cs301.up.edu.enums.Player;
+import cs301.up.edu.labyrinth.enums.Player;
 
 public class PlayerDeck extends XMLObject {
 

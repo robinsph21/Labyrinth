@@ -1,4 +1,4 @@
-package cs301.up.edu.enums;
+package cs301.up.edu.labyrinth.enums;
 
 public enum Arrow {
     TOP_LEFT, TOP_MIDDLE, TOP_RIGHT,

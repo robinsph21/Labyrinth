@@ -1,7 +1,7 @@
 package cs301.up.edu.labyrinth;
 
-import cs301.up.edu.enums.Player;
-import cs301.up.edu.enums.TileType;
+import cs301.up.edu.labyrinth.enums.Player;
+import cs301.up.edu.labyrinth.enums.TileType;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.LocalGame;
 import cs301.up.edu.game.actionMsg.GameAction;
@@ -11,8 +11,6 @@ import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthResetAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthRotateAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
-
-import android.util.Log;
 
 /**
  * A class that represents the state of a game. In our , the only

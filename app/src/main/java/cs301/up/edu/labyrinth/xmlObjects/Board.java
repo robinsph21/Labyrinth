@@ -1,8 +1,7 @@
-package cs301.up.edu.xmlObjects;
+package cs301.up.edu.labyrinth.xmlObjects;
 
 import cs301.up.edu.game.Game;
 import cs301.up.edu.game.GamePlayer;
-import cs301.up.edu.enums.Arrow;
 
 public class Board {
 

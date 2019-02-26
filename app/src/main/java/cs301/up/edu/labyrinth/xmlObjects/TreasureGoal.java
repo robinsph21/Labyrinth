@@ -1,8 +1,8 @@
-package cs301.up.edu.xmlObjects;
+package cs301.up.edu.labyrinth.xmlObjects;
 
 import android.view.View;
 
-import cs301.up.edu.enums.TreasureType;
+import cs301.up.edu.labyrinth.enums.TreasureType;
 
 public class TreasureGoal extends XMLObject{
 

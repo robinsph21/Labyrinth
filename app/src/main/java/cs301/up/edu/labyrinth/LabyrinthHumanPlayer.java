@@ -1,11 +1,11 @@
 package cs301.up.edu.labyrinth;
 
-import cs301.up.edu.enums.Player;
+import cs301.up.edu.labyrinth.enums.Player;
 import cs301.up.edu.game.GameHumanPlayer;
 import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.R;
 import cs301.up.edu.game.infoMsg.GameInfo;
-import cs301.up.edu.xmlObjects.*;
+import cs301.up.edu.labyrinth.xmlObjects.*;
 
 import android.view.View;
 import android.widget.ImageView;

@@ -1,4 +1,4 @@
-package cs301.up.edu.enums;
+package cs301.up.edu.labyrinth.enums;
 
 public enum TreasureType {
     NONE, BAT, BOOK, BOW, CANDLES, CHEST, COINS, CROWN, DRAGON, FOX, GEM, GHOST,

@@ -2,9 +2,9 @@ package cs301.up.edu.labyrinth;
 
 import java.io.Serializable;
 
-import cs301.up.edu.enums.Player;
-import cs301.up.edu.enums.TileType;
-import cs301.up.edu.enums.TreasureType;
+import cs301.up.edu.labyrinth.enums.Player;
+import cs301.up.edu.labyrinth.enums.TileType;
+import cs301.up.edu.labyrinth.enums.TreasureType;
 
 public class Tile implements Serializable {
 

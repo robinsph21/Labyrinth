@@ -1,4 +1,4 @@
-package cs301.up.edu.xmlObjects;
+package cs301.up.edu.labyrinth.xmlObjects;
 
 public class BoardSpot extends XMLObject{
 

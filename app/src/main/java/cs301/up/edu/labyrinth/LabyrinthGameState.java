@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import cs301.up.edu.enums.Arrow;
-import cs301.up.edu.enums.Player;
-import cs301.up.edu.enums.TileType;
-import cs301.up.edu.enums.TreasureType;
+import cs301.up.edu.labyrinth.enums.Arrow;
+import cs301.up.edu.labyrinth.enums.Player;
+import cs301.up.edu.labyrinth.enums.TileType;
+import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.game.infoMsg.GameState;
 
 

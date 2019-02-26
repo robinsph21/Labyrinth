@@ -1,9 +1,9 @@
-package cs301.up.edu.xmlObjects;
+package cs301.up.edu.labyrinth.xmlObjects;
 
 import android.view.View;
 
-import cs301.up.edu.enums.Player;
-import cs301.up.edu.enums.TreasureType;
+import cs301.up.edu.labyrinth.enums.Player;
+import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.game.Game;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
