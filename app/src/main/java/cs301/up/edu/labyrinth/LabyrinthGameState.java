@@ -474,7 +474,7 @@ public class LabyrinthGameState extends GameState {
     }
 
     public boolean checkSlideTile(int playerID, Arrow clickedArrow) {
-        if (clickedArrow != this.disabledArrow) {
+        if (clickedArrow != this.disabledArrow && !shiftedLabyrinthThisTurn) {
             Tile tempTile = this.currentTile; //Tile to slide in
 
             switch (clickedArrow){
