@@ -29,10 +29,6 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer
     public LabyrinthComputerPlayer1(String name) {
         // invoke superclass constructor
         super(name);
-
-        // start the timer, ticking 20 times per second
-        getTimer().setInterval(50);
-        getTimer().start();
     }
 
     /**
@@ -48,15 +44,17 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer
 
         // update our state
         this.state = (LabyrinthGameState)info;
-    }
 
-    /**
-     * callback method: the timer ticked
-     */
-    protected void timerTicked() {
-        // Calculate what to do based on state
+        if (this.state.getPlayerTurn().ordinal() == this.playerNum) {
+            // Take a rotate action (0-3 times)
 
-        // send the move-action to the game
-        game.sendAction(new LabyrinthEndTurnAction(this));
+            // Take a Slide Tile Action (1 time)
+
+            // Take a Move Pawn Action (1 time)
+
+
+            // Take an End Turn Action (1 time)
+            game.sendAction(new LabyrinthEndTurnAction(this));
+        }
     }
 }
