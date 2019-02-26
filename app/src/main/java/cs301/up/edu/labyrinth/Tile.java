@@ -56,6 +56,14 @@ public class Tile implements Serializable {
         this.rotation = (this.rotation + 270) % 360;
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
     public TileType getType() {
         return this.type;
     }
@@ -85,7 +93,6 @@ public class Tile implements Serializable {
         this.y = y;
     }
 
-    //TODO: also check neghibor tile is connected to you
     public void calculateConnectedTiles() {
         for (int i = 0; i < 4; i++) {
             if (this.connections[i]) {
@@ -106,7 +113,9 @@ public class Tile implements Serializable {
                 }
                 if ((loc[0] >= 0 && loc[0] <= 6) &&
                         (loc[1] >= 0 && loc[1] <= 6)) {
-                    this.connectedTiles[i] = this.board[loc[0]][loc[1]];
+                    if (this.board[loc[0]][loc[1]].connections[(i+2)%4]) {
+                        this.connectedTiles[i] = this.board[loc[0]][loc[1]];
+                    }
                 } else {
                     this.connectedTiles[i] = null;
                 }

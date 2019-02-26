@@ -390,6 +390,22 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    public Tile getPlayerLoc(Player p) {
+        Tile playerTile = null;
+        boolean found = false;
+        for (Tile[] row : this.gameBoard) {
+            for ( Tile spot : row) {
+                if (spot.getPawn() == p) {
+                    playerTile = spot;
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+        }
+        return playerTile;
+    }
+
 
     /** All actions that can be taken */
 
@@ -443,105 +459,268 @@ public class LabyrinthGameState extends GameState {
 
     public boolean checkSlideTile(int playerID, Arrow clickedArrow) {
         if (clickedArrow != this.disabledArrow) {
-            // TODO: Slide Tiles / Make sure to call setLoc on all tiles moved, current becomes -1,-1
             Tile tempTile = this.currentTile; //Tile to slide in
 
             switch (clickedArrow){
                 case LEFT_TOP:
                     this.currentTile = this.gameBoard[6][1];
                     currentTile.setLoc(-1,-1);
-                    for(int i = 0; i < 6; i ++ ) {
-                        if (i == 5) {
-                            this.gameBoard[5-i][1] = tempTile;
+                    for(int i = 0; i < 7; i++ ) {
+                        if (i == 6) {
+                            this.gameBoard[0][1] = tempTile;
                         }
                         else {
-                            this.gameBoard[5 - i][1] = this.gameBoard[4 - i][1];
+                            this.gameBoard[6 - i][1] = this.gameBoard[5 - i][1];
                         }
-                        this.gameBoard[5 - 1][1].setLoc(5 - i, 1);
+                        this.gameBoard[6 - i][1].setLoc(6 - i, 1);
                     }
                     break;
 
                 case LEFT_MIDDLE:
                     this.currentTile = this.gameBoard[6][3];
                     currentTile.setLoc(-1,-1);
-                    for(int i = 0; i < 6; i ++ ) {
-                        if (i == 5) {
-                            this.gameBoard[5-i][3] = tempTile;
+                    for(int i = 0; i < 7; i++ ) {
+                        if (i == 6) {
+                            this.gameBoard[0][3] = tempTile;
                         }
                         else {
-                            this.gameBoard[5 - i][3] = this.gameBoard[4 - i][3];
+                            this.gameBoard[6 - i][3] = this.gameBoard[5 - i][3];
                         }
-                        this.gameBoard[5 - 1][3].setLoc(5 - i, 3);
+                        this.gameBoard[6 - i][3].setLoc(6 - i, 3);
                     }
                     break;
+
                 case LEFT_BOTTOM:
                     this.currentTile = this.gameBoard[6][5];
                     currentTile.setLoc(-1,-1);
-                    for(int i = 0; i < 6; i ++ ) {
-                        if (i == 5) {
-                            this.gameBoard[5-i][5] = tempTile;
+                    for(int i = 0; i < 7; i++ ) {
+                        if (i == 6) {
+                            this.gameBoard[0][5] = tempTile;
                         }
                         else {
-                            this.gameBoard[5 - i][5] = this.gameBoard[4 - i][5];
+                            this.gameBoard[6 - i][5] = this.gameBoard[5 - i][5];
                         }
-                        this.gameBoard[5 - 1][1].setLoc(5 - i, 5);
+                        this.gameBoard[6 - i][5].setLoc(6 - i, 5);
                     }
+                    break;
+
+
+                case RIGHT_TOP:
+                    this.currentTile = this.gameBoard[0][1];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i++ ) {
+                        this.gameBoard[i][1] = this.gameBoard[i+1][1];
+                        this.gameBoard[i][1].setLoc(i, 1);
+                    }
+                    this.gameBoard[6][1] = tempTile;
+                    this.gameBoard[6][1].setLoc(6,1);
+                    break;
+
+                case RIGHT_MIDDLE:
+                    this.currentTile = this.gameBoard[0][3];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i++ ) {
+                        this.gameBoard[i][3] = this.gameBoard[i+1][3];
+                        this.gameBoard[i][3].setLoc(i, 3);
+                    }
+                    this.gameBoard[6][3] = tempTile;
+                    this.gameBoard[6][3].setLoc(6,3);
+                    break;
+
+                case RIGHT_BOTTOM:
+                    this.currentTile = this.gameBoard[0][5];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i++ ) {
+                        this.gameBoard[i][5] = this.gameBoard[i+1][5];
+                        this.gameBoard[i][5].setLoc(i, 5);
+                    }
+                    this.gameBoard[6][5] = tempTile;
+                    this.gameBoard[6][5].setLoc(6,5);
+                    break;
+
+                    /**----------------------------------------- */
+                case TOP_LEFT:
+                    this.currentTile = this.gameBoard[1][6];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 7; i++ ) {
+                        if (i == 6) {
+                            this.gameBoard[1][0] = tempTile;
+                        }
+                        else {
+                            this.gameBoard[1][6 - i] = this.gameBoard[1][5-i];
+                        }
+                        this.gameBoard[1][6-i].setLoc(1, 6-i);
+                    }
+                    break;
+
+                case TOP_MIDDLE:
+                    this.currentTile = this.gameBoard[3][6];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 7; i++ ) {
+                        if (i == 6) {
+                            this.gameBoard[3][0] = tempTile;
+                        }
+                        else {
+                            this.gameBoard[3][6-i] = this.gameBoard[3][5-i];
+                        }
+                        this.gameBoard[3][6-i].setLoc(3, 6-i);
+                    }
+                    break;
+
+                case TOP_RIGHT:
+                    this.currentTile = this.gameBoard[5][6];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 7; i++ ) {
+                        if (i == 6) {
+                            this.gameBoard[5][0] = tempTile;
+                        }
+                        else {
+                            this.gameBoard[5][6-i] = this.gameBoard[5][5-i];
+                        }
+                        this.gameBoard[5][6-i].setLoc(5, 6-i);
+                    }
+                    break;
+
+
+                case BOTTOM_LEFT:
+                    this.currentTile = this.gameBoard[1][0];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i++ ) {
+                        this.gameBoard[1][i] = this.gameBoard[1][i+1];
+                        this.gameBoard[1][i].setLoc(1, i);
+                    }
+                    this.gameBoard[1][6] = tempTile;
+                    this.gameBoard[1][6].setLoc(1,6);
+                    break;
+
+                case BOTTOM_MIDDLE:
+                    this.currentTile = this.gameBoard[3][0];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i++ ) {
+                        this.gameBoard[3][i] = this.gameBoard[3][i+1];
+                        this.gameBoard[3][i].setLoc(3, i);
+                    }
+                    this.gameBoard[3][6] = tempTile;
+                    this.gameBoard[3][6].setLoc(3,6);
+                    break;
+
+                case BOTTOM_RIGHT:
+                    this.currentTile = this.gameBoard[5][0];
+                    currentTile.setLoc(-1,-1);
+                    for(int i = 0; i < 6; i++ ) {
+                        this.gameBoard[5][i] = this.gameBoard[5][i+1];
+                        this.gameBoard[5][i].setLoc(5, i);
+                    }
+                    this.gameBoard[5][6] = tempTile;
+                    this.gameBoard[5][6].setLoc(5,6);
                     break;
                 }
 
+            Player temp = this.currentTile.getPawn();
 
+            switch (clickedArrow) {
+                case LEFT_TOP: {
+                    this.disabledArrow = Arrow.RIGHT_TOP;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[0][1].setPawn(temp);
+                    }
+                } break;
 
-            /*for (int i = 0; i < 7; i++) {
+                case LEFT_MIDDLE: {
+                    this.disabledArrow = Arrow.RIGHT_MIDDLE;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[0][3].setPawn(temp);
+                    }
+                } break;
 
-                                if (clickedArrow == Arrow.BOTTOM_LEFT ||
-                        clickedArrow == Arrow.BOTTOM_MIDDLE ||
-                        clickedArrow == Arrow.BOTTOM_RIGHT) {
-                    this.currentTile = this.gameBoard[][]
-                    // Slide stuff
+                case LEFT_BOTTOM: {
+                    this.disabledArrow = Arrow.RIGHT_BOTTOM;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[0][5].setPawn(temp);
+                    }
+                } break;
 
-                } else if (clickedArrow == Arrow.TOP_LEFT ||
-                        clickedArrow == Arrow.TOP_MIDDLE ||
-                        clickedArrow == Arrow.TOP_RIGHT) {
-                    // Slide stuff
+                case RIGHT_TOP: {
+                    this.disabledArrow = Arrow.LEFT_TOP;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[6][1].setPawn(temp);
+                    }
+                } break;
 
-                } else if (clickedArrow == Arrow.LEFT_TOP ||
-                        clickedArrow == Arrow.LEFT_MIDDLE ||
-                        clickedArrow == Arrow.LEFT_BOTTOM) {
-                    // Slide stuff
+                case RIGHT_MIDDLE: {
+                    this.disabledArrow = Arrow.LEFT_MIDDLE;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[6][3].setPawn(temp);
+                    }
+                } break;
 
-                } else if (clickedArrow == Arrow.RIGHT_TOP ||
-                        clickedArrow == Arrow.RIGHT_MIDDLE ||
-                        clickedArrow == Arrow.RIGHT_BOTTOM) {
-                    // Slide stuff
+                case RIGHT_BOTTOM: {
+                    this.disabledArrow = Arrow.LEFT_BOTTOM;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[6][5].setPawn(temp);
+                    }
+                } break;
 
-                }
-            }*/
+                case TOP_LEFT: {
+                    this.disabledArrow = Arrow.BOTTOM_LEFT;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[1][0].setPawn(temp);
+                    }
+                } break;
 
+                case TOP_MIDDLE: {
+                    this.disabledArrow = Arrow.BOTTOM_MIDDLE;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[3][0].setPawn(temp);
+                    }
+                } break;
 
-            // TODO: If pawn moves to currentTile, move to other end
+                case TOP_RIGHT: {
+                    this.disabledArrow = Arrow.BOTTOM_RIGHT;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[5][0].setPawn(temp);
+                    }
+                } break;
 
-            //Update each tiles connections after sliding
+                case BOTTOM_LEFT: {
+                    this.disabledArrow = Arrow.TOP_LEFT;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[1][6].setPawn(temp);
+                    }
+                } break;
+
+                case BOTTOM_MIDDLE: {
+                    this.disabledArrow = Arrow.TOP_MIDDLE;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[3][6].setPawn(temp);
+                    }
+                } break;
+
+                case BOTTOM_RIGHT: {
+                    this.disabledArrow = Arrow.TOP_RIGHT;
+                    if (temp != Player.None) {
+                        this.currentTile.setPawn(Player.None);
+                        this.gameBoard[5][6].setPawn(temp);
+                    }
+                } break;
+
+            }
+
             this.updateTiles();
 
             this.shiftedLabyrinthThisTurn = true;
 
-            switch (clickedArrow) {
-                case LEFT_TOP: this.disabledArrow = Arrow.RIGHT_TOP; break;
-                case LEFT_MIDDLE: this.disabledArrow = Arrow.RIGHT_MIDDLE; break;
-                case LEFT_BOTTOM: this.disabledArrow = Arrow.RIGHT_BOTTOM; break;
-
-                case RIGHT_TOP: this.disabledArrow = Arrow.LEFT_TOP; break;
-                case RIGHT_MIDDLE: this.disabledArrow = Arrow.LEFT_MIDDLE; break;
-                case RIGHT_BOTTOM: this.disabledArrow = Arrow.LEFT_BOTTOM; break;
-
-                case TOP_LEFT: this.disabledArrow = Arrow.BOTTOM_LEFT; break;
-                case TOP_MIDDLE: this.disabledArrow = Arrow.BOTTOM_MIDDLE; break;
-                case TOP_RIGHT: this.disabledArrow = Arrow.BOTTOM_RIGHT; break;
-
-                case BOTTOM_LEFT: this.disabledArrow = Arrow.TOP_LEFT; break;
-                case BOTTOM_MIDDLE: this.disabledArrow = Arrow.TOP_MIDDLE; break;
-                case BOTTOM_RIGHT: this.disabledArrow = Arrow.TOP_RIGHT; break;
-            }
             return true;
         } else {
             return false;
@@ -551,18 +730,7 @@ public class LabyrinthGameState extends GameState {
 
     public boolean checkMovePawn(int playerID, int locX, int locY) {
         // Find Player Tile
-        Tile playerTile = null;
-        boolean found = false;
-        for (Tile[] row : this.gameBoard) {
-            for ( Tile spot : row) {
-                if (spot.getPawn() == this.playerTurn) {
-                    playerTile = spot;
-                    found = true;
-                    break;
-                }
-            }
-            if (found) break;
-        }
+        Tile playerTile = this.getPlayerLoc(this.playerTurn);
 
         List<Tile> checkedSpots = new ArrayList<>(49);
         boolean valid;

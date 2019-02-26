@@ -1,6 +1,7 @@
 package cs301.up.edu.labyrinth;
 
 import cs301.up.edu.enums.Player;
+import cs301.up.edu.enums.TileType;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.LocalGame;
 import cs301.up.edu.game.actionMsg.GameAction;
@@ -23,13 +24,6 @@ import android.util.Log;
  * @version July 2013
  */
 public class LabyrinthLocalGame extends LocalGame {
-
-	// When a labyrinth game is played, any number of players. The first player
-	// is trying to get the counter value to TARGET_MAGNITUDE; the second player,
-	// if present, is trying to get the counter to -TARGET_MAGNITUDE. The
-	// remaining players are neither winners nor losers, but can interfere by
-	// modifying the counter.
-	public static final int TARGET_MAGNITUDE = 10;
 
 	// the game's state
 	private LabyrinthGameState gameState;
@@ -62,7 +56,6 @@ public class LabyrinthLocalGame extends LocalGame {
 	 */
 	@Override
 	protected boolean makeMove(GameAction action) {
-		Log.i("action", action.getClass().toString());
 
 		if (action instanceof LabyrinthMainMenuAction) {
 			LabyrinthMainMenuAction act = (LabyrinthMainMenuAction) action;
@@ -88,7 +81,6 @@ public class LabyrinthLocalGame extends LocalGame {
 
 		} else if (action instanceof LabyrinthMovePawnAction) {
 			LabyrinthMovePawnAction act = (LabyrinthMovePawnAction) action;
-			// TODO: Get info about action and pass to method in gamestate to check if its valid
 			return this.gameState.checkMovePawn(getPlayerIdx(act.getPlayer()),
 					act.getLocX(), act.getLocY());
 
@@ -119,18 +111,31 @@ public class LabyrinthLocalGame extends LocalGame {
 	 */
 	@Override
 	protected String checkIfGameOver() {
-		// TODO: Add also back to starting point
 		if (this.gameState.getPlayerDeckSize(Player.RED) == 0) {
-			return "Red Player has won!";
-		} else if (this.gameState.getPlayerDeckSize(Player.YELLOW) == 0) {
-			return "Yellow Player has won!";
-		} else if (this.gameState.getPlayerDeckSize(Player.BLUE) == 0) {
-			return "Blue Player has won!";
-		} else if (this.gameState.getPlayerDeckSize(Player.GREEN) == 0) {
-			return "Green Player has won!";
-		} else {
-			return null;
+			if (this.gameState.getPlayerLoc(Player.RED).getType() ==
+					TileType.RED_ENTRY) {
+				return "Red Player has won!";
+			}
 		}
+		if (this.gameState.getPlayerDeckSize(Player.YELLOW) == 0) {
+			if (this.gameState.getPlayerLoc(Player.YELLOW).getType() ==
+					TileType.YELLOW_ENTRY) {
+				return "Yellow Player has won!";
+			}
+		}
+		if (this.gameState.getPlayerDeckSize(Player.BLUE) == 0) {
+			if (this.gameState.getPlayerLoc(Player.BLUE).getType() ==
+					TileType.BLUE_ENTRY) {
+				return "Blue Player has won!";
+			}
+		}
+		if (this.gameState.getPlayerDeckSize(Player.GREEN) == 0) {
+			if (this.gameState.getPlayerLoc(Player.GREEN).getType() ==
+					TileType.GREEN_ENTRY) {
+				return "Green Player has won!";
+			}
+		}
+		return null;
 	}
 
 }// class LabyrinthLocalGame
