@@ -1,5 +1,7 @@
 package cs301.up.edu.labyrinth;
 
+import android.support.annotation.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -310,7 +312,21 @@ public class LabyrinthGameState extends GameState {
     public LabyrinthGameState(LabyrinthGameState state, int playerID) {
         this(state);
 
-        // TODO: Remove Extra Player Info
+        int id = this.playerTurn.ordinal();
+
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            if (i != id) {
+                this.treasureDecks.set(i ,null);
+            }
+        }
+
+        int yourDeckSize = this.treasureDecks.get(id).size();
+
+        if (yourDeckSize > 0) {
+            for (int i = yourDeckSize - 1; i > 0; i--) {
+                this.treasureDecks.get(id).remove(i);
+            }
+        }
     }
 
     public Player getPlayerTurn() {
@@ -742,9 +758,16 @@ public class LabyrinthGameState extends GameState {
 
             // Set new pawn loc
             this.gameBoard[locX][locY].setPawn(playerTurn);
+            if (this.gameBoard[locX][locY].getTreasure() ==
+                    this.treasureDecks.get(this.playerTurn.ordinal()).get(0)) {
+                this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
+                this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
+                this.updateDeckSizes();
+            }
             return true;
         } else {
             return false;
         }
     }
+
 }
