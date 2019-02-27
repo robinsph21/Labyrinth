@@ -104,7 +104,7 @@ public class LabyrinthGameStateTest {
      *
      * @param state LabyrinthGameState containing the information to test.
      */
-    public void testEndTurn(LabyrinthGameState state) {
+    private void testEndTurn(LabyrinthGameState state) {
         assertTrue(state.checkEndTurn());
     }
 
@@ -114,7 +114,7 @@ public class LabyrinthGameStateTest {
      *
      * @param state LabyrinthGameState containing the information to test.
      */
-    public void testMainMenu(LabyrinthGameState state) {
+    private void testMainMenu(LabyrinthGameState state) {
         assertTrue(state.checkMainMenu());
     }
 
@@ -124,7 +124,7 @@ public class LabyrinthGameStateTest {
      *
      * @param state LabyrinthGameState containing the information to test.
      */
-    public void testReset(LabyrinthGameState state) {
+    private void testReset(LabyrinthGameState state) {
         assertTrue(state.checkReset());
     }
 
@@ -137,7 +137,7 @@ public class LabyrinthGameStateTest {
      *                  False if we wish to rotate the current tile counter
      *                  clockwise
      */
-    public void testRotate(LabyrinthGameState state, boolean clockwise) {
+    private void testRotate(LabyrinthGameState state, boolean clockwise) {
         assertTrue(state.checkRotate(clockwise));
     }
 
@@ -147,7 +147,7 @@ public class LabyrinthGameStateTest {
      * @param state LabyrinthGameState containing the information to test.
      * @return String containing where the player moved.
      */
-    public String testMovePawn(LabyrinthGameState state) {
+    private String testMovePawn(LabyrinthGameState state) {
 
         // Will be set to true of the player was able to move. Will be false
         // if the player was unable to move.
@@ -184,7 +184,7 @@ public class LabyrinthGameStateTest {
      * @param state LabyrinthGameState containing the information to test.
      * @param topLeft Arrow on the board that will be tested
      */
-    public void testSlideTile(LabyrinthGameState state, Arrow topLeft) {
+    private void testSlideTile(LabyrinthGameState state, Arrow topLeft) {
         assertTrue(state.checkSlideTile(topLeft));
     }
 
