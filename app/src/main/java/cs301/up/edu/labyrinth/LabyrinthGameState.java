@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import cs301.up.edu.labyrinth.enums.Arrow;
 import cs301.up.edu.labyrinth.enums.Player;
@@ -42,7 +43,7 @@ public class LabyrinthGameState extends GameState {
     public LabyrinthGameState() {
 
         // First player turn is randomized
-        double randomChoice = Math.random();
+        double randomChoice = new Random(6161997).nextDouble();
         if (randomChoice < 0.25) {
             this.playerTurn = Player.RED;
         } else if (randomChoice < 0.5) {
@@ -81,7 +82,7 @@ public class LabyrinthGameState extends GameState {
             treasureList.add(type);
         }
         treasureList.remove(0); // Delete None TreasureType
-        Collections.shuffle(treasureList);
+        //Collections.shuffle(treasureList);
 
         for (int i = 0; i < NUM_PLAYERS; i++) {
             this.treasureDecks.add(new ArrayList<TreasureType>(6));
@@ -122,7 +123,7 @@ public class LabyrinthGameState extends GameState {
             }
         }
 
-        Collections.shuffle(randomPieces);
+        //Collections.shuffle(randomPieces);
 
         // Initialize Game Board
         for (int i = 0; i < 7; i++) {
