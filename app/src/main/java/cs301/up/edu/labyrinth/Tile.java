@@ -6,7 +6,6 @@ import cs301.up.edu.labyrinth.enums.Player;
 import cs301.up.edu.labyrinth.enums.TileType;
 import cs301.up.edu.labyrinth.enums.TreasureType;
 
-// TODO: Comment this file
 
 /**
  * Defines a board tile. The gameboard is made up of these tile objects.

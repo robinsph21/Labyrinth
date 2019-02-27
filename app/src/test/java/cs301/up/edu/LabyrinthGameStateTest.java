@@ -7,7 +7,6 @@ import cs301.up.edu.labyrinth.enums.Arrow;
 
 import static org.junit.Assert.*;
 
-//TODO: Comment this file
 
 /**
  * Unit test for gamestate
