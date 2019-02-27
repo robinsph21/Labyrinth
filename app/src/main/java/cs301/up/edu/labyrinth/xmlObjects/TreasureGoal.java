@@ -1,6 +1,7 @@
 package cs301.up.edu.labyrinth.xmlObjects;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import cs301.up.edu.labyrinth.enums.TreasureType;
 
@@ -18,5 +19,10 @@ public class TreasureGoal extends XMLObject{
 
     public void setTreasure(TreasureType treasure) {
         this.treasure = treasure;
+    }
+
+    @Override
+    public ImageView getXmlObj() {
+        return (ImageView)super.getXmlObj();
     }
 }

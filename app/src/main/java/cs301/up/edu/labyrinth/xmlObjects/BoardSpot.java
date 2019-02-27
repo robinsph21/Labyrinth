@@ -1,5 +1,7 @@
 package cs301.up.edu.labyrinth.xmlObjects;
 
+import android.widget.ImageView;
+
 public class BoardSpot extends XMLObject{
 
     private int locX;
@@ -27,4 +29,8 @@ public class BoardSpot extends XMLObject{
         this.rotation = rotation;
     }
 
+    @Override
+    public ImageView getXmlObj() {
+        return (ImageView)super.getXmlObj();
+    }
 }

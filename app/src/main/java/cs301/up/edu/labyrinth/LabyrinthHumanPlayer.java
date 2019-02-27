@@ -7,7 +7,10 @@ import cs301.up.edu.R;
 import cs301.up.edu.game.infoMsg.GameInfo;
 import cs301.up.edu.labyrinth.xmlObjects.*;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 /**
@@ -35,7 +38,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     private TreasureGoal currentTreasure;
     private Rotate rotateClockwise;
     private Rotate rotateCounterClockwise;
-    private CurrentTile currentTile;
+    private BoardTile currentTile;
     private EndTurn endTurn;
     private Reset reset;
 
@@ -44,6 +47,9 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     // the android activity that we are running
     private GameMainActivity myActivity;
+
+    // Possible treasures
+    private final static int[] allTreasures = new int[] {R.drawable.card_book};
 
     /**
      * constructor
@@ -69,6 +75,13 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
      */
     public void updateDisplay() {
         // TODO: Modify XML objects to mirror gamestate variable
+
+        // Update current treasure
+        this.currentTreasure.getXmlObj().setImageResource(allTreasures[0]);
+
+        // Update gameBoard
+        this.ourGameBoard.getBoardSpot(0,0).getXmlObj().
+                setImageResource(R.drawable.entry_green);
     }
 
 
@@ -160,8 +173,9 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 (R.id.rotateCounterClockwise), false,
                 this, this.game);
 
-        currentTile = new CurrentTile(this.myActivity.findViewById
-                (R.id.currentTile));
+        currentTile = new BoardTile(-1,-1,false,
+                this,this.game);
+        currentTile.setXmlObj(this.myActivity.findViewById(R.id.currentTile));
 
         endTurn = new EndTurn(this.myActivity.findViewById
                 (R.id.endTurn),
