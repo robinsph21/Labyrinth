@@ -30,17 +30,16 @@ public class Tile implements Serializable {
         this.board = board;
         this.pawn = pawn;
         this.calculateConnections();
-        this.calculateConnectedTiles();
     }
 
     public Tile(TileType type, int rotation, TreasureType treasure,
                 Tile[][] board, int x, int y) {
-        this(type, rotation, treasure, Player.None, board, x, y);
+        this(type, rotation, treasure, Player.NONE, board, x, y);
     }
 
     public Tile(TileType type, int rotation, TreasureType treasure,
                 Tile[][] board) {
-        this(type, rotation, treasure, Player.None, board, -1, -1);
+        this(type, rotation, treasure, Player.NONE, board, -1, -1);
     }
 
     public Tile(TileType type, int rotation, Player pawn, Tile[][] board,
@@ -73,7 +72,7 @@ public class Tile implements Serializable {
     }
 
     public Player getPawn() {
-        return pawn;
+        return this.pawn;
     }
 
     public void setPawn(Player pawn) {
@@ -172,10 +171,6 @@ public class Tile implements Serializable {
                     default: this.connections = new boolean[]
                             {false, false, false, false}; break;
                 }
-            }
-            default: {
-                this.connections = new boolean[]{false, false, false, false};
-                break;
             }
         }
 

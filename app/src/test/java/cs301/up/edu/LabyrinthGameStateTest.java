@@ -52,53 +52,39 @@ public class LabyrinthGameStateTest {
         // Move pawn to first available location
         textToPrint.append(this.testMovePawn(this.firstInstance) + "\n");
 
-        // Check Reset
-        this.testReset(this.firstInstance);
-        textToPrint.append("Player reset the labyrinth");
-
-        // Rotate Tile clockwise
-        this.testRotate(this.firstInstance, true);
-        textToPrint.append("Tile rotated clockwise once!\n");
-
-        // Slide tile again
-        this.testSlideTile(this.firstInstance,Arrow.TOP_LEFT);
-        textToPrint.append("Tile shifted in from top left arrow!\n");
-
-        // Move pawn to first available location
-        textToPrint.append(this.testMovePawn(this.firstInstance) + "\n");
-
         // Check end turn
         this.testEndTurn(this.firstInstance);
         textToPrint.append("The player has ended their turn");
-        
+
+        // Check Reset
+        this.testReset(this.firstInstance);
+        textToPrint.append("Next player has reset the labyrinth");
 
 
         // Check States are Equal
         String second = this.secondInstance.toString();
         String fourth = this.fourthInstance.toString();
+
+        textToPrint.append(second);
+        textToPrint.append(fourth);
     }
 
-    @Test
     public void testEndTurn(LabyrinthGameState state) {
         assertTrue(state.checkEndTurn(state.getPlayerTurn().ordinal()));
     }
 
-    @Test
     public void testMainMenu(LabyrinthGameState state) {
         assertTrue(state.checkMainMenu(state.getPlayerTurn().ordinal()));
     }
 
-    @Test
     public void testReset(LabyrinthGameState state) {
         assertTrue(state.checkReset(state.getPlayerTurn().ordinal()));
     }
 
-    @Test
     public void testRotate(LabyrinthGameState state, boolean clockwise) {
         assertTrue(state.checkRotate(state.getPlayerTurn().ordinal(),clockwise));
     }
 
-    @Test
     public String testMovePawn(LabyrinthGameState state) {
         boolean check = false;
         int i = 0;
@@ -121,9 +107,13 @@ public class LabyrinthGameStateTest {
         }
     }
 
-    @Test
     public void testSlideTile(LabyrinthGameState state, Arrow topLeft) {
         assertTrue(state.checkSlideTile(state.getPlayerTurn().ordinal(), topLeft));
     }
 
+
+    @Test
+    public void test() {
+        LabyrinthGameStateTest test = new LabyrinthGameStateTest();
+    }
 }
