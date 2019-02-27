@@ -6,6 +6,14 @@ import cs301.up.edu.labyrinth.enums.Player;
 import cs301.up.edu.labyrinth.enums.TileType;
 import cs301.up.edu.labyrinth.enums.TreasureType;
 
+
+/**
+ * Defines a board tile. The gameboard is made up of these tile objects.
+ * They contain all information about a specific space.
+ *
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
+ * Date: 2/27/2019
+ */
 public class Tile implements Serializable {
 
     private static final long serialVersionUID = 323737276246984926L;

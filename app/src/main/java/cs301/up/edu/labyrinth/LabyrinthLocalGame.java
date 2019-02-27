@@ -57,30 +57,27 @@ public class LabyrinthLocalGame extends LocalGame {
 
 		if (action instanceof LabyrinthMainMenuAction) {
 			LabyrinthMainMenuAction act = (LabyrinthMainMenuAction) action;
-			return this.gameState.checkMainMenu(getPlayerIdx(act.getPlayer()));
+			return this.gameState.checkMainMenu();
 
 		} else if (action instanceof LabyrinthRotateAction) {
 			LabyrinthRotateAction act = (LabyrinthRotateAction) action;
-			return this.gameState.checkRotate(getPlayerIdx(act.getPlayer()),
-					act.isClockwise());
+			return this.gameState.checkRotate(act.isClockwise());
 
 		} else if (action instanceof LabyrinthEndTurnAction) {
 			LabyrinthEndTurnAction act = (LabyrinthEndTurnAction) action;
-			return this.gameState.checkEndTurn(getPlayerIdx(act.getPlayer()));
+			return this.gameState.checkEndTurn();
 
 		} else if (action instanceof LabyrinthResetAction) {
 			LabyrinthResetAction act = (LabyrinthResetAction) action;
-			return this.gameState.checkReset(getPlayerIdx(act.getPlayer()));
+			return this.gameState.checkReset();
 
 		} else if (action instanceof LabyrinthSlideTileAction) {
 			LabyrinthSlideTileAction act = (LabyrinthSlideTileAction) action;
-			return this.gameState.checkSlideTile(getPlayerIdx(act.getPlayer()),
-					act.getThisArrow());
+			return this.gameState.checkSlideTile(act.getThisArrow());
 
 		} else if (action instanceof LabyrinthMovePawnAction) {
 			LabyrinthMovePawnAction act = (LabyrinthMovePawnAction) action;
-			return this.gameState.checkMovePawn(getPlayerIdx(act.getPlayer()),
-					act.getLocX(), act.getLocY());
+			return this.gameState.checkMovePawn(act.getLocX(), act.getLocY());
 
 		} else {
 			// denote that this was an illegal move

@@ -8,22 +8,24 @@ import cs301.up.edu.labyrinth.enums.Arrow;
 import static org.junit.Assert.*;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * Unit test for gamestate
  *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
+ * Date: 2/27/2019
  */
 public class LabyrinthGameStateTest {
 
+    private final String info;
     private LabyrinthGameState firstInstance;
     private LabyrinthGameState secondInstance;
     private LabyrinthGameState thirdInstance;
     private LabyrinthGameState fourthInstance;
 
     public LabyrinthGameStateTest() {
-        this.init();
+        this.info = this.init();
     }
 
-    private void init() {
+    private String init() {
         // First round of testing
         this.firstInstance = new LabyrinthGameState();
         this.secondInstance = new LabyrinthGameState(this.firstInstance,
@@ -67,22 +69,24 @@ public class LabyrinthGameStateTest {
 
         textToPrint.append(second);
         textToPrint.append(fourth);
+
+        return textToPrint.toString();
     }
 
     public void testEndTurn(LabyrinthGameState state) {
-        assertTrue(state.checkEndTurn(state.getPlayerTurn().ordinal()));
+        assertTrue(state.checkEndTurn());
     }
 
     public void testMainMenu(LabyrinthGameState state) {
-        assertTrue(state.checkMainMenu(state.getPlayerTurn().ordinal()));
+        assertTrue(state.checkMainMenu());
     }
 
     public void testReset(LabyrinthGameState state) {
-        assertTrue(state.checkReset(state.getPlayerTurn().ordinal()));
+        assertTrue(state.checkReset());
     }
 
     public void testRotate(LabyrinthGameState state, boolean clockwise) {
-        assertTrue(state.checkRotate(state.getPlayerTurn().ordinal(),clockwise));
+        assertTrue(state.checkRotate(clockwise));
     }
 
     public String testMovePawn(LabyrinthGameState state) {
@@ -91,9 +95,7 @@ public class LabyrinthGameStateTest {
         int j = 0;
         for (i = 0; i < 7; i++) {
             for (j = 0; j < 7; j++) {
-                if (this.firstInstance.checkMovePawn(
-                        state.getPlayerTurn().ordinal(),
-                        i,j)) {
+                if (this.firstInstance.checkMovePawn(i,j)) {
                     check = true;
                     break;
                 }
@@ -108,12 +110,16 @@ public class LabyrinthGameStateTest {
     }
 
     public void testSlideTile(LabyrinthGameState state, Arrow topLeft) {
-        assertTrue(state.checkSlideTile(state.getPlayerTurn().ordinal(), topLeft));
+        assertTrue(state.checkSlideTile(topLeft));
     }
 
 
     @Test
     public void test() {
         LabyrinthGameStateTest test = new LabyrinthGameStateTest();
+    }
+
+    public String getInfo() {
+        return info;
     }
 }

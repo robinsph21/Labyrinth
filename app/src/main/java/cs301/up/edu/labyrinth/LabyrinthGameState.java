@@ -11,10 +11,16 @@ import cs301.up.edu.labyrinth.enums.TileType;
 import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.game.infoMsg.GameState;
 
-
+/**
+ * Defines a gamestate for our labyrinth game. Has all the information needed
+ * for a game.
+ *
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
+ * Date: 2/27/2019
+ */
 public class LabyrinthGameState extends GameState {
 
-    // to satisfy Serializable interface
+    // To satisfy Serializable interface
     private static final long serialVersionUID = 7737393762469851826L;
 
     // Constants
@@ -34,7 +40,9 @@ public class LabyrinthGameState extends GameState {
     private LabyrinthGameState prevState;
 
     /**
-     * Constructor used to initialize a gamestate
+     * Constructor used to initialize a gamestate. It creates the gameboard by
+     * randomizing the starting player, randomizing player decks, and randomizing
+     * specific pieces on the board.
      *
      */
     public LabyrinthGameState() {
@@ -65,12 +73,18 @@ public class LabyrinthGameState extends GameState {
         this.prevState = null;
     }
 
+    /**
+     * Updates array containing sizes of each players treasure deck
+     */
     private void updateDeckSizes() {
         for (int i = 0; i < NUM_PLAYERS; i++) {
             this.deckSizes[i] = this.treasureDecks.get(i).size();
         }
     }
 
+    /**
+     * Called by ctor to initialize all player decks randomly
+     */
     private void initDecks() {
         // Get an array of all TreasureTypes and convert it to a list
         TreasureType[] allTreasures = TreasureType.values();
@@ -81,10 +95,12 @@ public class LabyrinthGameState extends GameState {
         treasureList.remove(0); // Delete NONE TreasureType
         //Collections.shuffle(treasureList);
 
+        //Create an arraylist of size 6 for each player within the outer one
         for (int i = 0; i < NUM_PLAYERS; i++) {
             this.treasureDecks.add(new ArrayList<TreasureType>(6));
         }
 
+        //Add all random treasures to each player deck
         for (int i = 0; i < NUM_TREASURE_PER_PLAYER; i++) {
             this.treasureDecks.get(0).add(treasureList.remove(0));
             this.treasureDecks.get(1).add(treasureList.remove(0));
@@ -93,6 +109,9 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    /**
+     * Called by ctor to initialize the gameboard with static and random pieces
+     */
     private void initBoard() {
         // Generate arraylist of all randomized pieces for board
         List<Tile> randomPieces = new ArrayList<>(NUM_RANDOM_TILES);
@@ -100,6 +119,7 @@ public class LabyrinthGameState extends GameState {
         int numStraight = 13;
         int numCorner = 15;
 
+        // Create each of the random tiles and place in arraylist
         for (int i = 0; i < NUM_RANDOM_TILES; i++) {
             int randomRotation = 0; // TODO: Make this randomly 0, 90, 180, 270
 
@@ -120,9 +140,10 @@ public class LabyrinthGameState extends GameState {
             }
         }
 
+
         //Collections.shuffle(randomPieces);
 
-        // Initialize Game Board
+        // Place all random pieces in gameBoard
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 if ((i % 2 != 0) || (j % 2 != 0)) {
@@ -252,21 +273,23 @@ public class LabyrinthGameState extends GameState {
                 6,4);
 
 
+        // Check connections for each tile
         this.updateTiles();
 
     }
 
 
     /**
-     * Copy Constructor makes a deep copy of the gamestate for a
-     * specific player
+     * Copy Constructor makes a deep copy of the gamestate
      *
      * @param state The state of game that needs to be copied
      */
     public LabyrinthGameState(LabyrinthGameState state) {
 
+        //Copy player turn
         this.playerTurn = Player.valueOf(state.playerTurn.name());
 
+        //Copy the entire gameboard by creating new tiles for each spot
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 this.gameBoard[i][j] = new Tile(
@@ -281,6 +304,7 @@ public class LabyrinthGameState extends GameState {
             }
         }
 
+        //Copy current tile
         this.currentTile = new Tile(
                 TileType.valueOf(state.currentTile.getType().name()),
                 state.currentTile.getRotation(),
@@ -288,8 +312,10 @@ public class LabyrinthGameState extends GameState {
                 this.gameBoard,
                 -1, -1);
 
+        //Update tile positions
         this.updateTiles();
 
+        //Copy treasure decks
         for (int i = 0; i < NUM_PLAYERS; i++) {
             this.treasureDecks.add(new ArrayList<TreasureType>(6));
             for (TreasureType treasure : state.treasureDecks.get(i)) {
@@ -298,43 +324,66 @@ public class LabyrinthGameState extends GameState {
             }
         }
 
+        //Copy disabled arrow
         this.disabledArrow = Arrow.valueOf(state.disabledArrow.name());
 
+        //Copy deck sizes
         for (int i = 0; i < NUM_PLAYERS; i++) {
             this.deckSizes[i] = state.deckSizes[i];
         }
 
+        //Copy if someone has made a move
         this.shiftedLabyrinthThisTurn = state.shiftedLabyrinthThisTurn;
 
-        // Doesn't matter if deepcopy has a reference to itself since
-        // this variable is never used by deepcopies
+        // Doesn't matter if deepCopy has a reference to itself since
+        // this variable is never used by deepCopies. Hence it is a shallow copy
         this.prevState = state.prevState;
     }
 
+    /**
+     * Calls main copy constructor and then removes information
+     * about other players
+     *
+     * @param state gamestate to copy
+     * @param playerID of player who gets this
+     */
     public LabyrinthGameState(LabyrinthGameState state, int playerID) {
         this(state);
 
-        int id = this.playerTurn.ordinal();
-
+        // Delete all other decks
         for (int i = 0; i < NUM_PLAYERS; i++) {
-            if (i != id) {
+            if (i != playerID) {
                 this.treasureDecks.set(i ,null);
             }
         }
 
-        int yourDeckSize = this.treasureDecks.get(id).size();
+        // Find size of your deck
+        int yourDeckSize = this.treasureDecks.get(playerID).size();
 
+        // Remove all but your first treasure
         if (yourDeckSize > 0) {
             for (int i = yourDeckSize - 1; i > 0; i--) {
-                this.treasureDecks.get(id).remove(i);
+                this.treasureDecks.get(playerID).remove(i);
             }
         }
     }
 
+    /**
+     *
+     * Get current player turn
+     *
+     * @return whos turn it is
+     */
     public Player getPlayerTurn() {
         return this.playerTurn;
     }
 
+    /**
+     * Gets deck size for specific player
+     *
+     * @param player who you want deck size of
+     * @return int size of deck
+     */
     public int getPlayerDeckSize(Player player) {
         switch (player) {
             case RED: return deckSizes[0];
@@ -363,6 +412,12 @@ public class LabyrinthGameState extends GameState {
                 "GameBoard: { " + board + " }" ;
     }
 
+    /**
+     * returns a string used by toString representing the board
+     * (Helper method)
+     *
+     * @return a string of the board
+     */
     private String convertBoardToString() {
         StringBuilder returnValue = new StringBuilder();
         for (int i = 0; i < 7; i++) {
@@ -373,6 +428,9 @@ public class LabyrinthGameState extends GameState {
         return returnValue.toString();
     }
 
+    /**
+     * Update the connections of all tiles on the board
+     */
     private void updateTiles() {
         for (Tile[] row : this.gameBoard) {
             for (Tile spot : row) {
@@ -382,17 +440,29 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    /**
+     * Recursive search algorithm to find if there is a path between 2 tiles
+     *
+     * @param orig Starting tile
+     * @param search Ending tile
+     * @param checkedSpots arraylist containing searched spots
+     * @return true if there is a path
+     */
     private boolean searchConnectedTile(Tile orig, Tile search,
                                         List<Tile> checkedSpots) {
 
+        // Get the tiles surrounding the current tile
         List<Tile> connectedTiles = Arrays.asList(orig.getConnectedTiles());
 
+        //Check if you have searched this spot
         if (checkedSpots.contains(orig)) {
             return false;
+        //Check if surrounding tiles contain goal
         } else if (connectedTiles.contains(search)) {
             checkedSpots.addAll(connectedTiles);
             return true;
         } else {
+            // Call the algorithm on the other tiles if they exist
             List<Boolean> checks = new ArrayList<>(4);
             for (Tile spot : connectedTiles) {
                 if (spot != null) {
@@ -408,6 +478,12 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    /**
+     * Returns the tile a specific player is on
+     *
+     * @param p player you are searching for
+     * @return Tile that player is on
+     */
     public Tile getPlayerLoc(Player p) {
         Tile playerTile = null;
         boolean found = false;
@@ -428,23 +504,37 @@ public class LabyrinthGameState extends GameState {
     /** All actions that can be taken */
 
 
-    public boolean checkMainMenu(int playerID) {
+    /**
+     * Main Menu Action doesn't affect the gamestate
+     *
+     * @return true always
+     */
+    public boolean checkMainMenu() {
         // Always able to quit your game
         return true;
     }
 
-    public boolean checkRotate(int playerID, boolean clockwise) {
+    /**
+     * Rotate Action rotates the current tile
+     *
+     * @param clockwise if you want to rotate clockwise
+     * @return true if you can rotate
+     */
+    public boolean checkRotate(boolean clockwise) {
         if (clockwise) {
             this.currentTile.rotateClockwise();
-            this.updateTiles();
         } else {
             this.currentTile.rotateCounterClockwise();
-            this.updateTiles();
         }
         return true;
     }
 
-    public boolean checkEndTurn(int playerID) {
+    /**
+     * End Turn Action tries to end player turn and start next turn
+     *
+     * @return true if it ended
+     */
+    public boolean checkEndTurn() {
         if (this.shiftedLabyrinthThisTurn) {
             this.shiftedLabyrinthThisTurn = false;
             switch (this.playerTurn) {
@@ -460,7 +550,12 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
-    public boolean checkReset(int playerID) {
+    /**
+     * Reset Action resets the gamestate to beginning of turn
+     *
+     * @return true if reset
+     */
+    public boolean checkReset() {
         if (this.prevState == null) {
             return false;
         } else {
@@ -475,7 +570,13 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
-    public boolean checkSlideTile(int playerID, Arrow clickedArrow) {
+    /**
+     * Slide Tile Action tries to slide in the current tile to an arrow location
+     *
+     * @param clickedArrow the arrow clicked
+     * @return true if you can slide it
+     */
+    public boolean checkSlideTile(Arrow clickedArrow) {
         if (clickedArrow != this.disabledArrow && !shiftedLabyrinthThisTurn) {
             Tile tempTile = this.currentTile; //Tile to slide in
 
@@ -556,7 +657,7 @@ public class LabyrinthGameState extends GameState {
                     this.gameBoard[6][5].setLoc(6,5);
                     break;
 
-                    /**----------------------------------------- */
+
                 case TOP_LEFT:
                     this.currentTile = this.gameBoard[1][6];
                     currentTile.setLoc(-1,-1);
@@ -746,7 +847,14 @@ public class LabyrinthGameState extends GameState {
 
     }
 
-    public boolean checkMovePawn(int playerID, int locX, int locY) {
+    /**
+     *  Move Pawn Action checks if there is a path from their pawn to location
+     *
+     * @param locX x cord of desired move location
+     * @param locY y cord of desired move location
+     * @return true if you can move there
+     */
+    public boolean checkMovePawn(int locX, int locY) {
         // Find Player Tile
         Tile playerTile = this.getPlayerLoc(this.playerTurn);
 
