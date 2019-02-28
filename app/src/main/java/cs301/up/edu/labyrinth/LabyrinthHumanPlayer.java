@@ -50,9 +50,23 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     private GameMainActivity myActivity;
 
     // Possible treasures
-    //TODO: Add the other drawable treasures in the right order
+    private final static int[] allTreasureCards = new int[]
+            {R.drawable.card_book}; // TODO: Add other treasure cards
+
     private final static int[] allTreasures = new int[]
-            {R.drawable.card_book};
+            {0, R.drawable.tile_bat, R.drawable.tile_book,
+                    R.drawable.tile_bow, R.drawable.tile_candles,
+                    R.drawable.tile_chest, R.drawable.tile_coins,
+                    R.drawable.tile_corner, R.drawable.tile_crown,
+                    R.drawable.tile_dragon, R.drawable.tile_fox,
+                    R.drawable.tile_gem, R.drawable.tile_ghost,
+                    R.drawable.tile_goblet, R.drawable.tile_helmet,
+                    R.drawable.tile_keys, R.drawable.tile_map,
+                    R.drawable.tile_moth, R.drawable.tile_mouse,
+                    R.drawable.tile_owl, R.drawable.tile_ring,
+                    R.drawable.tile_shield, R.drawable.tile_skull,
+                    R.drawable.tile_spider, R.drawable.tile_sword,
+                    R.drawable.tile_urn};
 
     private final static int[] allPlayers = new int[]
             {R.drawable.pawn_red, R.drawable.pawn_yellow,
@@ -83,11 +97,13 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     public void updateDisplay() {
         // TODO: Finish all updating of display
 
+        /**
         // Update current treasure
         int treasureIndex = this.state.getCurrentTreasure
                 (this.playerNum).ordinal();
         this.currentTreasure.getXmlObj().setImageResource
-                (allTreasures[treasureIndex]);
+                (allTreasureCards[treasureIndex]);
+        */
 
         // Update gameBoard
         for (int i = 0; i < 7; i++) {
@@ -95,6 +111,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 Tile current = this.state.getTile(i,j);
 
                 // Check type of tile
+
 
                 // Check rotation of tile
                 float rotation = (float)current.getRotation();
@@ -107,7 +124,9 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                         setImageResource(allPlayers[pawn]);
 
                 // Check if treasure on tile
-
+                int treasure = current.getTreasure().ordinal();
+                ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
+                        setImageResource(allTreasures[treasure]);
             }
         }
 
