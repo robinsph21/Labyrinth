@@ -66,11 +66,11 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                     R.drawable.tile_owl, R.drawable.tile_ring,
                     R.drawable.tile_shield, R.drawable.tile_skull,
                     R.drawable.tile_spider, R.drawable.tile_sword,
-                    R.drawable.tile_urn};
+                    R.drawable.tile_urn}; // TODO: Add image that is None instead of 0
 
     private final static int[] allPlayers = new int[]
             {R.drawable.pawn_red, R.drawable.pawn_yellow,
-                    R.drawable.pawn_blue, R.drawable.pawn_yellow};
+                    R.drawable.pawn_blue, R.drawable.pawn_yellow, 0}; // TODO: Add image that is None instead of 0
 
     /**
      * constructor
