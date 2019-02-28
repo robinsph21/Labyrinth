@@ -73,6 +73,14 @@ public class LabyrinthGameState extends GameState {
         this.prevState = null;
     }
 
+    public Tile getCurrentTile() {
+        return this.currentTile;
+    }
+
+    public TreasureType getCurrentTreasure(int playerID) {
+        return treasureDecks.get(playerID).get(0);
+    }
+
     /**
      * Updates array containing sizes of each players treasure deck
      */

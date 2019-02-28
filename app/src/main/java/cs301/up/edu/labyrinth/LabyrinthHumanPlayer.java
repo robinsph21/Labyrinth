@@ -5,6 +5,7 @@ import cs301.up.edu.game.GameHumanPlayer;
 import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.R;
 import cs301.up.edu.game.infoMsg.GameInfo;
+import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.labyrinth.xmlObjects.*;
 
 import android.graphics.drawable.Drawable;
@@ -49,7 +50,8 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     private GameMainActivity myActivity;
 
     // Possible treasures
-    private final static int[] allTreasures = new int[] {R.drawable.card_book};
+    private final static int[] allTreasures = new int[]
+            {R.drawable.card_book};
 
     /**
      * constructor
@@ -74,12 +76,20 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
      * Update everything displayed on tablet
      */
     public void updateDisplay() {
-        // TODO: Modify XML objects to mirror gamestate variable
+        // TODO: Modify XML objects to mirror gameState variable
 
         // Update current treasure
-        this.currentTreasure.getXmlObj().setImageResource(allTreasures[0]);
+        int treasureIndex = this.state.getCurrentTreasure
+                (this.playerNum).ordinal();
+        this.currentTreasure.getXmlObj().setImageResource
+                (allTreasures[treasureIndex]);
 
         // Update gameBoard
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+
+            }
+        }
         this.ourGameBoard.getBoardSpot(0,0).getXmlObj().
                 setImageResource(R.drawable.entry_green);
     }
