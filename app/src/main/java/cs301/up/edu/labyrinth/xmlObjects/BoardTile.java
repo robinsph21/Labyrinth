@@ -54,7 +54,7 @@ public class BoardTile extends BoardSpot {
         GameAction action = null;
 
         action = new LabyrinthMovePawnAction(this.player,
-                this.getLocX(), this.getLocY());
+                this.getLocX() - 1, this.getLocY() - 1);
 
         game.sendAction(action);
     }
