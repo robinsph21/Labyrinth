@@ -67,7 +67,7 @@ public class LabyrinthGameState extends GameState {
         this.updateDeckSizes();
 
         // Players can slide the first piece in anywhere they want
-        this.disabledArrow = Arrow.None;
+        this.disabledArrow = Arrow.NONE;
         this.shiftedLabyrinthThisTurn = false;
 
         this.prevState = null;
@@ -79,6 +79,10 @@ public class LabyrinthGameState extends GameState {
 
     public TreasureType getCurrentTreasure(int playerID) {
         return treasureDecks.get(playerID).get(0);
+    }
+
+    public Tile getTile(int x, int y) {
+        return this.gameBoard[x][y];
     }
 
     /**

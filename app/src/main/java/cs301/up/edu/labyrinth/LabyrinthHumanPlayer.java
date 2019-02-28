@@ -50,8 +50,13 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     private GameMainActivity myActivity;
 
     // Possible treasures
+    //TODO: Add the other drawable treasures in the right order
     private final static int[] allTreasures = new int[]
             {R.drawable.card_book};
+
+    private final static int[] allPlayers = new int[]
+            {R.drawable.pawn_red, R.drawable.pawn_yellow,
+                    R.drawable.pawn_blue, R.drawable.pawn_yellow};
 
     /**
      * constructor
@@ -76,7 +81,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
      * Update everything displayed on tablet
      */
     public void updateDisplay() {
-        // TODO: Modify XML objects to mirror gameState variable
+        // TODO: Finish all updating of display
 
         // Update current treasure
         int treasureIndex = this.state.getCurrentTreasure
@@ -87,11 +92,26 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         // Update gameBoard
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
+                Tile current = this.state.getTile(i,j);
+
+                // Check type of tile
+
+                // Check rotation of tile
+                float rotation = (float)current.getRotation();
+                ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
+                        setRotation(rotation);
+
+                // Check if pawn on tile
+                int pawn = current.getPawn().ordinal();
+                ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
+                        setImageResource(allPlayers[pawn]);
+
+                // Check if treasure on tile
 
             }
         }
-        this.ourGameBoard.getBoardSpot(0,0).getXmlObj().
-                setImageResource(R.drawable.entry_green);
+
+
     }
 
 
