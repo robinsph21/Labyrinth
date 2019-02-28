@@ -185,39 +185,39 @@ public class LabyrinthGameState extends GameState {
                 6,0);
 
         this.gameBoard[6][6] = new Tile(
-                TileType.GREEN_ENTRY,
-                0,
-                Player.GREEN,
-                this.gameBoard,
-                6,6);
-
-        this.gameBoard[0][6] = new Tile(
                 TileType.BLUE_ENTRY,
                 0,
                 Player.BLUE,
                 this.gameBoard,
+                6,6);
+
+        this.gameBoard[0][6] = new Tile(
+                TileType.GREEN_ENTRY,
+                0,
+                Player.GREEN,
+                this.gameBoard,
                 0,6);
 
         // Below is the setting of the fixed tiles on the board
-
+        // TODO: Fix fixed tiles treasure
         this.gameBoard[0][2] = new Tile(
                 TileType.INTERSECTION,
                 270,
-                TreasureType.BOOK,
+                TreasureType.MAP,
                 this.gameBoard,
                 0,2);
 
         this.gameBoard[0][4] = new Tile(
                 TileType.INTERSECTION,
                 270,
-                TreasureType.COINS,
+                TreasureType.RING,
                 this.gameBoard,
                 0,4);
 
         this.gameBoard[2][0] = new Tile(
                 TileType.INTERSECTION,
                 180,
-                TreasureType.MAP,
+                TreasureType.BOOK,
                 this.gameBoard,
                 2,0);
 
@@ -238,14 +238,14 @@ public class LabyrinthGameState extends GameState {
         this.gameBoard[2][6] = new Tile(
                 TileType.INTERSECTION,
                 0,
-                TreasureType.SKULL,
+                TreasureType.CANDLES,
                 this.gameBoard,
                 2,6);
 
         this.gameBoard[4][0] = new Tile(
                 TileType.INTERSECTION,
                 180,
-                TreasureType.RING,
+                TreasureType.COINS,
                 this.gameBoard,
                 4,0);
 
@@ -266,21 +266,21 @@ public class LabyrinthGameState extends GameState {
         this.gameBoard[4][6] = new Tile(
                 TileType.INTERSECTION,
                 0,
-                TreasureType.SWORD,
+                TreasureType.NONE,
                 this.gameBoard,
                 4,6);
 
         this.gameBoard[6][2] = new Tile(
                 TileType.INTERSECTION,
                 90,
-                TreasureType.CANDLES,
+                TreasureType.SKULL,
                 this.gameBoard,
                 6,2);
 
         this.gameBoard[6][4] = new Tile(
                 TileType.INTERSECTION,
                 90,
-                TreasureType.HELMET,
+                TreasureType.SWORD,
                 this.gameBoard,
                 6,4);
 

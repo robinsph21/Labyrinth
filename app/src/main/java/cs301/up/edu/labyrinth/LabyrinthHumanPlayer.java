@@ -70,7 +70,13 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     private final static int[] allPlayers = new int[]
             {R.drawable.pawn_red, R.drawable.pawn_yellow,
-                    R.drawable.pawn_blue, R.drawable.pawn_yellow, 0}; // TODO: Add image that is None instead of 0
+                    R.drawable.pawn_blue, R.drawable.pawn_green, 0}; // TODO: Add image that is None instead of 0
+
+    private final static int[] allTiles = new int[]
+            {R.drawable.tile_straight, R.drawable.tile_intersection,
+            R.drawable.tile_corner, R.drawable.entry_red,
+            R.drawable.entry_yellow, R.drawable.entry_blue,
+            R.drawable.entry_green};
 
     /**
      * constructor
@@ -97,7 +103,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     public void updateDisplay() {
         // TODO: Finish all updating of display
 
-        /**
+        /** TODO: Add card images to drawable
         // Update current treasure
         int treasureIndex = this.state.getCurrentTreasure
                 (this.playerNum).ordinal();
@@ -110,8 +116,18 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             for (int j = 0; j < 7; j++) {
                 Tile current = this.state.getTile(i,j);
 
-                // Check type of tile
-
+                // Check if treasure on tile
+                int treasure = current.getTreasure().ordinal();
+                int type = current.getType().ordinal();
+                if (treasure == 0) {
+                    //If no treasure, set based on type
+                    ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
+                            setBackgroundResource(allTiles[type]);
+                } else {
+                    //If treasure, set the background to tile treasure
+                    ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
+                            setBackgroundResource(allTreasures[treasure]);
+                }
 
                 // Check rotation of tile
                 float rotation = (float)current.getRotation();
@@ -123,10 +139,6 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
                         setImageResource(allPlayers[pawn]);
 
-                // Check if treasure on tile
-                int treasure = current.getTreasure().ordinal();
-                ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
-                        setImageResource(allTreasures[treasure]);
             }
         }
 
