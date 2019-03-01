@@ -25,6 +25,8 @@ import android.view.View;
  */
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
+    //TODO: KILL PORTRAIT MODE
+
     /* instance variables */
     private Board ourGameBoard;
     private BoardEdge[] arrows = new BoardEdge[12];
@@ -113,7 +115,6 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
      * Update everything displayed on tablet
      */
     public void updateDisplay() {
-        // TODO: Finish all updating of display
 
         //Update Number of Treasures
         int numCards = state.getPlayerDeckSize(Player.RED);

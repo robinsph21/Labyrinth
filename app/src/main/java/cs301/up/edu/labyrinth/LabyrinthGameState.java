@@ -167,7 +167,6 @@ public class LabyrinthGameState extends GameState {
             int randomRotation = (new Random().nextInt(4))*90;
 
             if (numIntersection > 0) {
-                // TODO: 6 Intersections Need Treasures
                 randomPieces.add(new Tile(TileType.INTERSECTION, randomRotation,
                         intersectionTreasures.remove(0), this.gameBoard));
                 numIntersection--;
@@ -176,7 +175,6 @@ public class LabyrinthGameState extends GameState {
                         TreasureType.NONE, this.gameBoard));
                 numStraight--;
             } else if (numCorner > 0) {
-                // TODO: 6 Corners Need Treasures
                 randomPieces.add(new Tile(TileType.CORNER, randomRotation,
                         cornerTreasures.remove(0), this.gameBoard));
                 numCorner--;
