@@ -40,6 +40,10 @@ public class BoardEdge extends BoardSpot {
         this.getXmlObj().setOnClickListener(this);
     }
 
+    public void setClickable (boolean clickable) {
+        this.clickable = clickable;
+    }
+
     @Override
     public void onClick(View v) {
         // if we are not yet connected to a game, ignore

@@ -1,5 +1,6 @@
 package cs301.up.edu.labyrinth;
 
+import cs301.up.edu.labyrinth.enums.Arrow;
 import cs301.up.edu.labyrinth.enums.Player;
 import cs301.up.edu.game.GameHumanPlayer;
 import cs301.up.edu.game.GameMainActivity;
@@ -26,6 +27,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     /* instance variables */
     private Board ourGameBoard;
+    private BoardEdge[] arrows = new BoardEdge[12];
     private MainMenu mainMenuButton;
     private PlayerDeck playerRedDeck;
     private PlayerDeck playerYellowDeck;
@@ -148,6 +150,84 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         this.currentTile.getXmlObj().setRotation(rotation1);
 
         //Update clickable arrows
+
+        for (BoardEdge member : arrows) {
+            member.setClickable(true);
+        }
+        switch (state.getDisabledArrow()) {
+            case LEFT_TOP: {
+                arrows[Arrow.LEFT_TOP.ordinal()].setClickable(false);
+                arrows[Arrow.LEFT_TOP.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case LEFT_MIDDLE: {
+                arrows[Arrow.LEFT_MIDDLE.ordinal()].setClickable(false);
+                arrows[Arrow.LEFT_MIDDLE.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case LEFT_BOTTOM: {
+                arrows[Arrow.LEFT_BOTTOM.ordinal()].setClickable(false);
+                arrows[Arrow.LEFT_BOTTOM.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case RIGHT_TOP: {
+                arrows[Arrow.RIGHT_TOP.ordinal()].setClickable(false);
+                arrows[Arrow.RIGHT_TOP.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case RIGHT_MIDDLE: {
+                arrows[Arrow.RIGHT_MIDDLE.ordinal()].setClickable(false);
+                arrows[Arrow.RIGHT_MIDDLE.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case RIGHT_BOTTOM: {
+                arrows[Arrow.RIGHT_BOTTOM.ordinal()].setClickable(false);
+                arrows[Arrow.RIGHT_BOTTOM.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case TOP_LEFT: {
+                arrows[Arrow.TOP_LEFT.ordinal()].setClickable(false);
+                arrows[Arrow.TOP_LEFT.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case TOP_MIDDLE: {
+                arrows[Arrow.TOP_MIDDLE.ordinal()].setClickable(false);
+                arrows[Arrow.TOP_MIDDLE.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case TOP_RIGHT: {
+                arrows[Arrow.TOP_RIGHT.ordinal()].setClickable(false);
+                arrows[Arrow.TOP_RIGHT.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case BOTTOM_LEFT: {
+                arrows[Arrow.BOTTOM_LEFT.ordinal()].setClickable(false);
+                arrows[Arrow.BOTTOM_LEFT.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case BOTTOM_MIDDLE: {
+                arrows[Arrow.BOTTOM_MIDDLE.ordinal()].setClickable(false);
+                arrows[Arrow.BOTTOM_MIDDLE.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+
+            case BOTTOM_RIGHT: {
+                arrows[Arrow.BOTTOM_RIGHT.ordinal()].setClickable(false);
+                arrows[Arrow.BOTTOM_RIGHT.ordinal()].getXmlObj().
+                        setImageResource(R.drawable.empty);
+            } break;
+        }
+
 
         // Update gameBoard
         for (int i = 0; i < 7; i++) {
@@ -284,6 +364,19 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 (R.id.reset),
                 this, this.game);
 
+
+        arrows[0] = (BoardEdge)ourGameBoard.getBoardSpot(2,0);
+        arrows[1] = (BoardEdge)ourGameBoard.getBoardSpot(4,0);
+        arrows[2] = (BoardEdge)ourGameBoard.getBoardSpot(6,0);
+        arrows[3] = (BoardEdge)ourGameBoard.getBoardSpot(8,2);
+        arrows[4] = (BoardEdge)ourGameBoard.getBoardSpot(8,4);
+        arrows[5] = (BoardEdge)ourGameBoard.getBoardSpot(8,6);
+        arrows[6] = (BoardEdge)ourGameBoard.getBoardSpot(6,8);
+        arrows[7] = (BoardEdge)ourGameBoard.getBoardSpot(4,8);
+        arrows[8] = (BoardEdge)ourGameBoard.getBoardSpot(2,8);
+        arrows[9] = (BoardEdge)ourGameBoard.getBoardSpot(0,6);
+        arrows[10] = (BoardEdge)ourGameBoard.getBoardSpot(0,4);
+        arrows[11] = (BoardEdge)ourGameBoard.getBoardSpot(0,2);
 
 
         // if we have a game state, "simulate" that we have just received

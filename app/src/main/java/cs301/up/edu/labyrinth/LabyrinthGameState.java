@@ -74,6 +74,10 @@ public class LabyrinthGameState extends GameState {
         this.prevState = null;
     }
 
+    public Arrow getDisabledArrow() {
+        return this.disabledArrow;
+    }
+
     public Tile getCurrentTile() {
         return this.currentTile;
     }
