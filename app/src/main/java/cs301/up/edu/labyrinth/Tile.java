@@ -287,13 +287,13 @@ public class Tile implements Serializable {
             }
 
             case RED_ENTRY: this.connections = new boolean[]
-                    {false, false, true, true};
+                    {false, false, true, true}; break;
             case YELLOW_ENTRY: this.connections = new boolean[]
-                    {true, false, false, true};
+                    {true, false, false, true}; break;
             case BLUE_ENTRY: this.connections = new boolean[]
-                    {true, true, false, false};
+                    {true, true, false, false}; break;
             case GREEN_ENTRY: this.connections = new boolean[]
-                    {false, true, true, false};
+                    {false, true, true, false}; break;
         }
     }
 
