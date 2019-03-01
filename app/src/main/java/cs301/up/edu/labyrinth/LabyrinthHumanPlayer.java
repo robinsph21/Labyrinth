@@ -26,6 +26,7 @@ import android.view.View;
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     //TODO: KILL PORTRAIT MODE
+    //TODO: Move broken
 
     /* instance variables */
     private Board ourGameBoard;
