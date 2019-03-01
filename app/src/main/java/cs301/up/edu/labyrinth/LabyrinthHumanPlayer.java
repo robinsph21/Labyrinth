@@ -5,14 +5,9 @@ import cs301.up.edu.game.GameHumanPlayer;
 import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.R;
 import cs301.up.edu.game.infoMsg.GameInfo;
-import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.labyrinth.xmlObjects.*;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
@@ -32,10 +27,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     /* instance variables */
     private Board ourGameBoard;
     private MainMenu mainMenuButton;
-    private PlayerDeck player1Deck;
-    private PlayerDeck player2Deck;
-    private PlayerDeck player3Deck;
-    private PlayerDeck player4Deck;
+    private PlayerDeck playerRedDeck;
+    private PlayerDeck playerYellowDeck;
+    private PlayerDeck playerGreenDeck;
+    private PlayerDeck playerBlueDeck;
     private TreasureGoal currentTreasure;
     private Rotate rotateClockwise;
     private Rotate rotateCounterClockwise;
@@ -88,6 +83,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             R.drawable.tile_corner, R.drawable.entry_red,
             R.drawable.entry_yellow, R.drawable.entry_blue,
             R.drawable.entry_green};
+    private int[] number = new int[]
+            {R.drawable.empty, R.drawable.number_1, R.drawable.number_2,
+            R.drawable.number_3, R.drawable.number_4, R.drawable.number_5,
+            R.drawable.number_6};
 
     /**
      * constructor
@@ -114,9 +113,18 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     public void updateDisplay() {
         // TODO: Finish all updating of display
 
-        //Update Number of Treasures TODO
+        //Update Number of Treasures
+        int numCards = state.getPlayerDeckSize(Player.RED);
+        this.playerRedDeck.getXmlObj().setImageResource(number[numCards]);
 
-        //Update oponents number of treasures TODO
+        numCards = state.getPlayerDeckSize(Player.YELLOW);
+        this.playerYellowDeck.getXmlObj().setImageResource(number[numCards]);
+
+        numCards = state.getPlayerDeckSize(Player.BLUE);
+        this.playerBlueDeck.getXmlObj().setImageResource(number[numCards]);
+
+        numCards = state.getPlayerDeckSize(Player.GREEN);
+        this.playerGreenDeck.getXmlObj().setImageResource(number[numCards]);
 
         // Update current treasure
         int treasureIndex = this.state.getCurrentTreasure
@@ -125,10 +133,19 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 (allTreasureCards[treasureIndex]);
 
         //Update current tile
-        int tileType = this.state.getCurrentTile().getType().ordinal();
-        float tileRotation = (float)this.state.getCurrentTile().getRotation();
-        this.currentTile.getXmlObj().setBackgroundResource(allTiles[tileType]);
-        this.currentTile.getXmlObj().setRotation(tileRotation);
+        int treasure1 = state.getCurrentTile().getTreasure().ordinal();
+        int type1 = state.getCurrentTile().getType().ordinal();
+        if (treasure1 == 0) {
+            //If no treasure, set based on type
+            this.currentTile.getXmlObj().
+                    setBackgroundResource(allTiles[type1]);
+        } else {
+            //If treasure, set the background to tile treasure
+            this.currentTile.getXmlObj().
+                    setBackgroundResource(allTreasures[treasure1]);
+        }
+        float rotation1 = (float)state.getCurrentTile().getRotation();
+        this.currentTile.getXmlObj().setRotation(rotation1);
 
         //Update clickable arrows
 
@@ -232,17 +249,17 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 (R.id.mainMenuButton),
                 this, this.game);
 
-        player1Deck = new PlayerDeck(this.myActivity.findViewById
-                (R.id.player1Deck), Player.RED);
+        playerRedDeck = new PlayerDeck(this.myActivity.findViewById
+                (R.id.yourDeck), Player.RED);
 
-        player2Deck = new PlayerDeck(this.myActivity.findViewById
-                (R.id.player2Deck), Player.YELLOW);
+        playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
+                (R.id.oponent1Deck), Player.YELLOW);
 
-        player3Deck = new PlayerDeck(this.myActivity.findViewById
-                (R.id.player3Deck), Player.GREEN);
+        playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
+                (R.id.oponent2Deck), Player.GREEN);
 
-        player4Deck = new PlayerDeck(this.myActivity.findViewById
-                (R.id.player4Deck), Player.BLUE);
+        playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
+                (R.id.oponent3Deck), Player.BLUE);
 
         currentTreasure = new TreasureGoal(this.myActivity.findViewById
                 (R.id.currentTreasure));

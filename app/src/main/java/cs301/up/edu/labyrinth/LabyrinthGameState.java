@@ -2,6 +2,7 @@ package cs301.up.edu.labyrinth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -105,7 +106,7 @@ public class LabyrinthGameState extends GameState {
             treasureList.add(type);
         }
         treasureList.remove(0); // Delete NONE TreasureType
-        //Collections.shuffle(treasureList);
+        Collections.shuffle(treasureList);
 
         //Create an arraylist of size 6 for each player within the outer one
         for (int i = 0; i < NUM_PLAYERS; i++) {
@@ -131,14 +132,36 @@ public class LabyrinthGameState extends GameState {
         int numStraight = 13;
         int numCorner = 15;
 
+        List<TreasureType> intersectionTreasures = new ArrayList<>(6);
+        List<TreasureType> cornerTreasures = new ArrayList<>(15);
+
+        for (int i = 0; i < 9; i++) {
+            cornerTreasures.add(TreasureType.NONE);
+        }
+
+        cornerTreasures.add(TreasureType.OWL);
+        cornerTreasures.add(TreasureType.SPIDER);
+        cornerTreasures.add(TreasureType.BOW);
+        cornerTreasures.add(TreasureType.MOUSE);
+        cornerTreasures.add(TreasureType.MOTH);
+        cornerTreasures.add(TreasureType.FOX);
+
+        intersectionTreasures.add(TreasureType.URN);
+        intersectionTreasures.add(TreasureType.BAT);
+        intersectionTreasures.add(TreasureType.GOBLET);
+        intersectionTreasures.add(TreasureType.DRAGON);
+        intersectionTreasures.add(TreasureType.GHOST);
+        intersectionTreasures.add(TreasureType.SHIELD);
+
+
         // Create each of the random tiles and place in arraylist
         for (int i = 0; i < NUM_RANDOM_TILES; i++) {
-            int randomRotation = 0; // TODO: Make this randomly 0, 90, 180, 270
+            int randomRotation = (new Random().nextInt(4))*90;
 
             if (numIntersection > 0) {
                 // TODO: 6 Intersections Need Treasures
                 randomPieces.add(new Tile(TileType.INTERSECTION, randomRotation,
-                        TreasureType.NONE, this.gameBoard));
+                        intersectionTreasures.remove(0), this.gameBoard));
                 numIntersection--;
             } else if (numStraight > 0) {
                 randomPieces.add(new Tile(TileType.STRAIGHT, randomRotation,
@@ -147,13 +170,13 @@ public class LabyrinthGameState extends GameState {
             } else if (numCorner > 0) {
                 // TODO: 6 Corners Need Treasures
                 randomPieces.add(new Tile(TileType.CORNER, randomRotation,
-                        TreasureType.NONE, this.gameBoard));
+                        cornerTreasures.remove(0), this.gameBoard));
                 numCorner--;
             }
         }
 
 
-        //Collections.shuffle(randomPieces);
+        Collections.shuffle(randomPieces);
 
         // Place all random pieces in gameBoard
         for (int i = 0; i < 7; i++) {
@@ -199,7 +222,6 @@ public class LabyrinthGameState extends GameState {
                 0,6);
 
         // Below is the setting of the fixed tiles on the board
-        // TODO: Fix fixed tiles treasure
         this.gameBoard[0][2] = new Tile(
                 TileType.INTERSECTION,
                 90,
@@ -209,7 +231,7 @@ public class LabyrinthGameState extends GameState {
 
         this.gameBoard[0][4] = new Tile(
                 TileType.INTERSECTION,
-                270,
+                90,
                 TreasureType.RING,
                 this.gameBoard,
                 0,4);
@@ -223,15 +245,15 @@ public class LabyrinthGameState extends GameState {
 
         this.gameBoard[2][2] = new Tile(
                 TileType.INTERSECTION,
-                180,
+                90,
                 TreasureType.CROWN,
                 this.gameBoard,
                 2,2);
 
         this.gameBoard[2][4] = new Tile(
                 TileType.INTERSECTION,
-                270,
-                TreasureType.KEYS,
+                0,
+                TreasureType.CHEST,
                 this.gameBoard,
                 2,4);
 
@@ -251,14 +273,14 @@ public class LabyrinthGameState extends GameState {
 
         this.gameBoard[4][2] = new Tile(
                 TileType.INTERSECTION,
-                90,
-                TreasureType.CHEST,
+                180,
+                TreasureType.KEYS,
                 this.gameBoard,
                 4,2);
 
         this.gameBoard[4][4] = new Tile(
                 TileType.INTERSECTION,
-                0,
+                270,
                 TreasureType.GEM,
                 this.gameBoard,
                 4,4);
@@ -266,7 +288,7 @@ public class LabyrinthGameState extends GameState {
         this.gameBoard[4][6] = new Tile(
                 TileType.INTERSECTION,
                 0,
-                TreasureType.NONE,
+                TreasureType.HELMET,
                 this.gameBoard,
                 4,6);
 
