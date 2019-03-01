@@ -66,22 +66,22 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     private final static int[] allTreasures = new int[]
             {R.drawable.empty, R.drawable.tile_bat, R.drawable.tile_book,
-                    R.drawable.tile_bow, R.drawable.tile_candles,
-                    R.drawable.tile_chest, R.drawable.tile_coins,
-                    R.drawable.tile_crown, R.drawable.tile_dragon,
-                    R.drawable.tile_fox, R.drawable.tile_gem,
-                    R.drawable.tile_ghost, R.drawable.tile_goblet,
-                    R.drawable.tile_helmet, R.drawable.tile_keys,
-                    R.drawable.tile_map, R.drawable.tile_moth,
-                    R.drawable.tile_mouse, R.drawable.tile_owl,
-                    R.drawable.tile_ring, R.drawable.tile_shield,
-                    R.drawable.tile_skull, R.drawable.tile_spider,
-                    R.drawable.tile_sword, R.drawable.tile_urn};
+            R.drawable.tile_bow, R.drawable.tile_candles,
+            R.drawable.tile_chest, R.drawable.tile_coins,
+            R.drawable.tile_crown, R.drawable.tile_dragon,
+            R.drawable.tile_fox, R.drawable.tile_gem,
+            R.drawable.tile_ghost, R.drawable.tile_goblet,
+            R.drawable.tile_helmet, R.drawable.tile_keys,
+            R.drawable.tile_map, R.drawable.tile_moth,
+            R.drawable.tile_mouse, R.drawable.tile_owl,
+            R.drawable.tile_ring, R.drawable.tile_shield,
+            R.drawable.tile_skull, R.drawable.tile_spider,
+            R.drawable.tile_sword, R.drawable.tile_urn};
 
     private final static int[] allPlayers = new int[]
             {R.drawable.pawn_red, R.drawable.pawn_yellow,
-                    R.drawable.pawn_blue, R.drawable.pawn_green,
-                    R.drawable.empty};
+            R.drawable.pawn_blue, R.drawable.pawn_green,
+            R.drawable.empty};
 
     private final static int[] allTiles = new int[]
             {R.drawable.tile_straight, R.drawable.tile_intersection,
@@ -114,11 +114,23 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     public void updateDisplay() {
         // TODO: Finish all updating of display
 
+        //Update Number of Treasures TODO
+
+        //Update oponents number of treasures TODO
+
         // Update current treasure
         int treasureIndex = this.state.getCurrentTreasure
                 (this.playerNum).ordinal();
         this.currentTreasure.getXmlObj().setImageResource
                 (allTreasureCards[treasureIndex]);
+
+        //Update current tile
+        int tileType = this.state.getCurrentTile().getType().ordinal();
+        float tileRotation = (float)this.state.getCurrentTile().getRotation();
+        this.currentTile.getXmlObj().setBackgroundResource(allTiles[tileType]);
+        this.currentTile.getXmlObj().setRotation(tileRotation);
+
+        //Update clickable arrows
 
         // Update gameBoard
         for (int i = 0; i < 7; i++) {
@@ -166,6 +178,16 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         // ignore the message if it's not a CounterState message
         if (!(info instanceof LabyrinthGameState)) return;
 
+        // Check if game variable has been acquired
+        if (mainMenuButton.getGame() == null) {
+            ourGameBoard.setGame(this.game);
+            endTurn.setGame(this.game);
+            mainMenuButton.setGame(this.game);
+            reset.setGame(this.game);
+            rotateClockwise.setGame(this.game);
+            rotateCounterClockwise.setGame(this.game);
+        }
+
         // update our state; then update the display
         this.state = (LabyrinthGameState)info;
         updateDisplay();
@@ -204,17 +226,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
 
 
-        ourGameBoard = new Board(this, this.game);
-
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                ImageView imageObj = this.myActivity.findViewById(
-                        this.myActivity.getResources().getIdentifier
-                                ("cell_" + i + j, "id",
-                                this.myActivity.getPackageName()));
-                ourGameBoard.getBoardSpot(i, j).setXmlObj(imageObj);
-            }
-        }
+        ourGameBoard = new Board(this, this.game, this.myActivity);
 
         mainMenuButton = new MainMenu(this.myActivity.findViewById
                 (R.id.mainMenuButton),
@@ -243,9 +255,9 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 (R.id.rotateCounterClockwise), false,
                 this, this.game);
 
-        currentTile = new BoardTile(-1,-1,false,
+        currentTile = new BoardTile(this.myActivity.
+                findViewById(R.id.currentTile),-1,-1,false,
                 this,this.game);
-        currentTile.setXmlObj(this.myActivity.findViewById(R.id.currentTile));
 
         endTurn = new EndTurn(this.myActivity.findViewById
                 (R.id.endTurn),

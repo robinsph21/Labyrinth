@@ -1,12 +1,16 @@
 package cs301.up.edu.labyrinth.xmlObjects;
 
+import android.widget.ImageView;
+
 import cs301.up.edu.game.Game;
+import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.game.GamePlayer;
 
 public class Board {
 
     private static final int LENGTH = 9;
     private BoardSpot[][] gameBoard = new BoardSpot[LENGTH][LENGTH];
+    private Game game;
 
     /**
      * Constructor for our board. Our board is a 9x9 grid. All tiles on the outside of the grid are
@@ -51,49 +55,63 @@ public class Board {
      *      ----- ----- ----- ----- ----- ----- ----- ----- -----
      *                                                          (8,8)
      */
-    public Board(GamePlayer player, Game game) {
+    public Board(GamePlayer player, Game game, GameMainActivity activity) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
+                ImageView imageObj = activity.findViewById(
+                        activity.getResources().getIdentifier
+                                ("cell_" + i + j, "id",
+                                        activity.getPackageName()));
                 if (i == 0 || i == 8) {
                     /*Make appropriate top and bottom rows BoardEdge clickable*/
                     switch (j) {
                         case 2:
-                            gameBoard[i][j] = new BoardEdge(i, j, true,
-                                    player, game);
+                            gameBoard[i][j] = new BoardEdge(imageObj,
+                                    i, j, true,
+                                    player, game); break;
                         case 4:
-                            gameBoard[i][j] = new BoardEdge(i, j, true,
-                                    player, game);
+                            gameBoard[i][j] = new BoardEdge(imageObj,
+                                    i, j, true,
+                                    player, game); break;
                         case 6:
-                            gameBoard[i][j] = new BoardEdge(i, j, true,
-                                    player, game);
+                            gameBoard[i][j] = new BoardEdge(imageObj,
+                                    i, j, true,
+                                    player, game); break;
                         default:
-                            gameBoard[i][j] = new BoardEdge(i, j, false,
-                                    player, game);
+                            gameBoard[i][j] = new BoardEdge(imageObj,
+                                    i, j, false,
+                                    player, game); break;
                     }
                 } else if (j == 0 || j == 8) {
                     switch (i) {
                         /*Make appropriate left and right columns BoardEdge clickable*/
                         case 2:
-                            gameBoard[i][j] = new BoardEdge(i, j, true,
-                                    player, game);
+                            gameBoard[i][j] = new BoardEdge(imageObj,
+                                    i, j, true,
+                                    player, game); break;
                         case 4:
-                            gameBoard[i][j] = new BoardEdge(i, j, true,
-                                    player, game);
+                            gameBoard[i][j] = new BoardEdge(imageObj,
+                                    i, j, true,
+                                    player, game); break;
                         case 6:
-                            gameBoard[i][j] = new BoardEdge(i, j, true,
-                                    player, game);
+                            gameBoard[i][j] = new BoardEdge(imageObj,
+                                    i, j, true,
+                                    player, game); break;
                         default:
-                            gameBoard[i][j] = new BoardEdge(i, j, false,
-                                    player, game);
+                            gameBoard[i][j] = new BoardEdge(imageObj,
+                                    i, j, false,
+                                    player, game); break;
                     }
                 }
                 else {
                     /*Make appropriate BoardTiles fixed*/
                     if ((i % 2 == 1) && (j % 2 == 1)) {
-                        gameBoard[i][j] = new BoardTile(i, j, true,
+                        gameBoard[i][j] = new BoardTile(imageObj,
+                                i, j, true,
                                 player, game);
                     } else {
-                        gameBoard[i][j] = new BoardTile(i, j, false,
+                        gameBoard[i][j] = new BoardTile(imageObj,
+                                i, j, false,
                                 player, game);
                     }
                 }
@@ -104,5 +122,18 @@ public class Board {
 
     public BoardSpot getBoardSpot(int locX, int locY) {
         return gameBoard[locX][locY];
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                gameBoard[i][j].setGame(game);
+            }
+        }
+    }
+
+    public Game getGame() {
+        return this.game;
     }
 }

@@ -202,7 +202,7 @@ public class LabyrinthGameState extends GameState {
         // TODO: Fix fixed tiles treasure
         this.gameBoard[0][2] = new Tile(
                 TileType.INTERSECTION,
-                270,
+                90,
                 TreasureType.MAP,
                 this.gameBoard,
                 0,2);
@@ -272,14 +272,14 @@ public class LabyrinthGameState extends GameState {
 
         this.gameBoard[6][2] = new Tile(
                 TileType.INTERSECTION,
-                90,
+                270,
                 TreasureType.SKULL,
                 this.gameBoard,
                 6,2);
 
         this.gameBoard[6][4] = new Tile(
                 TileType.INTERSECTION,
-                90,
+                270,
                 TreasureType.SWORD,
                 this.gameBoard,
                 6,4);

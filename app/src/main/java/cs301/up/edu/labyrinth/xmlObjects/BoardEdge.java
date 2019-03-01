@@ -12,32 +12,32 @@ public class BoardEdge extends BoardSpot {
 
     private boolean clickable;
     private GamePlayer player;
-    private Game game;
     private Arrow thisArrow;
 
-    public BoardEdge(int locX, int locY, boolean clickable,
+    public BoardEdge(View v, int locX, int locY, boolean clickable,
                      GamePlayer player, Game game) {
-        super(locX,locY);
+        super(v, locX,locY);
         this.clickable = clickable;
         this.player = player;
         this.game = game;
         switch ("" + locX + locY) {
-            case "20": this.thisArrow = Arrow.TOP_LEFT;
-            case "40": this.thisArrow = Arrow.TOP_MIDDLE;
-            case "60": this.thisArrow = Arrow.TOP_RIGHT;
+            case "20": this.thisArrow = Arrow.TOP_LEFT; break;
+            case "40": this.thisArrow = Arrow.TOP_MIDDLE; break;
+            case "60": this.thisArrow = Arrow.TOP_RIGHT; break;
 
-            case "02": this.thisArrow = Arrow.LEFT_TOP;
-            case "04": this.thisArrow = Arrow.LEFT_MIDDLE;
-            case "06": this.thisArrow = Arrow.LEFT_BOTTOM;
+            case "02": this.thisArrow = Arrow.LEFT_TOP; break;
+            case "04": this.thisArrow = Arrow.LEFT_MIDDLE; break;
+            case "06": this.thisArrow = Arrow.LEFT_BOTTOM; break;
 
-            case "82": this.thisArrow = Arrow.RIGHT_TOP;
-            case "84": this.thisArrow = Arrow.RIGHT_MIDDLE;
-            case "86": this.thisArrow = Arrow.RIGHT_BOTTOM;
+            case "82": this.thisArrow = Arrow.RIGHT_TOP; break;
+            case "84": this.thisArrow = Arrow.RIGHT_MIDDLE; break;
+            case "86": this.thisArrow = Arrow.RIGHT_BOTTOM; break;
 
-            case "28": this.thisArrow = Arrow.BOTTOM_LEFT;
-            case "48": this.thisArrow = Arrow.BOTTOM_MIDDLE;
-            case "68": this.thisArrow = Arrow.BOTTOM_RIGHT;
+            case "28": this.thisArrow = Arrow.BOTTOM_LEFT; break;
+            case "48": this.thisArrow = Arrow.BOTTOM_MIDDLE; break;
+            case "68": this.thisArrow = Arrow.BOTTOM_RIGHT; break;
         }
+        this.getXmlObj().setOnClickListener(this);
     }
 
     @Override
@@ -53,4 +53,5 @@ public class BoardEdge extends BoardSpot {
             game.sendAction(action);
         }
     }
+
 }

@@ -134,7 +134,7 @@
                     android:layout_marginTop="5dp"
                     android:scaleX=".85"
                     android:scaleY=".85"
-                    android:background="@drawable/tile_corner" />
+                    android:background="@drawable/tile_straight" />
 
             </FrameLayout>
 

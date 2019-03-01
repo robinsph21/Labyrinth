@@ -14,15 +14,15 @@ public class BoardTile extends BoardSpot {
     private boolean fixed;
     private TreasureType treasure;
     private GamePlayer player;
-    private Game game;
     private Player pawn;
 
-    public BoardTile(int locX, int locY, boolean fixed,
+    public BoardTile(View v, int locX, int locY, boolean fixed,
                      GamePlayer player, Game game) {
-        super(locX,locY);
+        super(v, locX,locY);
         this.fixed = fixed;
         this.player = player;
         this.game = game;
+        this.getXmlObj().setOnClickListener(this);
     }
 
     public boolean isFixed() {

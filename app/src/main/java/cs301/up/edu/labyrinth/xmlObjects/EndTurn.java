@@ -31,4 +31,12 @@ public class EndTurn extends XMLObject {
 
         game.sendAction(action);
     }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return this.game;
+    }
 }

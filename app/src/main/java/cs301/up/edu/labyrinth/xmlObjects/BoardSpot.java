@@ -1,14 +1,19 @@
 package cs301.up.edu.labyrinth.xmlObjects;
 
+import android.view.View;
 import android.widget.ImageView;
+
+import cs301.up.edu.game.Game;
 
 public class BoardSpot extends XMLObject{
 
     private int locX;
     private int locY;
     private int rotation;
+    protected Game game;
 
-    public BoardSpot(int locX, int locY) {
+    public BoardSpot(View v, int locX, int locY) {
+        super(v);
         this.locX = locX;
         this.locY = locY;
     }
@@ -32,5 +37,13 @@ public class BoardSpot extends XMLObject{
     @Override
     public ImageView getXmlObj() {
         return (ImageView)super.getXmlObj();
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return this.game;
     }
 }

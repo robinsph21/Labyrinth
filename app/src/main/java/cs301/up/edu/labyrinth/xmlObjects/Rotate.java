@@ -10,7 +10,7 @@ import cs301.up.edu.labyrinth.actions.LabyrinthRotateAction;
 public class Rotate extends XMLObject {
 
     private final GamePlayer player;
-    private final Game game;
+    private Game game;
     private boolean clockwise;
     
     public Rotate(View v, boolean clockwise, GamePlayer player, Game game) {
@@ -35,5 +35,13 @@ public class Rotate extends XMLObject {
         action = new LabyrinthRotateAction(this.player, this.clockwise);
 
         game.sendAction(action);
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return this.game;
     }
 }
