@@ -204,16 +204,20 @@ public abstract class LocalGame implements Game, Tickable {
 				// acknowledge this.
 				ReadyAction ra = (ReadyAction)action;
 
-				// mark the given player as being ready
-				int playerIdx = getPlayerIdx(ra.getPlayer());
-				Log.i("LocalGame", "got 'ready' ("+playerNames[playerIdx]+")");
-				if (playerIdx >= 0 && !playersReady[playerIdx]) {
-					playersReady[playerIdx] = true;
-					playerReadyCount++;
+
+				synchronized (this) {
+					// mark the given player as being ready
+					int playerIdx = getPlayerIdx(ra.getPlayer());
+					Log.i("LocalGame", "got 'ready' (" + playerNames[playerIdx] + ")");
+					if (playerIdx >= 0 && !playersReady[playerIdx]) {
+						playersReady[playerIdx] = true;
+						playerReadyCount++;
+					}
 				}
 
 				// if all players are ready, set the game stage to "during game", and
 				// send each player the initial state
+
 				if (playerReadyCount >= playerNames.length) {
 					gameStage = GameStage.DURING_GAME;
 					Log.i("LocalGame", "broadcasting initial state");
