@@ -44,6 +44,10 @@ public class BoardEdge extends BoardSpot {
         this.clickable = clickable;
     }
 
+    public Arrow getThisArrow() {
+        return thisArrow;
+    }
+
     @Override
     public void onClick(View v) {
         // if we are not yet connected to a game, ignore

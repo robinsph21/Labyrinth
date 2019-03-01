@@ -151,9 +151,61 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
         //Update clickable arrows
 
+        //All arrows clickable and showing
         for (BoardEdge member : arrows) {
             member.setClickable(true);
+            switch (member.getThisArrow()) {
+                case LEFT_TOP: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_right);
+                } break;
+
+                case LEFT_MIDDLE: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_right);
+                } break;
+
+                case LEFT_BOTTOM: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_right);
+                } break;
+
+                case RIGHT_TOP: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_left);
+                } break;
+
+                case RIGHT_MIDDLE: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_left);
+                } break;
+
+                case RIGHT_BOTTOM: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_left);
+                } break;
+
+                case TOP_LEFT: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_down);
+                } break;
+
+                case TOP_MIDDLE: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_down);
+                } break;
+
+                case TOP_RIGHT: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_down);
+                } break;
+
+                case BOTTOM_LEFT: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_up);
+                } break;
+
+                case BOTTOM_MIDDLE: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_up);
+                } break;
+
+                case BOTTOM_RIGHT: {
+                    member.getXmlObj().setImageResource(R.drawable.arrow_up);
+                } break;
+            }
+
         }
+
         switch (state.getDisabledArrow()) {
             case LEFT_TOP: {
                 arrows[Arrow.LEFT_TOP.ordinal()].setClickable(false);
