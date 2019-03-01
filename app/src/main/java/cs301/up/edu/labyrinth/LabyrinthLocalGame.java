@@ -47,6 +47,9 @@ public class LabyrinthLocalGame extends LocalGame {
 	public LabyrinthLocalGame() {
 		// initialize the game state
 		this.gameState = new LabyrinthGameState();
+
+		LabyrinthGameState copy = new LabyrinthGameState(this.gameState);
+		this.gameState.setPrevState(copy);
 	}
 
 	/**

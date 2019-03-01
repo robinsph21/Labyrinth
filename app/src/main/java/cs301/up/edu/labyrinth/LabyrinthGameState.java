@@ -99,6 +99,10 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    public void setPrevState(LabyrinthGameState state) {
+        this.prevState = state;
+    }
+
     /**
      * Called by ctor to initialize all player decks randomly
      */
@@ -604,6 +608,7 @@ public class LabyrinthGameState extends GameState {
             this.treasureDecks = temp.treasureDecks;
             this.deckSizes = temp.deckSizes;
             this.disabledArrow = temp.disabledArrow;
+            this.shiftedLabyrinthThisTurn = temp.shiftedLabyrinthThisTurn;
             return true;
         }
     }
