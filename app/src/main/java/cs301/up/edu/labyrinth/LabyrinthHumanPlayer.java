@@ -51,26 +51,37 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     // Possible treasures
     private final static int[] allTreasureCards = new int[]
-            {R.drawable.card_book}; // TODO: Add other treasure cards
+            {R.drawable.empty, R.drawable.card_bat, R.drawable.card_book,
+            R.drawable.card_bow, R.drawable.card_candles,
+            R.drawable.card_chest, R.drawable.card_coins,
+            R.drawable.card_crown, R.drawable.card_dragon,
+            R.drawable.card_fox, R.drawable.card_gem,
+            R.drawable.card_ghost, R.drawable.card_goblet,
+            R.drawable.card_helmet, R.drawable.card_keys,
+            R.drawable.card_map, R.drawable.card_moth,
+            R.drawable.card_mouse, R.drawable.card_owl,
+            R.drawable.card_ring, R.drawable.card_shield,
+            R.drawable.card_skull, R.drawable.card_spider,
+            R.drawable.card_sword, R.drawable.card_urn};
 
     private final static int[] allTreasures = new int[]
-            {0, R.drawable.tile_bat, R.drawable.tile_book,
+            {R.drawable.empty, R.drawable.tile_bat, R.drawable.tile_book,
                     R.drawable.tile_bow, R.drawable.tile_candles,
                     R.drawable.tile_chest, R.drawable.tile_coins,
-                    R.drawable.tile_corner, R.drawable.tile_crown,
-                    R.drawable.tile_dragon, R.drawable.tile_fox,
-                    R.drawable.tile_gem, R.drawable.tile_ghost,
-                    R.drawable.tile_goblet, R.drawable.tile_helmet,
-                    R.drawable.tile_keys, R.drawable.tile_map,
-                    R.drawable.tile_moth, R.drawable.tile_mouse,
-                    R.drawable.tile_owl, R.drawable.tile_ring,
-                    R.drawable.tile_shield, R.drawable.tile_skull,
-                    R.drawable.tile_spider, R.drawable.tile_sword,
-                    R.drawable.tile_urn}; // TODO: Add image that is None instead of 0
+                    R.drawable.tile_crown, R.drawable.tile_dragon,
+                    R.drawable.tile_fox, R.drawable.tile_gem,
+                    R.drawable.tile_ghost, R.drawable.tile_goblet,
+                    R.drawable.tile_helmet, R.drawable.tile_keys,
+                    R.drawable.tile_map, R.drawable.tile_moth,
+                    R.drawable.tile_mouse, R.drawable.tile_owl,
+                    R.drawable.tile_ring, R.drawable.tile_shield,
+                    R.drawable.tile_skull, R.drawable.tile_spider,
+                    R.drawable.tile_sword, R.drawable.tile_urn};
 
     private final static int[] allPlayers = new int[]
             {R.drawable.pawn_red, R.drawable.pawn_yellow,
-                    R.drawable.pawn_blue, R.drawable.pawn_green, 0}; // TODO: Add image that is None instead of 0
+                    R.drawable.pawn_blue, R.drawable.pawn_green,
+                    R.drawable.empty};
 
     private final static int[] allTiles = new int[]
             {R.drawable.tile_straight, R.drawable.tile_intersection,
@@ -103,13 +114,11 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     public void updateDisplay() {
         // TODO: Finish all updating of display
 
-        /** TODO: Add card images to drawable
         // Update current treasure
         int treasureIndex = this.state.getCurrentTreasure
                 (this.playerNum).ordinal();
         this.currentTreasure.getXmlObj().setImageResource
                 (allTreasureCards[treasureIndex]);
-        */
 
         // Update gameBoard
         for (int i = 0; i < 7; i++) {
