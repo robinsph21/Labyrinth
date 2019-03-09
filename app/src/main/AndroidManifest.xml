@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/icon_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".labyrinth.LabyrinthMainActivity" >
+        <activity android:name=".labyrinth.LabyrinthMainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
