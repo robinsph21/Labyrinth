@@ -472,10 +472,14 @@ public class LabyrinthGameState extends GameState {
      * Update the connections of all tiles on the board
      */
     private void updateTiles() {
-        for (Tile[] row : this.gameBoard) {
-            for (Tile spot : row) {
-                spot.calculateConnections();
-                spot.calculateConnectedTiles();
+        for (Tile[] row1 : this.gameBoard) {
+            for (Tile spot1 : row1) {
+                spot1.calculateConnections();
+            }
+        }
+        for (Tile[] row2 : this.gameBoard) {
+            for (Tile spot2 : row2) {
+                spot2.calculateConnectedTiles();
             }
         }
     }
@@ -896,29 +900,33 @@ public class LabyrinthGameState extends GameState {
      * @return true if you can move there
      */
     public boolean checkMovePawn(int locX, int locY) {
-        // Find Player Tile
-        Tile playerTile = this.getPlayerLoc(this.playerTurn);
+        //Only can move if shifted labyrinth
+        if (this.shiftedLabyrinthThisTurn) {
+            // Find Player Tile
+            Tile playerTile = this.getPlayerLoc(this.playerTurn);
 
-        List<Tile> checkedSpots = new ArrayList<>(49);
-        boolean valid;
-        valid = this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
-                checkedSpots);
-        if (valid) {
-            // Remove old pawn loc
-            playerTile.setPawn(Player.NONE);
+            List<Tile> checkedSpots = new ArrayList<>(49);
+            boolean valid;
+            valid = this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
+                    checkedSpots);
+            if (valid) {
+                // Remove old pawn loc
+                playerTile.setPawn(Player.NONE);
 
-            // Set new pawn loc
-            this.gameBoard[locX][locY].setPawn(playerTurn);
-            if (this.gameBoard[locX][locY].getTreasure() ==
-                    this.treasureDecks.get(this.playerTurn.ordinal()).get(0)) {
-                this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
-                this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
-                this.updateDeckSizes();
+                // Set new pawn loc
+                this.gameBoard[locX][locY].setPawn(playerTurn);
+                if (this.gameBoard[locX][locY].getTreasure() ==
+                        this.treasureDecks.get(this.playerTurn.ordinal()).get(0)) {
+                    this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
+                    this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
+                    this.updateDeckSizes();
+                }
+                return true;
+            } else {
+                return false;
             }
-            return true;
-        } else {
-            return false;
         }
+        else return false;
     }
 
 }

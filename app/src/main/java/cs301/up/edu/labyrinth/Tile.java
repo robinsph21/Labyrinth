@@ -226,7 +226,7 @@ public class Tile implements Serializable {
                     default: this.connections = new boolean[]
                             {false, false, false, false}; break;
                 }
-            }
+            } break;
 
             /*
             * The 0 degree rotation for a straight  piece can be seen below. 90,
@@ -246,14 +246,14 @@ public class Tile implements Serializable {
                             {true, false, true, false}; break;
                     case 90: this.connections = new boolean[]
                             {false, true, false, true}; break;
-                    case 180: this.connections = new boolean[]
+                     case 180: this.connections = new boolean[]
                             {true, false, true, false}; break;
                     case 270: this.connections = new boolean[]
                             {false, true, false, true}; break;
                     default: this.connections = new boolean[]
                             {false, false, false, false}; break;
                 }
-            }
+            } break;
 
             /*
             * The 0 degree rotation for a straight  piece can be seen below. 90,
@@ -284,7 +284,7 @@ public class Tile implements Serializable {
                     default: this.connections = new boolean[]
                             {false, false, false, false}; break;
                 }
-            }
+            } break;
 
             case RED_ENTRY: this.connections = new boolean[]
                     {false, false, true, true}; break;
