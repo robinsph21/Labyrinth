@@ -1,5 +1,7 @@
 package cs301.up.edu.labyrinth;
 
+import cs301.up.edu.game.infoMsg.IllegalMoveInfo;
+import cs301.up.edu.game.infoMsg.NotYourTurnInfo;
 import cs301.up.edu.labyrinth.enums.Arrow;
 import cs301.up.edu.labyrinth.enums.Player;
 import cs301.up.edu.game.GameHumanPlayer;
@@ -25,8 +27,7 @@ import android.view.View;
  */
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
-    //TODO: KILL PORTRAIT MODE
-    //TODO: Move broken
+    //TODO: Move only goes nextdoor for now
 
     /* instance variables */
     private Board ourGameBoard;
@@ -327,21 +328,29 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     @Override
     public void receiveInfo(GameInfo info) {
         // ignore the message if it's not a CounterState message
-        if (!(info instanceof LabyrinthGameState)) return;
+        if (info instanceof LabyrinthGameState) {
 
-        // Check if game variable has been acquired
-        if (mainMenuButton.getGame() == null) {
-            ourGameBoard.setGame(this.game);
-            endTurn.setGame(this.game);
-            mainMenuButton.setGame(this.game);
-            reset.setGame(this.game);
-            rotateClockwise.setGame(this.game);
-            rotateCounterClockwise.setGame(this.game);
+            // Check if game variable has been acquired
+            if (mainMenuButton.getGame() == null) {
+                ourGameBoard.setGame(this.game);
+                endTurn.setGame(this.game);
+                mainMenuButton.setGame(this.game);
+                reset.setGame(this.game);
+                rotateClockwise.setGame(this.game);
+                rotateCounterClockwise.setGame(this.game);
+            }
+
+            // update our state; then update the display
+            this.state = (LabyrinthGameState) info;
+            updateDisplay();
+
+        } else if (info instanceof NotYourTurnInfo) {
+            //TODO: Display toast message not your turn
+
+        } else if (info instanceof IllegalMoveInfo) {
+            //TODO: Display toast message illegal move
+
         }
-
-        // update our state; then update the display
-        this.state = (LabyrinthGameState)info;
-        updateDisplay();
     }
 
     /**
