@@ -11,6 +11,7 @@ import cs301.up.edu.game.infoMsg.GameInfo;
 import cs301.up.edu.labyrinth.xmlObjects.*;
 
 import android.view.View;
+import android.widget.Toast;
 
 /**
  * A GUI of a counter-player. The GUI displays the current value of the counter,
@@ -345,11 +346,12 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             updateDisplay();
 
         } else if (info instanceof NotYourTurnInfo) {
-            //TODO: Display toast message not your turn
+            Toast.makeText(this.myActivity, "Not Your Turn!",
+                    Toast.LENGTH_SHORT).show();
 
         } else if (info instanceof IllegalMoveInfo) {
-            //TODO: Display toast message illegal move
-
+            Toast.makeText(this.myActivity, "Illegal Move!!",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
