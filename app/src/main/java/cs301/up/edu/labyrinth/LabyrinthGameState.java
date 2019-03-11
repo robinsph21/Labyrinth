@@ -14,7 +14,7 @@ import cs301.up.edu.game.infoMsg.GameState;
 
 /**
  * Defines a gamestate for our labyrinth game. Has all the information needed
- * for a game.
+ * for a game to be played.
  *
  * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * Date: 2/27/2019
