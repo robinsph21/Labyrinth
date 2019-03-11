@@ -573,12 +573,16 @@ public class LabyrinthGameState extends GameState {
      * @return true if you can rotate
      */
     public boolean checkRotate(boolean clockwise) {
-        if (clockwise) {
-            this.currentTile.rotateClockwise();
+        if (!this.shiftedLabyrinthThisTurn) {
+            if (clockwise) {
+                this.currentTile.rotateClockwise();
+            } else {
+                this.currentTile.rotateCounterClockwise();
+            }
+            return true;
         } else {
-            this.currentTile.rotateCounterClockwise();
+            return false;
         }
-        return true;
     }
 
     /**
@@ -930,38 +934,28 @@ public class LabyrinthGameState extends GameState {
             valid = this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
                     checkedSpots);
             if (valid) {
-                if (this.gameBoard[locX][locY].getPawn()[4]) {
-                    // Remove old pawn loc
-                    playerTile.setPawn(new boolean[]
-                            {false, false, false, false, true});
+                // Remove old pawn loc
+                boolean[] temp = playerTile.getPawn();
+                temp[this.playerTurn.ordinal()] = false;
+                if (!temp[0] & !temp[1] & !temp[2] & !temp[3]) temp[4] = true;
 
-                    // Set new pawn loc
-                    switch (this.playerTurn) {
-                        case RED: this.gameBoard[locX][locY].setPawn(new
-                                boolean[]{true,false,false,false,false}); break;
-                        case YELLOW: this.gameBoard[locX][locY].setPawn(new
-                                boolean[]{false,true,false,false,false}); break;
-                        case BLUE: this.gameBoard[locX][locY].setPawn(new
-                                boolean[]{false,false,true,false,false}); break;
-                        case GREEN: this.gameBoard[locX][locY].setPawn(new
-                                boolean[]{false,false,false,true,false}); break;
-                    }
-                    //this.gameBoard[locX][locY].setPawn(playerTurn);
-                    if (this.gameBoard[locX][locY].getTreasure() ==
-                            this.treasureDecks.get(this.playerTurn.ordinal()).get(0)) {
-                        this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
-                        this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
-                        this.updateDeckSizes();
-                        // End your turn once you get a treasure
+                // Set new pawn loc
+                boolean[] temp2 = this.gameBoard[locX][locY].getPawn();
+                temp2[this.playerTurn.ordinal()] = true;
+                temp2[4] = false;
 
-                        // TODO: Should this automatically end the player's turn?
-                        // We could have a separate boolean that
-                        checkEndTurn();
-                    }
-                    return true;
-                } else {
-                    return false;
+                if (this.gameBoard[locX][locY].getTreasure() ==
+                        this.treasureDecks.get(this.playerTurn.ordinal()).get(0)) {
+                    this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
+                    this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
+                    this.updateDeckSizes();
+                    // End your turn once you get a treasure
+
+                    // TODO: Should this automatically end the player's turn?
+                    // We could have a separate boolean that
+                    checkEndTurn();
                 }
+                return true;
             } else {
                 return false;
             }

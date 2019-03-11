@@ -360,8 +360,7 @@
                 android:background="@drawable/tile_book"
                 android:clickable="true"
                 android:rotation="180"
-                android:scaleType="fitXY"
-                android:src="@drawable/highlight" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/cell_41"

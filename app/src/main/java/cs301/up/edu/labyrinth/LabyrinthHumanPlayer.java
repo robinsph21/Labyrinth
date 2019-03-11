@@ -29,6 +29,7 @@ import android.widget.Toast;
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     //TODO: Move only goes nextdoor for now
+    //TODO: Highlight current treasure
 
     /* instance variables */
     private Board ourGameBoard;
@@ -80,11 +81,23 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             R.drawable.tile_skull, R.drawable.tile_spider,
             R.drawable.tile_sword, R.drawable.tile_urn};
 
-    //TODO: Add drawable for multiple pawns here
     private final static int[] allPlayers = new int[]
             {R.drawable.pawn_red, R.drawable.pawn_yellow,
             R.drawable.pawn_blue, R.drawable.pawn_green,
             R.drawable.empty};
+
+    private final static int[] multiplePlayers = new int[]
+            {R.drawable.pawn_red_yellow_green_blue,
+            R.drawable.pawn_red_yellow_blue,
+            R.drawable.pawn_red_yellow_green,
+            R.drawable.pawn_red_yellow,
+            R.drawable.pawn_red_green_blue,
+            R.drawable.pawn_red_blue,
+            R.drawable.pawn_red_green,
+            R.drawable.pawn_yellow_green_blue,
+            R.drawable.pawn_yellow_blue,
+            R.drawable.pawn_yellow_green,
+            R.drawable.pawn_green_blue};
 
     private final static int[] allTiles = new int[]
             {R.drawable.tile_straight, R.drawable.tile_intersection,
@@ -309,12 +322,87 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
                         setRotation(rotation);
 
-                //TODO: Display all the different pawns
                 // Check if pawn on tile
-                /**
-                int pawn = current.getPawn().ordinal();
-                ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
-                        setImageResource(allPlayers[pawn]);*/
+                boolean[] pawn = current.getPawn();
+                if (pawn[4]) {
+                    ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
+                            setImageResource(allPlayers[4]);
+                } else if (pawn[0]) {
+                    if (pawn[1]) {
+                        if (pawn[2]) {
+                            if (pawn[3]) {
+                                ourGameBoard.getBoardSpot(i+1,j+1).
+                                        getXmlObj().
+                                        setImageResource(multiplePlayers[0]);
+                            } else {
+                                ourGameBoard.getBoardSpot(i+1,j+1).
+                                        getXmlObj().
+                                        setImageResource(multiplePlayers[1]);
+                            }
+                        } else if (pawn[3]){
+                            ourGameBoard.getBoardSpot(i+1,j+1).
+                                    getXmlObj().
+                                    setImageResource(multiplePlayers[2]);
+                        } else {
+                            ourGameBoard.getBoardSpot(i+1,j+1).
+                                    getXmlObj().
+                                    setImageResource(multiplePlayers[3]);
+                        }
+                    } else if (pawn[2]) {
+                        if (pawn[3]) {
+                            ourGameBoard.getBoardSpot(i+1,j+1).
+                                    getXmlObj().
+                                    setImageResource(multiplePlayers[4]);
+                        } else {
+                            ourGameBoard.getBoardSpot(i+1,j+1).
+                                    getXmlObj().
+                                    setImageResource(multiplePlayers[5]);
+                        }
+                    } else if (pawn[3]) {
+                        ourGameBoard.getBoardSpot(i+1,j+1).
+                                getXmlObj().
+                                setImageResource(multiplePlayers[6]);
+                    } else {
+                        ourGameBoard.getBoardSpot(i+1,j+1).
+                                getXmlObj().
+                                setImageResource(allPlayers[0]);
+                    }
+                } else if (pawn[1]) {
+                    if (pawn[2]) {
+                        if (pawn[3]) {
+                            ourGameBoard.getBoardSpot(i+1,j+1).
+                                    getXmlObj().
+                                    setImageResource(multiplePlayers[7]);
+                        } else {
+                            ourGameBoard.getBoardSpot(i+1,j+1).
+                                    getXmlObj().
+                                    setImageResource(multiplePlayers[8]);
+                        }
+                    } else if (pawn[3]) {
+                        ourGameBoard.getBoardSpot(i+1,j+1).
+                                getXmlObj().
+                                setImageResource(multiplePlayers[9]);
+                    } else {
+                        ourGameBoard.getBoardSpot(i+1,j+1).
+                                getXmlObj().
+                                setImageResource(allPlayers[1]);
+                    }
+
+                } else if (pawn[2]) {
+                    if (pawn[3]) {
+                        ourGameBoard.getBoardSpot(i+1,j+1).
+                                getXmlObj().
+                                setImageResource(multiplePlayers[10]);
+                    } else {
+                        ourGameBoard.getBoardSpot(i+1,j+1).
+                                getXmlObj().
+                                setImageResource(allPlayers[2]);
+                    }
+                } else if (pawn[3]) {
+                    ourGameBoard.getBoardSpot(i+1,j+1).
+                            getXmlObj().
+                            setImageResource(allPlayers[3]);
+                }
             }
         }
 
