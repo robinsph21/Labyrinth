@@ -28,8 +28,7 @@ import android.widget.Toast;
  */
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
-    //TODO: Move only goes nextdoor for now
-    //TODO: Change card background based on playerTurn
+    //TODO: Update Greyed Card Images with Prettier Pictures
 
     /* instance variables */
     private Board ourGameBoard;
@@ -132,6 +131,35 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
      * Update everything displayed on tablet
      */
     public void updateDisplay() {
+
+        //Update Decks
+        this.playerRedDeck.getXmlObj().setBackgroundResource
+                (R.drawable.card_back_red);
+        this.playerYellowDeck.getXmlObj().setBackgroundResource
+                (R.drawable.card_back_yellow);
+        this.playerBlueDeck.getXmlObj().setBackgroundResource
+                (R.drawable.card_back_blue);
+        this.playerGreenDeck.getXmlObj().setBackgroundResource
+                (R.drawable.card_back_green);
+
+        switch (this.state.getPlayerTurn()) {
+            case RED:
+                this.playerRedDeck.getXmlObj().setBackgroundResource
+                        (R.drawable.card_back_red_greyed);
+                break;
+            case YELLOW:
+                this.playerYellowDeck.getXmlObj().setBackgroundResource
+                        (R.drawable.card_back_yellow_greyed);
+                break;
+            case BLUE:
+                this.playerBlueDeck.getXmlObj().setBackgroundResource
+                        (R.drawable.card_back_blue_greyed);
+                break;
+            case GREEN:
+                this.playerGreenDeck.getXmlObj().setBackgroundResource
+                        (R.drawable.card_back_green_greyed);
+                break;
+        }
 
         //Update Number of Treasures
         int numCards = state.getPlayerDeckSize(Player.RED);
@@ -493,17 +521,65 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 (R.id.mainMenuButton),
                 this, this.game);
 
-        playerRedDeck = new PlayerDeck(this.myActivity.findViewById
-                (R.id.yourDeck), Player.RED);
+        switch (this.playerNum) {
 
-        playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
-                (R.id.oponent1Deck), Player.YELLOW);
+            case 0:
+                playerRedDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.yourDeck), Player.RED);
 
-        playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
-                (R.id.oponent2Deck), Player.GREEN);
+                playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent1Deck), Player.YELLOW);
 
-        playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
-                (R.id.oponent3Deck), Player.BLUE);
+                playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent2Deck), Player.BLUE);
+
+                playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent3Deck), Player.GREEN);
+                break;
+
+            case 1:
+                playerRedDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent1Deck), Player.RED);
+
+                playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.yourDeck), Player.YELLOW);
+
+                playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent2Deck), Player.BLUE);
+
+                playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent3Deck), Player.GREEN);
+                break;
+
+            case 2:
+                playerRedDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent1Deck), Player.RED);
+
+                playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent2Deck), Player.YELLOW);
+
+                playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent3Deck), Player.BLUE);
+
+                playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.yourDeck), Player.GREEN);
+                break;
+
+            case 3:
+                playerRedDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent1Deck), Player.RED);
+
+                playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent2Deck), Player.YELLOW);
+
+                playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.yourDeck), Player.BLUE);
+
+                playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
+                        (R.id.oponent3Deck), Player.GREEN);
+                break;
+
+        }
 
         currentTreasure = new TreasureGoal(this.myActivity.findViewById
                 (R.id.currentTreasure));
