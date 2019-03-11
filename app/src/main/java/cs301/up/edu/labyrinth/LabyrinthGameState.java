@@ -949,6 +949,8 @@ public class LabyrinthGameState extends GameState {
                     this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
                     this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
                     this.updateDeckSizes();
+
+                    // TODO: implement treasureCollectedThisTurn boolean functionality
                 }
                 return true;
             } else {
