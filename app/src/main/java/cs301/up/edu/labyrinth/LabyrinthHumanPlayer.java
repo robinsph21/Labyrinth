@@ -134,30 +134,30 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
         //Update Decks
         this.playerRedDeck.getXmlObj().setBackgroundResource
-                (R.drawable.card_back_red);
+                (R.drawable.card_back_red_greyed);
         this.playerYellowDeck.getXmlObj().setBackgroundResource
-                (R.drawable.card_back_yellow);
+                (R.drawable.card_back_yellow_greyed);
         this.playerBlueDeck.getXmlObj().setBackgroundResource
-                (R.drawable.card_back_blue);
+                (R.drawable.card_back_blue_greyed);
         this.playerGreenDeck.getXmlObj().setBackgroundResource
-                (R.drawable.card_back_green);
+                (R.drawable.card_back_green_greyed);
 
         switch (this.state.getPlayerTurn()) {
             case RED:
                 this.playerRedDeck.getXmlObj().setBackgroundResource
-                        (R.drawable.card_back_red_greyed);
+                        (R.drawable.card_back_red);
                 break;
             case YELLOW:
                 this.playerYellowDeck.getXmlObj().setBackgroundResource
-                        (R.drawable.card_back_yellow_greyed);
+                        (R.drawable.card_back_yellow);
                 break;
             case BLUE:
                 this.playerBlueDeck.getXmlObj().setBackgroundResource
-                        (R.drawable.card_back_blue_greyed);
+                        (R.drawable.card_back_blue);
                 break;
             case GREEN:
                 this.playerGreenDeck.getXmlObj().setBackgroundResource
-                        (R.drawable.card_back_green_greyed);
+                        (R.drawable.card_back_green);
                 break;
         }
 
