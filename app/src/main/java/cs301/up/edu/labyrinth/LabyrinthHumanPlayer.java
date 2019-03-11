@@ -298,24 +298,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             } break;
         }
 
-
         // Update gameBoard
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 Tile current = this.state.getTile(i,j);
-
-                // Check if treasure on tile
-                int treasure = current.getTreasure().ordinal();
-                int type = current.getType().ordinal();
-                if (treasure == 0) {
-                    //If no treasure, set based on type
-                    ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
-                            setBackgroundResource(allTiles[type]);
-                } else {
-                    //If treasure, set the background to tile treasure
-                    ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
-                            setBackgroundResource(allTreasures[treasure]);
-                }
 
                 // Check rotation of tile
                 float rotation = (float)current.getRotation();
@@ -403,6 +389,29 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                             getXmlObj().
                             setImageResource(allPlayers[3]);
                 }
+
+                // Check if treasure on tile
+                int treasure = current.getTreasure().ordinal();
+                int type = current.getType().ordinal();
+                if (treasure == 0) {
+                    //If no treasure, set based on type
+                    ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
+                            setBackgroundResource(allTiles[type]);
+                } else {
+                    //If treasure, set the background to tile treasure
+                    ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
+                            setBackgroundResource(allTreasures[treasure]);
+                    //If current treasure, highlight it
+                    if (treasureIndex == treasure) {
+                        ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
+                                setImageResource(R.drawable.highlight);
+                    } else if (current.getPawn()[4]) {
+                        ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
+                                setImageResource(R.drawable.empty);
+                    }
+                }
+
+
             }
         }
 

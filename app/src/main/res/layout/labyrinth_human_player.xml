@@ -529,7 +529,8 @@
                 android:background="@drawable/tile_map"
                 android:clickable="true"
                 android:rotation="90"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:src="@drawable/highlight"/>
 
             <ImageView
                 android:id="@+id/cell_23"
