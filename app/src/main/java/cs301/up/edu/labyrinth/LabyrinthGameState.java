@@ -949,11 +949,6 @@ public class LabyrinthGameState extends GameState {
                     this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
                     this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
                     this.updateDeckSizes();
-                    // End your turn once you get a treasure
-
-                    // TODO: Should this automatically end the player's turn?
-                    // We could have a separate boolean that
-                    checkEndTurn();
                 }
                 return true;
             } else {

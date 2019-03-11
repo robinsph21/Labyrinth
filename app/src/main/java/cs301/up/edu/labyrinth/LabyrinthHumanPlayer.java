@@ -29,7 +29,7 @@ import android.widget.Toast;
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     //TODO: Move only goes nextdoor for now
-    //TODO: Highlight current treasure
+    //TODO: Change card background based on playerTurn
 
     /* instance variables */
     private Board ourGameBoard;
