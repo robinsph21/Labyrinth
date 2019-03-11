@@ -223,7 +223,7 @@ public class LabyrinthGameState extends GameState {
         this.gameBoard[0][6] = new Tile(
                 TileType.GREEN_ENTRY,
                 0,
-                new boolean[] {true, false, false, true, false},
+                new boolean[] {false, false, false, true, false},
                 this.gameBoard,
                 0,6);
 
