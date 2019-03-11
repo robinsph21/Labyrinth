@@ -80,6 +80,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             R.drawable.tile_skull, R.drawable.tile_spider,
             R.drawable.tile_sword, R.drawable.tile_urn};
 
+    //TODO: Add drawable for multiple pawns here
     private final static int[] allPlayers = new int[]
             {R.drawable.pawn_red, R.drawable.pawn_yellow,
             R.drawable.pawn_blue, R.drawable.pawn_green,
@@ -308,11 +309,12 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
                         setRotation(rotation);
 
+                //TODO: Display all the different pawns
                 // Check if pawn on tile
+                /**
                 int pawn = current.getPawn().ordinal();
                 ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
-                        setImageResource(allPlayers[pawn]);
-
+                        setImageResource(allPlayers[pawn]);*/
             }
         }
 

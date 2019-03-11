@@ -202,28 +202,28 @@ public class LabyrinthGameState extends GameState {
         this.gameBoard[0][0] = new Tile(
                 TileType.RED_ENTRY,
                 0,
-                Player.RED,
+                new boolean[] {true, false, false, false, false},
                 this.gameBoard,
                 0,0);
 
         this.gameBoard[6][0] = new Tile(
                 TileType.YELLOW_ENTRY,
                 0,
-                Player.YELLOW,
+                new boolean[] {false, true, false, false, false},
                 this.gameBoard,
                 6,0);
 
         this.gameBoard[6][6] = new Tile(
                 TileType.BLUE_ENTRY,
                 0,
-                Player.BLUE,
+                new boolean[] {false, false, true, false, false},
                 this.gameBoard,
                 6,6);
 
         this.gameBoard[0][6] = new Tile(
                 TileType.GREEN_ENTRY,
                 0,
-                Player.GREEN,
+                new boolean[] {true, false, false, true, false},
                 this.gameBoard,
                 0,6);
 
@@ -332,13 +332,17 @@ public class LabyrinthGameState extends GameState {
         //Copy the entire gameboard by creating new tiles for each spot
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
+                boolean[] tempPlayer = new boolean[5];
+                for (int k = 0; k < 5; k++) {
+                    tempPlayer[k] = state.gameBoard[i][j].getPawn()[k];
+                }
                 this.gameBoard[i][j] = new Tile(
                         TileType.valueOf(
                                 state.gameBoard[i][j].getType().name()),
                         state.gameBoard[i][j].getRotation(),
                         TreasureType.valueOf(
                                 state.gameBoard[i][j].getTreasure().name()),
-                        Player.valueOf(state.gameBoard[i][j].getPawn().name()),
+                        tempPlayer,
                         this.gameBoard,
                         i,j);
             }
@@ -537,7 +541,7 @@ public class LabyrinthGameState extends GameState {
         boolean found = false;
         for (Tile[] row : this.gameBoard) {
             for ( Tile spot : row) {
-                if (spot.getPawn() == p) {
+                if (spot.getPawn()[p.ordinal()]) {
                     playerTile = spot;
                     found = true;
                     break;
@@ -784,101 +788,113 @@ public class LabyrinthGameState extends GameState {
                     break;
                 }
 
-            Player temp = this.currentTile.getPawn();
+            boolean[] temp = this.currentTile.getPawn();
 
             switch (clickedArrow) {
                 case LEFT_TOP: {
                     this.disabledArrow = Arrow.RIGHT_TOP;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[0][1].setPawn(temp);
                     }
                 } break;
 
                 case LEFT_MIDDLE: {
                     this.disabledArrow = Arrow.RIGHT_MIDDLE;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[0][3].setPawn(temp);
                     }
                 } break;
 
                 case LEFT_BOTTOM: {
                     this.disabledArrow = Arrow.RIGHT_BOTTOM;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[0][5].setPawn(temp);
                     }
                 } break;
 
                 case RIGHT_TOP: {
                     this.disabledArrow = Arrow.LEFT_TOP;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[6][1].setPawn(temp);
                     }
                 } break;
 
                 case RIGHT_MIDDLE: {
                     this.disabledArrow = Arrow.LEFT_MIDDLE;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[6][3].setPawn(temp);
                     }
                 } break;
 
                 case RIGHT_BOTTOM: {
                     this.disabledArrow = Arrow.LEFT_BOTTOM;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[6][5].setPawn(temp);
                     }
                 } break;
 
                 case TOP_LEFT: {
                     this.disabledArrow = Arrow.BOTTOM_LEFT;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[1][0].setPawn(temp);
                     }
                 } break;
 
                 case TOP_MIDDLE: {
                     this.disabledArrow = Arrow.BOTTOM_MIDDLE;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[3][0].setPawn(temp);
                     }
                 } break;
 
                 case TOP_RIGHT: {
                     this.disabledArrow = Arrow.BOTTOM_RIGHT;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[5][0].setPawn(temp);
                     }
                 } break;
 
                 case BOTTOM_LEFT: {
                     this.disabledArrow = Arrow.TOP_LEFT;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[1][6].setPawn(temp);
                     }
                 } break;
 
                 case BOTTOM_MIDDLE: {
                     this.disabledArrow = Arrow.TOP_MIDDLE;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[3][6].setPawn(temp);
                     }
                 } break;
 
                 case BOTTOM_RIGHT: {
                     this.disabledArrow = Arrow.TOP_RIGHT;
-                    if (temp != Player.NONE) {
-                        this.currentTile.setPawn(Player.NONE);
+                    if (!temp[4]) {
+                        this.currentTile.setPawn(new boolean[]
+                                {false, false, false, false, true});
                         this.gameBoard[5][6].setPawn(temp);
                     }
                 } break;
@@ -914,12 +930,23 @@ public class LabyrinthGameState extends GameState {
             valid = this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
                     checkedSpots);
             if (valid) {
-                if (this.gameBoard[locX][locY].getPawn() == Player.NONE) {
+                if (this.gameBoard[locX][locY].getPawn()[4]) {
                     // Remove old pawn loc
-                    playerTile.setPawn(Player.NONE);
+                    playerTile.setPawn(new boolean[]
+                            {false, false, false, false, true});
 
                     // Set new pawn loc
-                    this.gameBoard[locX][locY].setPawn(playerTurn);
+                    switch (this.playerTurn) {
+                        case RED: this.gameBoard[locX][locY].setPawn(new
+                                boolean[]{true,false,false,false,false}); break;
+                        case YELLOW: this.gameBoard[locX][locY].setPawn(new
+                                boolean[]{false,true,false,false,false}); break;
+                        case BLUE: this.gameBoard[locX][locY].setPawn(new
+                                boolean[]{false,false,true,false,false}); break;
+                        case GREEN: this.gameBoard[locX][locY].setPawn(new
+                                boolean[]{false,false,false,true,false}); break;
+                    }
+                    //this.gameBoard[locX][locY].setPawn(playerTurn);
                     if (this.gameBoard[locX][locY].getTreasure() ==
                             this.treasureDecks.get(this.playerTurn.ordinal()).get(0)) {
                         this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);

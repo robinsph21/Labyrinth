@@ -42,7 +42,7 @@ public class Tile implements Serializable {
     private int y;
 
     // Type of pawn on this tile (see Player enum)
-    private Player pawn;
+    private boolean[] pawn;
 
     // Array of tiles on the board.
     private Tile[][] board;
@@ -58,8 +58,8 @@ public class Tile implements Serializable {
      * @param x x location of the tile in the board
      * @param y y location of the tile in the board
      */
-    public Tile(TileType type, int rotation, TreasureType treasure, Player pawn,
-                Tile[][] board, int x, int y) {
+    public Tile(TileType type, int rotation, TreasureType treasure,
+                boolean[] pawn, Tile[][] board, int x, int y) {
         this.type = type;
         this.rotation = rotation;
         this.treasure = treasure;
@@ -82,7 +82,8 @@ public class Tile implements Serializable {
      */
     public Tile(TileType type, int rotation, TreasureType treasure,
                 Tile[][] board, int x, int y) {
-        this(type, rotation, treasure, Player.NONE, board, x, y);
+        this(type, rotation, treasure,
+                new boolean[]{false, false, false, false, true}, board, x, y);
     }
 
     /**
@@ -96,7 +97,9 @@ public class Tile implements Serializable {
      */
     public Tile(TileType type, int rotation, TreasureType treasure,
                 Tile[][] board) {
-        this(type, rotation, treasure, Player.NONE, board, -1, -1);
+        this(type, rotation, treasure,
+                new boolean[]{false, false, false, false, true},
+                board, -1, -1);
     }
 
     /**
@@ -109,7 +112,7 @@ public class Tile implements Serializable {
      * @param x x location of the tile in the board
      * @param y y location of the tile in the board
      */
-    public Tile(TileType type, int rotation, Player pawn, Tile[][] board,
+    public Tile(TileType type, int rotation, boolean[] pawn, Tile[][] board,
                 int x, int y) {
         this(type, rotation, TreasureType.NONE, pawn, board, x, y);
     }
@@ -313,7 +316,11 @@ public class Tile implements Serializable {
                     this.connections[2] + ", " +
                     this.connections[3] + "; " +
                 "Treasure: " + this.treasure.name() + "; " +
-                "Player on Tile: " + this.pawn.name() + " }";
+                "Players on Tile: " +
+                    "Red: " + this.pawn[0] +
+                    "Yellow: " + this.pawn[1] +
+                    "Blue: " + this.pawn[2] +
+                    "Green: " + this.pawn[3] + " }";
     }
 
     /* GETTERS AND SETTERS */
@@ -359,7 +366,7 @@ public class Tile implements Serializable {
      *
      * @return pawn color or none
      */
-    public Player getPawn() {
+    public boolean[] getPawn() {
         return this.pawn;
     }
 
@@ -368,7 +375,7 @@ public class Tile implements Serializable {
      *
      * @param pawn color or none
      */
-    public void setPawn(Player pawn) {
+    public void setPawn(boolean[] pawn) {
         this.pawn = pawn;
     }
 
