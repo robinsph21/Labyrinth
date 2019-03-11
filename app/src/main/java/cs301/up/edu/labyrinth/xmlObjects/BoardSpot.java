@@ -9,7 +9,6 @@ public class BoardSpot extends XMLObject{
 
     private int locX;
     private int locY;
-    private int rotation;
     protected Game game;
 
     public BoardSpot(View v, int locX, int locY) {
@@ -24,14 +23,6 @@ public class BoardSpot extends XMLObject{
 
     public int getLocY() {
         return this.locY;
-    }
-
-    public int getRotation() {
-        return this.rotation;
-    }
-
-    public void setRotation(int rotation) {
-        this.rotation = rotation;
     }
 
     @Override

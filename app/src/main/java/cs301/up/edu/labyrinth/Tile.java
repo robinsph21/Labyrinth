@@ -2,7 +2,6 @@ package cs301.up.edu.labyrinth;
 
 import java.io.Serializable;
 
-import cs301.up.edu.labyrinth.enums.Player;
 import cs301.up.edu.labyrinth.enums.TileType;
 import cs301.up.edu.labyrinth.enums.TreasureType;
 

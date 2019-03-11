@@ -21,10 +21,6 @@ public class Rotate extends XMLObject {
         this.getXmlObj().setOnClickListener(this);
     }
 
-    public boolean isClockwise() {
-        return this.clockwise;
-    }
-
     public void onClick(View v) {
         // if we are not yet connected to a game, ignore
         if (this.game == null) return;
