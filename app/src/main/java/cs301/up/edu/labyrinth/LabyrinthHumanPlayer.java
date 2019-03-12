@@ -29,6 +29,7 @@ import android.widget.Toast;
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
     //TODO: Add highlight with pawn images
+    //TODO: Fix color of card for network players
 
     /* instance variables */
     private Board ourGameBoard;
