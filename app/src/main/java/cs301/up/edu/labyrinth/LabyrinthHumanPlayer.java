@@ -28,7 +28,7 @@ import android.widget.Toast;
  */
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
-    //TODO: Update Greyed Card Images with Prettier Pictures
+    //TODO: Add highlight with pawn images
 
     /* instance variables */
     private Board ourGameBoard;

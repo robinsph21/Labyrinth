@@ -21,6 +21,8 @@ import cs301.up.edu.game.infoMsg.GameState;
  */
 public class LabyrinthGameState extends GameState {
 
+    //TODO: Fix crashes when pick up last treasure
+
     // To satisfy Serializable interface
     private static final long serialVersionUID = 7737393762469851826L;
 
