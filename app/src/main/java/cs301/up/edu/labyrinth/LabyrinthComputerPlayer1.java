@@ -24,8 +24,6 @@ import cs301.up.edu.labyrinth.enums.Arrow;
  */
 public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
 
-    //TODO: basic AI using queue
-
     //Instance Variables
     private LabyrinthGameState state;
 
