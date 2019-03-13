@@ -22,7 +22,7 @@ import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
  */
 public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
 
-    //TODO: Add queue to add
+    //TODO: basic AI using queue
 
     //Instance Variables
     private LabyrinthGameState state;
