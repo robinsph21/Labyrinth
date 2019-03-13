@@ -86,7 +86,12 @@ public class LabyrinthGameState extends GameState {
     }
 
     public TreasureType getCurrentTreasure(int playerID) {
-        return treasureDecks.get(playerID).get(0);
+        List<TreasureType> temp = treasureDecks.get(playerID);
+        if (temp.size() > 0) {
+            return temp.get(0);
+        } else {
+            return null;
+        }
     }
 
     public Tile getTile(int x, int y) {
@@ -949,12 +954,17 @@ public class LabyrinthGameState extends GameState {
                 temp2[this.playerTurn.ordinal()] = true;
                 temp2[4] = false;
 
-                if (this.gameBoard[locX][locY].getTreasure() ==
-                        this.treasureDecks.get(this.playerTurn.ordinal()).get(0)) {
-                    this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
-                    this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
-                    this.updateDeckSizes();
-                    this.foundTreasureThisTurn = true;
+
+                TreasureType yourTreasure = this.getCurrentTreasure(
+                        playerTurn.ordinal());
+                if (yourTreasure != null) {
+                    if (this.gameBoard[locX][locY].getTreasure() ==
+                            yourTreasure) {
+                        this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
+                        this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
+                        this.updateDeckSizes();
+                        this.foundTreasureThisTurn = true;
+                    }
                 }
                 return true;
             } else {

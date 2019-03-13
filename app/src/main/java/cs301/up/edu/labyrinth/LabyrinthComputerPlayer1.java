@@ -10,6 +10,8 @@ import cs301.up.edu.game.infoMsg.IllegalMoveInfo;
 import cs301.up.edu.game.infoMsg.NotYourTurnInfo;
 import cs301.up.edu.game.util.Tickable;
 import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
+import cs301.up.edu.labyrinth.enums.Arrow;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
@@ -50,26 +52,39 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
     protected void receiveInfo(GameInfo info) {
         // ignore the message if it's not a CounterState message
         if (info instanceof LabyrinthGameState) {
-            // update our state; then update the display
             this.state = (LabyrinthGameState) info;
-
-            //If moves are already calculated, send next one
-            //otherwise, calculate moves
+        }
+        if (state.getPlayerTurn().ordinal() == playerNum) {
             if (this.queue.size() > 0) {
                 this.game.sendAction(this.pop());
             } else {
-                this.calculateNextMoves();
+                if (info instanceof LabyrinthGameState) {
+                    this.state = (LabyrinthGameState) info;
+                    this.calculateNextMoves();
+                } else if (info instanceof NotYourTurnInfo) {
+                    ;
+                } else if (info instanceof IllegalMoveInfo) {
+                    ;
+                }
             }
-
-        } else if (info instanceof NotYourTurnInfo) {
-            ;
-        } else if (info instanceof IllegalMoveInfo) {
-            ;
         }
+
+
     }
 
     private void calculateNextMoves() {
         //Figure out actions and push to queue
+        GameAction act1 = new LabyrinthSlideTileAction(this,
+                Arrow.TOP_LEFT);
+        GameAction act2 = new LabyrinthSlideTileAction(this,
+                Arrow.TOP_MIDDLE);
+        GameAction act3 = new LabyrinthEndTurnAction(this);
+
+        this.push(act1);
+        this.push(act2);
+        this.push(act3);
+
+        this.game.sendAction(this.pop());
     }
 
     private void push(GameAction action) {
