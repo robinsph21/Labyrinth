@@ -12,6 +12,7 @@ import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.labyrinth.xmlObjects.*;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 /**
@@ -109,6 +110,8 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             {R.drawable.empty, R.drawable.number_1, R.drawable.number_2,
             R.drawable.number_3, R.drawable.number_4, R.drawable.number_5,
             R.drawable.number_6};
+
+    private ImageView yourDeck, opponent1Deck, opponent2Deck, opponent3Deck;
 
     /**
      * constructor
@@ -473,6 +476,45 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 reset.setGame(this.game);
                 rotateClockwise.setGame(this.game);
                 rotateCounterClockwise.setGame(this.game);
+
+                switch (this.playerNum) {
+                    case 0:
+                        playerRedDeck = new PlayerDeck(this.yourDeck, Player.RED);
+
+                        playerYellowDeck = new PlayerDeck(this.opponent1Deck, Player.YELLOW);
+
+                        playerBlueDeck = new PlayerDeck(this.opponent2Deck, Player.BLUE);
+
+                        playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
+                        break;
+                    case 1:
+                        playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
+
+                        playerYellowDeck = new PlayerDeck(this.yourDeck, Player.YELLOW);
+
+                        playerBlueDeck = new PlayerDeck(this.opponent2Deck, Player.BLUE);
+
+                        playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
+                        break;
+                    case 2:
+                        playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
+
+                        playerYellowDeck = new PlayerDeck(this.opponent2Deck, Player.YELLOW);
+
+                        playerBlueDeck = new PlayerDeck(this.yourDeck, Player.BLUE);
+
+                        playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
+                        break;
+                    case 3:
+                        playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
+
+                        playerYellowDeck = new PlayerDeck(this.opponent2Deck, Player.YELLOW);
+
+                        playerBlueDeck = new PlayerDeck(this.opponent3Deck, Player.BLUE);
+
+                        playerGreenDeck = new PlayerDeck(this.yourDeck, Player.GREEN);
+                        break;
+                }
             }
 
             // update our state; then update the display
@@ -528,65 +570,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 (R.id.mainMenuButton),
                 this, this.game);
 
-        switch (this.playerNum) {
-
-            case 0:
-                playerRedDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.yourDeck), Player.RED);
-
-                playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent1Deck), Player.YELLOW);
-
-                playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent2Deck), Player.BLUE);
-
-                playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent3Deck), Player.GREEN);
-                break;
-
-            case 1:
-                playerRedDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent1Deck), Player.RED);
-
-                playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.yourDeck), Player.YELLOW);
-
-                playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent2Deck), Player.BLUE);
-
-                playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent3Deck), Player.GREEN);
-                break;
-
-            case 2:
-                playerRedDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent1Deck), Player.RED);
-
-                playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent2Deck), Player.YELLOW);
-
-                playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent3Deck), Player.BLUE);
-
-                playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.yourDeck), Player.GREEN);
-                break;
-
-            case 3:
-                playerRedDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent1Deck), Player.RED);
-
-                playerYellowDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent2Deck), Player.YELLOW);
-
-                playerBlueDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.yourDeck), Player.BLUE);
-
-                playerGreenDeck = new PlayerDeck(this.myActivity.findViewById
-                        (R.id.oponent3Deck), Player.GREEN);
-                break;
-
-        }
+        yourDeck = this.myActivity.findViewById(R.id.yourDeck);
+        opponent1Deck = this.myActivity.findViewById(R.id.oponent1Deck);
+        opponent2Deck = this.myActivity.findViewById(R.id.oponent2Deck);
+        opponent3Deck = this.myActivity.findViewById(R.id.oponent3Deck);
 
         currentTreasure = new TreasureGoal(this.myActivity.findViewById
                 (R.id.currentTreasure));
