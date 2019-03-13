@@ -8,6 +8,7 @@ import cs301.up.edu.game.GameHumanPlayer;
 import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.R;
 import cs301.up.edu.game.infoMsg.GameInfo;
+import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.labyrinth.xmlObjects.*;
 
 import android.view.View;
@@ -176,8 +177,13 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         this.playerGreenDeck.getXmlObj().setImageResource(number[numCards]);
 
         // Update current treasure
-        int treasureIndex = this.state.getCurrentTreasure
-                (this.playerNum).ordinal();
+        TreasureType curTreasure = this.state.getCurrentTreasure(this.playerNum);
+        int treasureIndex;
+        if (curTreasure != null) {
+            treasureIndex = curTreasure.ordinal();
+        } else {
+            treasureIndex = 0;
+        }
         this.currentTreasure.getXmlObj().setImageResource
                 (allTreasureCards[treasureIndex]);
 
