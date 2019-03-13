@@ -21,7 +21,6 @@ import cs301.up.edu.game.infoMsg.GameState;
  */
 public class LabyrinthGameState extends GameState {
 
-    //TODO: Fix crashes when pick up last treasure
 
     // To satisfy Serializable interface
     private static final long serialVersionUID = 7737393762469851826L;
@@ -39,8 +38,9 @@ public class LabyrinthGameState extends GameState {
             new ArrayList<>(4);
     private int[] deckSizes = new int[4];
     private Arrow disabledArrow;
-    private boolean shiftedLabyrinthThisTurn;
     private LabyrinthGameState prevState;
+    private boolean shiftedLabyrinthThisTurn;
+    private boolean foundTreasureThisTurn;
 
     /**
      * Constructor used to initialize a gamestate. It creates the gameboard by
@@ -72,6 +72,7 @@ public class LabyrinthGameState extends GameState {
         // Players can slide the first piece in anywhere they want
         this.disabledArrow = Arrow.NONE;
         this.shiftedLabyrinthThisTurn = false;
+        this.foundTreasureThisTurn = false;
 
         this.prevState = null;
     }
@@ -380,6 +381,7 @@ public class LabyrinthGameState extends GameState {
 
         //Copy if someone has made a move
         this.shiftedLabyrinthThisTurn = state.shiftedLabyrinthThisTurn;
+        this.foundTreasureThisTurn = state.foundTreasureThisTurn;
 
         // Doesn't matter if deepCopy has a reference to itself since
         // this variable is never used by deepCopies. Hence it is a shallow copy
@@ -595,6 +597,7 @@ public class LabyrinthGameState extends GameState {
     public boolean checkEndTurn() {
         if (this.shiftedLabyrinthThisTurn) {
             this.shiftedLabyrinthThisTurn = false;
+            this.foundTreasureThisTurn = false;
             switch (this.playerTurn) {
                 case RED: this.playerTurn = Player.YELLOW; break;
                 case YELLOW: this.playerTurn = Player.BLUE; break;
@@ -927,7 +930,7 @@ public class LabyrinthGameState extends GameState {
      */
     public boolean checkMovePawn(int locX, int locY) {
         //Only can move if shifted labyrinth
-        if (this.shiftedLabyrinthThisTurn) {
+        if (this.shiftedLabyrinthThisTurn & !this.foundTreasureThisTurn) {
             // Find Player Tile
             Tile playerTile = this.getPlayerLoc(this.playerTurn);
 
@@ -951,8 +954,7 @@ public class LabyrinthGameState extends GameState {
                     this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
                     this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
                     this.updateDeckSizes();
-
-                    // TODO: implement treasureCollectedThisTurn boolean functionality
+                    this.foundTreasureThisTurn = true;
                 }
                 return true;
             } else {
