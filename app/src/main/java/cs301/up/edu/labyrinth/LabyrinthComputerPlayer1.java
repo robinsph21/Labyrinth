@@ -1,7 +1,13 @@
 package cs301.up.edu.labyrinth;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cs301.up.edu.game.GameComputerPlayer;
+import cs301.up.edu.game.actionMsg.GameAction;
 import cs301.up.edu.game.infoMsg.GameInfo;
+import cs301.up.edu.game.infoMsg.IllegalMoveInfo;
+import cs301.up.edu.game.infoMsg.NotYourTurnInfo;
 import cs301.up.edu.game.util.Tickable;
 import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
 
@@ -14,11 +20,14 @@ import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
  * @author Andrew M. Nuxoll
  * @version September 2013
  */
-public class LabyrinthComputerPlayer1 extends GameComputerPlayer
-        implements Tickable {
+public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
+
+    //TODO: Add queue to add
 
     //Instance Variables
     private LabyrinthGameState state;
+
+    private List<GameAction> queue = new ArrayList<>();
 
     /**
      * Constructor for objects of class CounterComputerPlayer1
@@ -40,21 +49,39 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer
     @Override
     protected void receiveInfo(GameInfo info) {
         // ignore the message if it's not a CounterState message
-        if (!(info instanceof LabyrinthGameState)) return;
+        if (info instanceof LabyrinthGameState) {
+            // update our state; then update the display
+            this.state = (LabyrinthGameState) info;
 
-        // update our state
-        this.state = (LabyrinthGameState)info;
+            //If moves are already calculated, send next one
+            //otherwise, calculate moves
+            if (this.queue.size() > 0) {
+                this.game.sendAction(this.pop());
+            } else {
+                this.calculateNextMoves();
+            }
 
-        if (this.state.getPlayerTurn().ordinal() == this.playerNum) {
-            // Take a rotate action (0-3 times)
+        } else if (info instanceof NotYourTurnInfo) {
+            ;
+        } else if (info instanceof IllegalMoveInfo) {
+            ;
+        }
+    }
 
-            // Take a Slide Tile Action (1 time)
+    private void calculateNextMoves() {
+        //Figure out actions and push to queue
+    }
 
-            // Take a Move Pawn Action (1 time)
+    private void push(GameAction action) {
+        this.queue.add(action);
+    }
 
 
-            // Take an End Turn Action (1 time)
-            game.sendAction(new LabyrinthEndTurnAction(this));
+    private GameAction pop() {
+        if (this.queue.size() > 0) {
+            return this.queue.remove(0);
+        } else {
+            return null;
         }
     }
 }
