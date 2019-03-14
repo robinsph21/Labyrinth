@@ -91,38 +91,31 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
             randomArrow = Arrow.values()[randomArrowChoice];
         }
 
-        /** Still broken
-        //Find location to move
+        //Get the spot the AI is currently occupying
         Tile playerSpot = state.getPlayerLoc(Player.values()[playerNum]);
-        int x = -1;
-        int y = -1;
-        int len = 0;
+        int x = playerSpot.getX();
+        int y = playerSpot.getY();
 
+        //Move to the first available connected tile
+        //If there are no connected tiles the AI will remain on its current tile
         for (Tile thisSpot : playerSpot.getConnectedTiles()) {
-            if (thisSpot != null) len++;
-        }
-
-        if (len > 0) {
-            while (x == -1) {
-                int random = new Random().nextInt(4);
-                if (playerSpot.getConnectedTiles()[random] != null) {
-                    x = playerSpot.getConnectedTiles()[random].getX();
-                    y = playerSpot.getConnectedTiles()[random].getY();
-                }
+            if (thisSpot != null) {
+                x = thisSpot.getX();
+                y = thisSpot.getY();
             }
         }
-         */
 
+        //Create game actions based in the info we calculated above
         GameAction rotate = new LabyrinthRotateAction(this,true);
         GameAction slideTile = new LabyrinthSlideTileAction(this,
                 randomArrow);
-        //GameAction movePawn = new LabyrinthMovePawnAction(this,x,y);
+        GameAction movePawn = new LabyrinthMovePawnAction(this,x,y);
         GameAction endTurn = new LabyrinthEndTurnAction(this);
 
-
+        //Push actions to AI turn Queue
         this.push(rotate);
         this.push(slideTile);
-        //this.push(movePawn);
+        this.push(movePawn);
         this.push(endTurn);
     }
 
