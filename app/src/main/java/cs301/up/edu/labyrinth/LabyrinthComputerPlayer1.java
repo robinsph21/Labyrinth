@@ -2,6 +2,7 @@ package cs301.up.edu.labyrinth;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cs301.up.edu.game.GameComputerPlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
@@ -10,8 +11,11 @@ import cs301.up.edu.game.infoMsg.IllegalMoveInfo;
 import cs301.up.edu.game.infoMsg.NotYourTurnInfo;
 import cs301.up.edu.game.util.Tickable;
 import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthRotateAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
 import cs301.up.edu.labyrinth.enums.Arrow;
+import cs301.up.edu.labyrinth.enums.Player;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
@@ -54,11 +58,17 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
         }
         if (state.getPlayerTurn().ordinal() == playerNum) {
             if (this.queue.size() > 0) {
+                try {
+                    Thread.sleep(500);
+                } catch (Exception e) {
+
+                }
                 this.game.sendAction(this.pop());
             } else {
                 if (info instanceof LabyrinthGameState) {
                     this.state = (LabyrinthGameState) info;
                     this.calculateNextMoves();
+                    this.game.sendAction(this.pop());
                 } else if (info instanceof NotYourTurnInfo) {
                     ;
                 } else if (info instanceof IllegalMoveInfo) {
@@ -72,17 +82,48 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
 
     private void calculateNextMoves() {
         //Figure out actions and push to queue
-        GameAction act1 = new LabyrinthSlideTileAction(this,
-                Arrow.TOP_LEFT);
-        GameAction act2 = new LabyrinthSlideTileAction(this,
-                Arrow.TOP_MIDDLE);
-        GameAction act3 = new LabyrinthEndTurnAction(this);
 
-        this.push(act1);
-        this.push(act2);
-        this.push(act3);
+        //Choose a random arrow
+        Arrow randomArrow = state.getDisabledArrow();
+        int randomArrowChoice;
+        while (randomArrow == state.getDisabledArrow()) {
+            randomArrowChoice = new Random().nextInt(12);
+            randomArrow = Arrow.values()[randomArrowChoice];
+        }
 
-        this.game.sendAction(this.pop());
+        /** Still broken
+        //Find location to move
+        Tile playerSpot = state.getPlayerLoc(Player.values()[playerNum]);
+        int x = -1;
+        int y = -1;
+        int len = 0;
+
+        for (Tile thisSpot : playerSpot.getConnectedTiles()) {
+            if (thisSpot != null) len++;
+        }
+
+        if (len > 0) {
+            while (x == -1) {
+                int random = new Random().nextInt(4);
+                if (playerSpot.getConnectedTiles()[random] != null) {
+                    x = playerSpot.getConnectedTiles()[random].getX();
+                    y = playerSpot.getConnectedTiles()[random].getY();
+                }
+            }
+        }
+         */
+
+        GameAction rotate = new LabyrinthRotateAction(this,true);
+        GameAction slideTile = new LabyrinthSlideTileAction(this,
+                randomArrow);
+        //GameAction movePawn = new LabyrinthMovePawnAction(this,x,y);
+        GameAction endTurn = new LabyrinthEndTurnAction(this);
+
+
+        this.push(rotate);
+        this.push(slideTile);
+        //this.push(movePawn);
+        this.push(endTurn);
     }
 
     private void push(GameAction action) {
