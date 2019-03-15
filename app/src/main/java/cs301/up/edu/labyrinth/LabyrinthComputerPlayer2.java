@@ -1,9 +1,22 @@
 package cs301.up.edu.labyrinth;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import cs301.up.edu.game.GameComputerPlayer;
+import cs301.up.edu.game.actionMsg.GameAction;
 import cs301.up.edu.game.infoMsg.GameInfo;
+import cs301.up.edu.game.infoMsg.IllegalMoveInfo;
+import cs301.up.edu.game.infoMsg.NotYourTurnInfo;
 import cs301.up.edu.game.util.Tickable;
 import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthResetAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthRotateAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
+import cs301.up.edu.labyrinth.enums.Arrow;
+import cs301.up.edu.labyrinth.enums.Player;
 
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
@@ -14,7 +27,12 @@ import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
  * @author Andrew M. Nuxoll
  * @version September 2013
  */
-public class LabyrinthComputerPlayer2 extends GameComputerPlayer implements Tickable {
+public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
+
+    //Instance Variables
+    private LabyrinthGameState state;
+
+    private List<GameAction> queue = new ArrayList<>();
 
     /**
      * Constructor for objects of class CounterComputerPlayer1
@@ -25,10 +43,6 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer implements Tick
     public LabyrinthComputerPlayer2(String name) {
         // invoke superclass constructor
         super(name);
-
-        // start the timer, ticking 20 times per second
-        getTimer().setInterval(50);
-        getTimer().start();
     }
 
     /**
@@ -39,17 +53,116 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer implements Tick
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-        // Do nothing, as we ignore all state in deciding our next move. It
-        // depends totally on the timer and random numbers.
+        // ignore the message if it's not a CounterState message
+        if (info instanceof LabyrinthGameState) {
+            this.state = (LabyrinthGameState) info;
+        }
+        if (state.getPlayerTurn().ordinal() == playerNum) {
+            if (this.queue.size() > 0) {
+                /**
+                try {
+                    Thread.sleep(500);
+                } catch (Exception e) {
+                }
+                 */
+                this.game.sendAction(this.pop());
+            } else if (info instanceof LabyrinthGameState) {
+                this.state = (LabyrinthGameState) info;
+                this.calculateNextMoves();
+                this.game.sendAction(this.pop());
+            }
+        }
+
+
+    }
+
+    private void calculateNextMoves() {
+
+        //Find All Possible Locations to Move To
+        List<int[]> moves = this.generatePossibleMoveActions();
+
+        //Choose a random arrow
+        Arrow randomArrow = state.getDisabledArrow();
+        int randomArrowChoice;
+        while (randomArrow == state.getDisabledArrow()) {
+            randomArrowChoice = new Random().nextInt(12);
+            randomArrow = Arrow.values()[randomArrowChoice];
+        }
+
+        int randPos = (int)(new Random().nextDouble()*(double)(moves.size()-1));
+        int x = moves.get(randPos)[0];
+        int y = moves.get(randPos)[1];
+
+        //Create game actions based in the info we calculated above
+        GameAction rotate = new LabyrinthRotateAction(this,true);
+        GameAction slideTile = new LabyrinthSlideTileAction(this,
+                randomArrow);
+        GameAction movePawn = new LabyrinthMovePawnAction(this,x,y);
+        GameAction endTurn = new LabyrinthEndTurnAction(this);
+
+        //Push actions to AI turn Queue
+        this.push(rotate);
+        this.push(slideTile);
+        this.push(movePawn);
+        this.push(endTurn);
     }
 
     /**
-     * callback method: the timer ticked
+     * Evaluates the current gamestate and assigns a score between 0 and 1
+     * with 1 being you are about to win and 0 being you will lose.
+     *
+     *
+     * @return a score of how good the state is for the current player
      */
-    protected void timerTicked() {
+    private double evalState() {
+        double score = 0;
+        //Check number of treasures
+        return score;
+    }
 
 
-        // send the move-action to the game
-        game.sendAction(new LabyrinthEndTurnAction(this));
+    private List<int[]> generatePossibleMoveActions() {
+        List<Tile> tiles = new ArrayList<>();
+        Tile orig = state.getPlayerLoc(Player.values()[playerNum]);
+        tiles.add(orig);
+        this.calculatePossibleMoves(orig, tiles);
+        List<int[]> locations = new ArrayList<>();
+        for (Tile spot : tiles) {
+            int[] loc = new int[2];
+            loc[0] = spot.getX();
+            loc[1] = spot.getY();
+            locations.add(loc);
+        }
+        return locations;
+    }
+
+    private void calculatePossibleMoves(Tile orig, List<Tile> availableSpots) {
+        for (Tile spot : orig.getConnectedTiles()) {
+            if (spot != null) {
+                if (!availableSpots.contains(spot)) {
+                    availableSpots.add(spot);
+                    this.calculatePossibleMoves(spot, availableSpots);
+                }
+            }
+        }
+    }
+
+
+
+    /**
+     * Queue Stuff
+     */
+
+    private void push(GameAction action) {
+        this.queue.add(action);
+    }
+
+
+    private GameAction pop() {
+        if (this.queue.size() > 0) {
+            return this.queue.remove(0);
+        } else {
+            return null;
+        }
     }
 }
