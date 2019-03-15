@@ -509,34 +509,27 @@ public class LabyrinthGameState extends GameState {
                                         List<Tile> checkedSpots) {
 
         // Get the tiles surrounding the current tile
-        List<Tile> connectedTiles = Arrays.asList(orig.getConnectedTiles());
-        /**
-        //Check if you have searched this spot
-        if (checkedSpots.contains(orig)) {
-            return false;
-        //Check if surrounding tiles contain goal
-        } else if (connectedTiles.contains(search)) {
-            checkedSpots.addAll(connectedTiles);
+        List<Tile> connectedTiles =  new ArrayList<>(4);
+        for (Tile spot : orig.getConnectedTiles()) {
+            if (spot != null) {
+                connectedTiles.add(spot);
+            }
+        }
+
+        //Check if this spot is connected to search spot
+        if (connectedTiles.contains(search)) {
             return true;
         } else {
-            // Call the algorithm on the other tiles if they exist
-            List<Boolean> checks = new ArrayList<>(4);
             for (Tile spot : connectedTiles) {
-                if (spot != null) {
-                    if (checkedSpots.contains(spot)) return false;
-                    if (searchConnectedTile(spot, search, checkedSpots)) {
-                        checks.add(Boolean.TRUE);
-                    } else {
-                        checks.add(Boolean.FALSE);
-                    }
+                if (!checkedSpots.contains(spot)) {
                     checkedSpots.add(spot);
+                    if (searchConnectedTile(spot, search, checkedSpots)) {
+                        return true;
+                    }
                 }
             }
-            checkedSpots.add(orig);
-            return checks.contains(Boolean.TRUE);
-        }*/
-
-        return connectedTiles.contains(search);
+            return false;
+        }
     }
 
     /**
@@ -940,6 +933,7 @@ public class LabyrinthGameState extends GameState {
             Tile playerTile = this.getPlayerLoc(this.playerTurn);
 
             List<Tile> checkedSpots = new ArrayList<>(49);
+            checkedSpots.add(playerTile);
             boolean valid;
             valid = this.searchConnectedTile(playerTile, this.gameBoard[locX][locY],
                     checkedSpots);
