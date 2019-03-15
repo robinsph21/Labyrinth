@@ -79,7 +79,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
     private void calculateNextMoves() {
 
         //Find All Possible Locations to Move To
-        List<int[]> moves = this.generatePossibleMoveActions();
+        //List<int[]> moves = this.generatePossibleMoveActions();
 
         //Choose a random arrow
         Arrow randomArrow = state.getDisabledArrow();
@@ -89,21 +89,15 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
             randomArrow = Arrow.values()[randomArrowChoice];
         }
 
-        int randPos = (int)(new Random().nextDouble()*(double)(moves.size()-1));
-        int x = moves.get(randPos)[0];
-        int y = moves.get(randPos)[1];
-
         //Create game actions based in the info we calculated above
         GameAction rotate = new LabyrinthRotateAction(this,true);
         GameAction slideTile = new LabyrinthSlideTileAction(this,
                 randomArrow);
-        GameAction movePawn = new LabyrinthMovePawnAction(this,x,y);
         GameAction endTurn = new LabyrinthEndTurnAction(this);
 
         //Push actions to AI turn Queue
         this.push(rotate);
         this.push(slideTile);
-        this.push(movePawn);
         this.push(endTurn);
     }
 

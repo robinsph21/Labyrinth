@@ -176,6 +176,8 @@ public class Tile implements Serializable {
                     // to have it right entry point set to TRUE.
                     if (this.board[loc[0]][loc[1]].connections[(i+2)%4]) {
                         this.connectedTiles[i] = this.board[loc[0]][loc[1]];
+                    } else {
+                        this.connectedTiles[i] = null; //Update previously valid
                     }
                 } else {
                     this.connectedTiles[i] = null;
