@@ -344,6 +344,13 @@ public class Tile implements Serializable {
         return this.y;
     }
 
+    public int[] getLoc() {
+        int[] loc = new int[2];
+        loc[0] = this.x;
+        loc[1] = this.y;
+        return loc;
+    }
+
     /**
      * get the enum value of the type of tile this is
      *

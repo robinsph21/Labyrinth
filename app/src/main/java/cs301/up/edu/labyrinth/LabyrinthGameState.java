@@ -12,6 +12,8 @@ import cs301.up.edu.labyrinth.enums.TileType;
 import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.game.infoMsg.GameState;
 
+//TODO: COMMENT!!!!!!!!!
+
 /**
  * Defines a gamestate for our labyrinth game. Has all the information needed
  * for a game to be played.
@@ -419,6 +421,17 @@ public class LabyrinthGameState extends GameState {
                 this.treasureDecks.get(playerID).remove(i);
             }
         }
+    }
+
+    public int[] findTreasureLoc(Player p) {
+        for (Tile[] row : gameBoard) {
+            for (Tile spot : row) {
+                if (spot.getTreasure() == this.getCurrentTreasure(p.ordinal())) {
+                    return spot.getLoc();
+                }
+            }
+        }
+        return new int[] {-1,-1};
     }
 
     /**

@@ -165,6 +165,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 break;
         }
 
+        //TODO: numCards - 1 for displaying?
         //Update Number of Treasures
         int numCards = state.getPlayerDeckSize(Player.RED);
         this.playerRedDeck.getXmlObj().setImageResource(number[numCards]);

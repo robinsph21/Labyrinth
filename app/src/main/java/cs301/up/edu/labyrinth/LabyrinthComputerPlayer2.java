@@ -18,6 +18,8 @@ import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
 import cs301.up.edu.labyrinth.enums.Arrow;
 import cs301.up.edu.labyrinth.enums.Player;
 
+import static java.lang.Math.sqrt;
+
 /**
  * A computer-version of a counter-player.  Since this is such a simple game,
  * it just sends "+" and "-" commands with equal probability, at an average
@@ -110,10 +112,81 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
      */
     private double evalState() {
         double score = 0;
-        //Check number of treasures
+
+        //Assign Percentages of Score
+        final double treasureValTotal = 70; //Based on number of treasures left
+        final double nearTreasureValTotal = 10; //Based on proximity to treasure
+        final double typeTileValTotal = 10; //Based on which tile you are on
+        final double numberOfConnectionsValTotal = 10; //Based on how many places you can move
+
+        double treasureVal = 0;
+        double nearTreasureVal = 0;
+        double typeTileVal = 0;
+        double numberOfConnectionsVal = 0;
+
+        treasureVal = (6.0 - (double)(state.getPlayerDeckSize(
+                Player.values()[playerNum])))/6.0*treasureValTotal;
+
+        int [] yourPos = state.getPlayerLoc(Player.values()[playerNum]).getLoc();
+        int [] treasurePos = state.findTreasureLoc(Player.values()[playerNum]);
+        if (treasurePos[0] == -1) {
+            nearTreasureVal = (10.0 - findDistance(yourPos, findHome()))
+                    / 10.0 * nearTreasureValTotal;
+        } else {
+            nearTreasureVal = (10.0 - findDistance(yourPos, treasurePos))
+                    / 10.0 * nearTreasureValTotal;
+        }
+
+        switch (state.getPlayerLoc(Player.values()[playerNum]).getType()) {
+            case STRAIGHT:
+                typeTileVal = 5.0 / 10.0 * typeTileValTotal;
+                break;
+            case INTERSECTION:
+                typeTileVal = typeTileValTotal;
+                break;
+            default:
+                typeTileVal = 3.0 / 10.0 * typeTileValTotal;
+                break;
+        }
+
+        //TODO: Calculate number of connections
+
+        score = (treasureVal + nearTreasureVal +
+                typeTileVal + numberOfConnectionsVal)/100.0;
         return score;
     }
 
+    private double findDistance(int[] pos1, int[] pos2) {
+        return sqrt((pos1[0]-pos2[0])*(pos1[0]-pos2[0])+
+                (pos1[1]-pos2[1])*(pos1[1]-pos2[1]));
+    }
+
+    private int[] findHome() {
+        int[] loc = new int[2];
+        switch (playerNum) {
+            case 0:
+                loc[0] = 0;
+                loc[1] = 0;
+                break;
+            case 1:
+                loc[0] = 6;
+                loc[1] = 0;
+                break;
+            case 2:
+                loc[0] = 6;
+                loc[1] = 6;
+                break;
+            case 3:
+                loc[0] = 0;
+                loc[1] = 6;
+                break;
+            default:
+                loc[0] = -1;
+                loc[1] = -1;
+                break;
+        }
+        return loc;
+    }
 
     private List<int[]> generatePossibleMoveActions() {
         List<Tile> tiles = new ArrayList<>();
