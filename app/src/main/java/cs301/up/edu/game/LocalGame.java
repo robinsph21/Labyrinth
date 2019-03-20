@@ -75,7 +75,7 @@ public abstract class LocalGame implements Game, Tickable {
 	 * @param players
 	 * 			the list of players who are playing in the game
 	 */
-	public void start(GamePlayer[] players) {
+	public synchronized void start(GamePlayer[] players) {
 		// if the game has already started, don't restart
 		if (this.players != null) return;
 		
@@ -88,24 +88,24 @@ public abstract class LocalGame implements Game, Tickable {
 		this.playerNames = new String[players.length];
 		
 		// start the thread for this game
-		synchronized(this) {
-			// if already started, don't restart
-			if (running) return;
-			running = true; // mark as running
-			
-			// create a thread that loops, waiting for actions;
-			// start the thread
-			Runnable runnable = new Runnable() {
-				public void run() {
-					Looper.prepare();
-					myHandler = new MyHandler(LocalGame.this);
-					Looper.loop();
-				}
-			};
-			Thread thread = new Thread(runnable);
-			thread.setName("Local Game");
-			thread.start();
-		}
+
+		// if already started, don't restart
+		if (running) return;
+		running = true; // mark as running
+
+		// create a thread that loops, waiting for actions;
+		// start the thread
+		Runnable runnable = new Runnable() {
+			public void run() {
+				Looper.prepare();
+				myHandler = new MyHandler(LocalGame.this);
+				Looper.loop();
+			}
+		};
+		Thread thread = new Thread(runnable);
+		thread.setName("Local Game");
+		thread.start();
+
 		
 		// at this point the game is running, so set our game stage to be that of
 		// waiting for the players to tell us their names
