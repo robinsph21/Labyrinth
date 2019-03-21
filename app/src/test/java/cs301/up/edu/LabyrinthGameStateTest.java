@@ -63,7 +63,7 @@ public class LabyrinthGameStateTest {
         StringBuilder textToPrint = new StringBuilder();
 
         // Run Main Menu test
-        this.testMainMenu(this.firstInstance);
+        this.testRulesHelp(this.firstInstance);
         textToPrint.append("Main Menu has no effect on gamestate");
 
         // Run Rotate Tile test. The tile till be rotated clockwise.
@@ -114,8 +114,8 @@ public class LabyrinthGameStateTest {
      *
      * @param state LabyrinthGameState containing the information to test.
      */
-    private void testMainMenu(LabyrinthGameState state) {
-        assertTrue(state.checkMainMenu());
+    private void testRulesHelp(LabyrinthGameState state) {
+        assertTrue(state.checkRulesHelpMenu());
     }
 
     /**

@@ -21,7 +21,7 @@
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/mainMenuButton"
+                android:id="@+id/rulesHelpButton"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_main_menu" />
+                android:background="@drawable/button_rules_help" />
         </LinearLayout>
 
         <LinearLayout

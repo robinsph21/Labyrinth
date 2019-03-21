@@ -35,7 +35,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
     /* instance variables */
     private Board ourGameBoard;
     private BoardEdge[] arrows = new BoardEdge[12];
-    private MainMenu mainMenuButton;
+    private RulesHelp rulesHelpButton;
     private PlayerDeck playerRedDeck;
     private PlayerDeck playerYellowDeck;
     private PlayerDeck playerGreenDeck;
@@ -469,10 +469,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         if (info instanceof LabyrinthGameState) {
 
             // Check if game variable has been acquired
-            if (mainMenuButton.getGame() == null) {
+            if (rulesHelpButton.getGame() == null) {
                 ourGameBoard.setGame(this.game);
                 endTurn.setGame(this.game);
-                mainMenuButton.setGame(this.game);
+                rulesHelpButton.setGame(this.game);
                 reset.setGame(this.game);
                 rotateClockwise.setGame(this.game);
                 rotateCounterClockwise.setGame(this.game);
@@ -566,8 +566,8 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
         ourGameBoard = new Board(this, this.game, this.myActivity);
 
-        mainMenuButton = new MainMenu(this.myActivity.findViewById
-                (R.id.mainMenuButton),
+        rulesHelpButton = new RulesHelp(this.myActivity.findViewById
+                (R.id.rulesHelpButton),
                 this, this.game);
 
         yourDeck = this.myActivity.findViewById(R.id.yourDeck);

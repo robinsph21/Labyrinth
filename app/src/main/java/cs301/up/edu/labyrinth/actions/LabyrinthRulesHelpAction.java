@@ -11,7 +11,7 @@ import cs301.up.edu.game.actionMsg.GameAction;
  * @author Andrew M. Nuxoll
  * @version September 2012
  */
-public class LabyrinthMainMenuAction extends GameAction {
+public class LabyrinthRulesHelpAction extends GameAction {
 
 	// to satisfy the serializable interface
 	private static final long serialVersionUID = 1290686476413L;
@@ -22,8 +22,8 @@ public class LabyrinthMainMenuAction extends GameAction {
 	 * @param player
 	 *            the player making the move
 	 */
-	public LabyrinthMainMenuAction(GamePlayer player) {
+	public LabyrinthRulesHelpAction(GamePlayer player) {
 		super(player);
 	}
 
-}//class LabyrinthEndTurnAction
+}//class LabyrinthRulesHelpAction

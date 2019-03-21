@@ -576,7 +576,7 @@ public class LabyrinthGameState extends GameState {
      *
      * @return true always
      */
-    public boolean checkMainMenu() {
+    public boolean checkRulesHelpMenu() {
         // Always able to quit your game
         return true;
     }

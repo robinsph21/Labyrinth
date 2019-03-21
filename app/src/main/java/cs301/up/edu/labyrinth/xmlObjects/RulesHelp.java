@@ -5,14 +5,14 @@ import android.view.View;
 import cs301.up.edu.game.Game;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
-import cs301.up.edu.labyrinth.actions.LabyrinthMainMenuAction;
+import cs301.up.edu.labyrinth.actions.LabyrinthRulesHelpAction;
 
-public class MainMenu extends XMLObject {
+public class RulesHelp extends XMLObject {
 
     private GamePlayer player;
     private Game game;
 
-    public MainMenu(View v, GamePlayer player, Game game) {
+    public RulesHelp(View v, GamePlayer player, Game game) {
         super(v);
         this.game = game;
         this.player = player;
@@ -27,7 +27,7 @@ public class MainMenu extends XMLObject {
         // Construct the action and send it to the game
         GameAction action = null;
 
-        action = new LabyrinthMainMenuAction(this.player);
+        action = new LabyrinthRulesHelpAction(this.player);
 
         game.sendAction(action);
     }
