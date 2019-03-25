@@ -2,10 +2,7 @@ package cs301.up.edu;
 
 import org.junit.Test;
 
-import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.labyrinth.LabyrinthComputerPlayer1;
-
-import static org.junit.Assert.*;
 
 
 /**
@@ -18,10 +15,9 @@ public class LabyrinthComputerPlayer1Test {
 
     @Test
     public void testPlayer() {
-        GamePlayer player1 = new LabyrinthComputerPlayer1("TestPlayer");
-        assertNotNull(player1);
-        assertFalse(player1.requiresGui());
-        assertFalse(player1.supportsGui());
+        LabyrinthComputerPlayer1 testPlayer = new
+                LabyrinthComputerPlayer1("TestPlayer");
+        testPlayer.test(testPlayer);
     }
 
 }

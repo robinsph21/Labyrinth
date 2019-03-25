@@ -130,4 +130,8 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
             return null;
         }
     }
+
+    public void test(LabyrinthComputerPlayer1 testPlayer) {
+
+    }
 }
