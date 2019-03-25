@@ -2,6 +2,7 @@ package cs301.up.edu;
 
 import android.content.Context;
 // TODO: Below two imports are throwing errors for me (Philip), anyone else can confirm?
+// Test works for Erik
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 //

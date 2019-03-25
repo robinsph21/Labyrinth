@@ -30,7 +30,6 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
 
     //Instance Variables
     private LabyrinthGameState state;
-
     private List<GameAction> queue = new ArrayList<>();
 
     /**
