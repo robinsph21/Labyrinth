@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import cs301.up.edu.game.GameComputerPlayer;
+import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
 import cs301.up.edu.game.infoMsg.GameInfo;
 import cs301.up.edu.game.infoMsg.IllegalMoveInfo;
@@ -131,7 +132,31 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
         }
     }
 
-    public void test(LabyrinthComputerPlayer1 testPlayer) {
+    public void test() {
+        LabyrinthGameState testState = new LabyrinthGameState();
+        this.state = testState;
 
+        this.calculateNextMoves();
+
+        assert (queue.size() == 4);
+        assert (queue.get(0) instanceof LabyrinthRotateAction);
+        assert (queue.get(1) instanceof LabyrinthSlideTileAction);
+        assert (queue.get(2) instanceof LabyrinthMovePawnAction);
+        assert (queue.get(3) instanceof LabyrinthEndTurnAction);
+
+        LabyrinthRotateAction move1 = (LabyrinthRotateAction)pop();
+        assert (move1.isClockwise());
+
+        LabyrinthSlideTileAction move2 = (LabyrinthSlideTileAction)pop();
+        assert (move2.getThisArrow() != Arrow.NONE);
+
+        LabyrinthMovePawnAction move3 = (LabyrinthMovePawnAction)pop();
+        assert (move3.getLocX() == 0 | move3.getLocX() == 1) &
+                (move3.getLocY() == 0 | move3.getLocY() == 1);
+
+        LabyrinthEndTurnAction move4 = (LabyrinthEndTurnAction) pop();
+        assert (move4 != null);
+
+        assert (queue.size() == 0);
     }
 }

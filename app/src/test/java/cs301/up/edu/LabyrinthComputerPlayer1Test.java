@@ -16,8 +16,8 @@ public class LabyrinthComputerPlayer1Test {
     @Test
     public void testPlayer() {
         LabyrinthComputerPlayer1 testPlayer = new
-                LabyrinthComputerPlayer1("TestPlayer");
-        testPlayer.test(testPlayer);
+                LabyrinthComputerPlayer1("P0");
+        testPlayer.test();
     }
 
 }

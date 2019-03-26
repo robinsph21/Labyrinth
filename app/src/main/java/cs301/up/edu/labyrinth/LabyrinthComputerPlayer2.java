@@ -233,7 +233,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
         }
     }
 
-    public void test(LabyrinthComputerPlayer2 testPlayer) {
+    public void test() {
 
     }
 }

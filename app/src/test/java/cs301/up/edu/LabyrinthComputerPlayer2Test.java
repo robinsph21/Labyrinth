@@ -11,6 +11,6 @@ public class LabyrinthComputerPlayer2Test {
     public void test() {
         LabyrinthComputerPlayer2 testPlayer = new
                 LabyrinthComputerPlayer2("Test Player");
-        testPlayer.test(testPlayer);
+        testPlayer.test();
     }
 }
