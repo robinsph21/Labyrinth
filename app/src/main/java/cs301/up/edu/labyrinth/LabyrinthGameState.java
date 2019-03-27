@@ -372,10 +372,13 @@ public class LabyrinthGameState extends GameState {
         //Copy treasure decks
         for (int i = 0; i < NUM_PLAYERS; i++) {
             this.treasureDecks.add(new ArrayList<TreasureType>(6));
-            for (TreasureType treasure : state.treasureDecks.get(i)) {
-                this.treasureDecks.get(i).add(
-                        TreasureType.valueOf(treasure.name()));
+            if (state.treasureDecks.get(i) != null) {
+                for (TreasureType treasure : state.treasureDecks.get(i)) {
+                    this.treasureDecks.get(i).add(
+                            TreasureType.valueOf(treasure.name()));
+                }
             }
+
         }
 
         //Copy disabled arrow
@@ -404,7 +407,6 @@ public class LabyrinthGameState extends GameState {
      */
     public LabyrinthGameState(LabyrinthGameState state, int playerID) {
         this(state);
-
         // Delete all other decks
         for (int i = 0; i < NUM_PLAYERS; i++) {
             if (i != playerID) {

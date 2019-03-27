@@ -2,17 +2,12 @@ package cs301.up.edu.labyrinth;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import cs301.up.edu.game.GameComputerPlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
 import cs301.up.edu.game.infoMsg.GameInfo;
-import cs301.up.edu.game.infoMsg.IllegalMoveInfo;
-import cs301.up.edu.game.infoMsg.NotYourTurnInfo;
-import cs301.up.edu.game.util.Tickable;
 import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
-import cs301.up.edu.labyrinth.actions.LabyrinthResetAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthRotateAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
 import cs301.up.edu.labyrinth.enums.Arrow;
@@ -61,46 +56,107 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
         }
         if (state.getPlayerTurn().ordinal() == playerNum) {
             if (this.queue.size() > 0) {
-                /**
                 try {
                     Thread.sleep(500);
                 } catch (Exception e) {
                 }
-                 */
-                this.game.sendAction(this.pop());
+                this.game.sendAction(this.pull());
             } else if (info instanceof LabyrinthGameState) {
                 this.state = (LabyrinthGameState) info;
-                this.calculateNextMoves();
-                this.game.sendAction(this.pop());
+                this.calculateActions();
+                this.game.sendAction(this.pull());
             }
         }
 
 
     }
 
-    private void calculateNextMoves() {
+    private void calculateActions() {
 
-        //Find All Possible Locations to Move To
-        //List<int[]> moves = this.generatePossibleMoveActions();
+        //Generate All Possible Moves In Tree
+        List<double[]> possibleMoves = generateMoves();
 
-        //Choose a random arrow
-        Arrow randomArrow = state.getDisabledArrow();
-        int randomArrowChoice;
-        while (randomArrow == state.getDisabledArrow()) {
-            randomArrowChoice = new Random().nextInt(12);
-            randomArrow = Arrow.values()[randomArrowChoice];
+        //Choose Best Move From List
+        double [] move = chooseBestMove(possibleMoves);
+
+        //Calculate Actions from this move and push to queue
+        generateActions(move);
+    }
+
+    private List<double[]> generateMoves() {
+        List<double[]> allInfo = new ArrayList<>(500);
+        AINode root = new AINode(this.state);
+
+        //Make All Rotates
+        for (int i = 0; i < 4; i++) {
+            AINode rotateNode = new AINode(root.copyState());
+            for (int j = 0; j <= i; j++) {
+                rotateNode.getState().checkRotate(true);
+            }
+
+            //Check Slides
+            for (int j = 0; j < 12; j++ ) {
+                if (rotateNode.getState().getDisabledArrow().ordinal() == j) {
+                    continue;
+                }
+                AINode slideNode = new AINode(rotateNode.copyState());
+                slideNode.getState().checkSlideTile(Arrow.values()[j]);
+
+                //Check Moves
+                List<int[]> movePlaces = generatePossibleMoveActions(
+                        slideNode.getState());
+                for (int[] spot : movePlaces) {
+                    AINode moveNode = new AINode(slideNode.copyState());
+                    moveNode.getState().checkMovePawn(spot[0], spot[1]);
+
+                    double eval = evalState(moveNode.getState());
+                    allInfo.add(new double[] {i, j, spot[0], spot[1], eval} );
+                }
+            }
+        }
+    return allInfo;
+    }
+
+
+
+    private void generateActions(double[] move) {
+        //Rotate Actions
+        for (int i = 0; i <= move[0]; i++) {
+            GameAction act1 = new LabyrinthRotateAction(this,true);
+            this.push(act1);
         }
 
-        //Create game actions based in the info we calculated above
-        GameAction rotate = new LabyrinthRotateAction(this,true);
-        GameAction slideTile = new LabyrinthSlideTileAction(this,
-                randomArrow);
-        GameAction endTurn = new LabyrinthEndTurnAction(this);
+        //Slide Action
+        GameAction act2 = new LabyrinthSlideTileAction(this,
+                Arrow.values()[(int)move[1]]);
+        this.push(act2);
 
-        //Push actions to AI turn Queue
-        this.push(rotate);
-        this.push(slideTile);
-        this.push(endTurn);
+        //Move Action
+        GameAction act3 = new LabyrinthMovePawnAction(this,
+                (int)move[2],(int)move[3]);
+        this.push(act3);
+
+        //End Turn Action
+        GameAction act4 = new LabyrinthEndTurnAction(this);
+        this.push(act4);
+    }
+
+    /**
+     * Chooses the best scored move out of the list
+     *
+     *                        [Rotation,Arrow,x,y,score]
+     * @param possibleMoves = [0-3,0-11,0-6,0-6,0-1]
+     */
+    private double[] chooseBestMove(List<double[]> possibleMoves) {
+        double bestScore = 0;
+        int indexBest = 0;
+        for (int i = 0; i < possibleMoves.size(); i++) {
+            if (possibleMoves.get(i)[4] > bestScore) {
+                bestScore = possibleMoves.get(i)[4];
+                indexBest = i;
+            }
+        }
+        return possibleMoves.get(indexBest);
     }
 
     /**
@@ -110,14 +166,14 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
      *
      * @return a score of how good the state is for the current player
      */
-    private double evalState() {
+    private double evalState(LabyrinthGameState state) {
         double score = 0;
 
         //Assign Percentages of Score
-        final double treasureValTotal = 70; //Based on number of treasures left
-        final double nearTreasureValTotal = 10; //Based on proximity to treasure
-        final double typeTileValTotal = 10; //Based on which tile you are on
-        final double numberOfConnectionsValTotal = 10; //Based on how many places you can move
+        final double treasureValTotal = 80; //Based on number of treasures left
+        final double nearTreasureValTotal = 15; //Based on proximity to treasure
+        final double typeTileValTotal = 1; //Based on which tile you are on
+        final double numberOfConnectionsValTotal = 4; //Based on how many places you can move
 
         double treasureVal = 0;
         double nearTreasureVal = 0;
@@ -149,10 +205,12 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
                 break;
         }
 
-        //TODO: Calculate number of connections
+        numberOfConnectionsVal = ((double)generatePossibleMoveActions(state).size()
+                /49.0*numberOfConnectionsValTotal);
 
         score = (treasureVal + nearTreasureVal +
                 typeTileVal + numberOfConnectionsVal)/100.0;
+
         return score;
     }
 
@@ -188,7 +246,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
         return loc;
     }
 
-    private List<int[]> generatePossibleMoveActions() {
+    private List<int[]> generatePossibleMoveActions(LabyrinthGameState state) {
         List<Tile> tiles = new ArrayList<>();
         Tile orig = state.getPlayerLoc(Player.values()[playerNum]);
         tiles.add(orig);
@@ -225,7 +283,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
     }
 
 
-    private GameAction pop() {
+    private GameAction pull() {
         if (this.queue.size() > 0) {
             return this.queue.remove(0);
         } else {
