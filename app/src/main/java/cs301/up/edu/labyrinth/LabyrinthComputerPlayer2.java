@@ -61,7 +61,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         if (state.getPlayerTurn().ordinal() == playerNum) {
             if (this.queue.size() > 0) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(250);
                 } catch (Exception e) {
                 }
                 this.game.sendAction(this.pull());
@@ -79,36 +79,36 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         AINode root = new AINode(this.state);
         switch (this.possibleRotation) {
             case 0:
-                this.generateMoves(root, 0);
                 this.possibleRotation++;
                 Thread instance2 = new Thread(this);
                 instance2.start();
+                this.generateMoves(root, 0);
                 try {
                     instance2.join();
                 } catch (InterruptedException e) {
                 }
                 break;
             case 1:
-                this.generateMoves(root, 1);
                 this.possibleRotation++;
                 Thread instance3 = new Thread(this);
                 instance3.start();
+                this.generateMoves(root, 1);
                 try {
                     instance3.join();
                 } catch (InterruptedException e) {
                 }
                 break;
             case 2:
-                this.generateMoves(root, 2);
                 this.possibleRotation++;
                 Thread instance4 = new Thread(this);
                 instance4.start();
+                this.generateMoves(root, 2);
                 try {
                     instance4.join();
                 } catch (InterruptedException e) {
                 }
                 break;
-            case 4:
+            case 3:
                 this.generateMoves(root, 3);
                 break;
         }
