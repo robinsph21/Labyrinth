@@ -641,6 +641,7 @@ public class LabyrinthGameState extends GameState {
             this.deckSizes = temp.deckSizes;
             this.disabledArrow = temp.disabledArrow;
             this.shiftedLabyrinthThisTurn = temp.shiftedLabyrinthThisTurn;
+            this.foundTreasureThisTurn = temp.foundTreasureThisTurn;
             return true;
         }
     }
