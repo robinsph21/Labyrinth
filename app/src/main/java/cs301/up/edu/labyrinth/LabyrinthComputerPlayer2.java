@@ -118,7 +118,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
     private void calculateActions() {
 
         //Generate All Possible Moves In Tree
-
+        this.possibleMoves.clear();
         this.possibleRotation = 0;
         Thread instance = new Thread(this);
         instance.start();
