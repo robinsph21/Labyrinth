@@ -24,12 +24,16 @@ import static java.lang.Math.sqrt;
  * @author Andrew M. Nuxoll
  * @version September 2013
  */
-public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
+public class LabyrinthComputerPlayer2 extends GameComputerPlayer
+        implements Runnable{
 
     //Instance Variables
     private LabyrinthGameState state;
 
     private List<GameAction> queue = new ArrayList<>();
+
+    private List<double[]> possibleMoves = new ArrayList<>();
+    private int possibleRotation;
 
     /**
      * Constructor for objects of class CounterComputerPlayer1
@@ -71,10 +75,56 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
 
     }
 
+    public void run() {
+        AINode root = new AINode(this.state);
+        switch (this.possibleRotation) {
+            case 0:
+                this.generateMoves(root, 0);
+                this.possibleRotation++;
+                Thread instance2 = new Thread(this);
+                instance2.start();
+                try {
+                    instance2.join();
+                } catch (InterruptedException e) {
+                }
+                break;
+            case 1:
+                this.generateMoves(root, 1);
+                this.possibleRotation++;
+                Thread instance3 = new Thread(this);
+                instance3.start();
+                try {
+                    instance3.join();
+                } catch (InterruptedException e) {
+                }
+                break;
+            case 2:
+                this.generateMoves(root, 2);
+                this.possibleRotation++;
+                Thread instance4 = new Thread(this);
+                instance4.start();
+                try {
+                    instance4.join();
+                } catch (InterruptedException e) {
+                }
+                break;
+            case 4:
+                this.generateMoves(root, 3);
+                break;
+        }
+
+    }
+
     private void calculateActions() {
 
         //Generate All Possible Moves In Tree
-        List<double[]> possibleMoves = generateMoves();
+
+        this.possibleRotation = 0;
+        Thread instance = new Thread(this);
+        instance.start();
+        try {
+            instance.join();
+        } catch (InterruptedException e) {}
 
         //Choose Best Move From List
         double [] move = chooseBestMove(possibleMoves);
@@ -83,38 +133,35 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer {
         generateActions(move);
     }
 
-    private List<double[]> generateMoves() {
-        List<double[]> allInfo = new ArrayList<>(500);
-        AINode root = new AINode(this.state);
+    private void generateMoves(AINode root, int i) {
 
         //Make All Rotates
-        for (int i = 0; i < 4; i++) {
-            AINode rotateNode = new AINode(root.copyState());
-            for (int j = 0; j <= i; j++) {
-                rotateNode.getState().checkRotate(true);
+        AINode rotateNode = new AINode(root.copyState());
+        for (int j = 0; j <= i; j++) {
+            rotateNode.getState().checkRotate(true);
+        }
+
+        //Check Slides
+        for (int j = 0; j < 12; j++ ) {
+            if (rotateNode.getState().getDisabledArrow().ordinal() == j) {
+                continue;
             }
+            AINode slideNode = new AINode(rotateNode.copyState());
+            slideNode.getState().checkSlideTile(Arrow.values()[j]);
 
-            //Check Slides
-            for (int j = 0; j < 12; j++ ) {
-                if (rotateNode.getState().getDisabledArrow().ordinal() == j) {
-                    continue;
-                }
-                AINode slideNode = new AINode(rotateNode.copyState());
-                slideNode.getState().checkSlideTile(Arrow.values()[j]);
+            //Check Moves
+            List<int[]> movePlaces = generatePossibleMoveActions(
+                    slideNode.getState());
+            for (int[] spot : movePlaces) {
+                AINode moveNode = new AINode(slideNode.copyState());
+                moveNode.getState().checkMovePawn(spot[0], spot[1]);
 
-                //Check Moves
-                List<int[]> movePlaces = generatePossibleMoveActions(
-                        slideNode.getState());
-                for (int[] spot : movePlaces) {
-                    AINode moveNode = new AINode(slideNode.copyState());
-                    moveNode.getState().checkMovePawn(spot[0], spot[1]);
-
-                    double eval = evalState(moveNode.getState());
-                    allInfo.add(new double[] {i, j, spot[0], spot[1], eval} );
+                double eval = evalState(moveNode.getState());
+                synchronized (possibleMoves) {
+                    possibleMoves.add(new double[]{i, j, spot[0], spot[1], eval});
                 }
             }
         }
-    return allInfo;
     }
 
 
