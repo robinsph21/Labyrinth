@@ -81,8 +81,8 @@ public class LabyrinthMainActivity extends GameMainActivity {
 
 		// Add the default players to the configuration
 		defaultConfig.addPlayer("Human", 0); // player 1: a human player
-		defaultConfig.addPlayer("Computer 1", 1); // player 2: an easy computer player
-		defaultConfig.addPlayer("Computer 2", 1); // player 3: an easy computer player
+		defaultConfig.addPlayer("Computer 1", 2); // player 2: an easy computer player
+		defaultConfig.addPlayer("Computer 2", 2); // player 3: an easy computer player
 		defaultConfig.addPlayer("Computer 3", 2); // player 4: a hard computer player
 		
 		// Set the default remote-player setup:

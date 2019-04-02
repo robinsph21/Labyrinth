@@ -6,7 +6,6 @@ import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.LocalGame;
 import cs301.up.edu.game.actionMsg.GameAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthEndTurnAction;
-import cs301.up.edu.labyrinth.actions.LabyrinthRulesHelpAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthMovePawnAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthResetAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthRotateAction;
@@ -58,11 +57,7 @@ public class LabyrinthLocalGame extends LocalGame {
 	@Override
 	protected boolean makeMove(GameAction action) {
 
-		if (action instanceof LabyrinthRulesHelpAction) {
-			LabyrinthRulesHelpAction act = (LabyrinthRulesHelpAction) action;
-			return this.gameState.checkRulesHelpMenu();
-
-		} else if (action instanceof LabyrinthRotateAction) {
+		if (action instanceof LabyrinthRotateAction) {
 			LabyrinthRotateAction act = (LabyrinthRotateAction) action;
 			return this.gameState.checkRotate(act.isClockwise());
 

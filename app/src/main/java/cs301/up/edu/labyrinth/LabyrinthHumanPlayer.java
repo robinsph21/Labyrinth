@@ -11,6 +11,7 @@ import cs301.up.edu.game.infoMsg.GameInfo;
 import cs301.up.edu.labyrinth.enums.TreasureType;
 import cs301.up.edu.labyrinth.xmlObjects.*;
 
+import android.media.Image;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -477,44 +478,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 rotateClockwise.setGame(this.game);
                 rotateCounterClockwise.setGame(this.game);
 
-                switch (this.playerNum) {
-                    case 0:
-                        playerRedDeck = new PlayerDeck(this.yourDeck, Player.RED);
-
-                        playerYellowDeck = new PlayerDeck(this.opponent1Deck, Player.YELLOW);
-
-                        playerBlueDeck = new PlayerDeck(this.opponent2Deck, Player.BLUE);
-
-                        playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
-                        break;
-                    case 1:
-                        playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
-
-                        playerYellowDeck = new PlayerDeck(this.yourDeck, Player.YELLOW);
-
-                        playerBlueDeck = new PlayerDeck(this.opponent2Deck, Player.BLUE);
-
-                        playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
-                        break;
-                    case 2:
-                        playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
-
-                        playerYellowDeck = new PlayerDeck(this.opponent2Deck, Player.YELLOW);
-
-                        playerBlueDeck = new PlayerDeck(this.yourDeck, Player.BLUE);
-
-                        playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
-                        break;
-                    case 3:
-                        playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
-
-                        playerYellowDeck = new PlayerDeck(this.opponent2Deck, Player.YELLOW);
-
-                        playerBlueDeck = new PlayerDeck(this.opponent3Deck, Player.BLUE);
-
-                        playerGreenDeck = new PlayerDeck(this.yourDeck, Player.GREEN);
-                        break;
-                }
+                this.setDecks();
             }
 
             // update our state; then update the display
@@ -528,6 +492,47 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         } else if (info instanceof IllegalMoveInfo) {
             Toast.makeText(this.myActivity, "Illegal Move!!",
                     Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setDecks() {
+        switch (this.playerNum) {
+            case 0:
+                playerRedDeck = new PlayerDeck(this.yourDeck, Player.RED);
+
+                playerYellowDeck = new PlayerDeck(this.opponent1Deck, Player.YELLOW);
+
+                playerBlueDeck = new PlayerDeck(this.opponent2Deck, Player.BLUE);
+
+                playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
+                break;
+            case 1:
+                playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
+
+                playerYellowDeck = new PlayerDeck(this.yourDeck, Player.YELLOW);
+
+                playerBlueDeck = new PlayerDeck(this.opponent2Deck, Player.BLUE);
+
+                playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
+                break;
+            case 2:
+                playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
+
+                playerYellowDeck = new PlayerDeck(this.opponent2Deck, Player.YELLOW);
+
+                playerBlueDeck = new PlayerDeck(this.yourDeck, Player.BLUE);
+
+                playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
+                break;
+            case 3:
+                playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
+
+                playerYellowDeck = new PlayerDeck(this.opponent2Deck, Player.YELLOW);
+
+                playerBlueDeck = new PlayerDeck(this.opponent3Deck, Player.BLUE);
+
+                playerGreenDeck = new PlayerDeck(this.yourDeck, Player.GREEN);
+                break;
         }
     }
 
@@ -563,12 +568,11 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         decorView.setSystemUiVisibility(uiOptions);
 
 
-
         ourGameBoard = new Board(this, this.game, this.myActivity);
 
         rulesHelpButton = new RulesHelp(this.myActivity.findViewById
                 (R.id.rulesHelpButton),
-                this, this.game);
+                this, this.game, this.myActivity);
 
         yourDeck = this.myActivity.findViewById(R.id.yourDeck);
         opponent1Deck = this.myActivity.findViewById(R.id.oponent1Deck);
@@ -616,6 +620,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         // if we have a game state, "simulate" that we have just received
         // the state from the game so that the GUI values are updated
         if (state != null) {
+            this.setDecks();
             receiveInfo(state);
         }
     }
