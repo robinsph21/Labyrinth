@@ -16,13 +16,14 @@ import cs301.up.edu.labyrinth.enums.Player;
 import static java.lang.Math.sqrt;
 
 /**
- * A computer-version of a counter-player.  Since this is such a simple game,
+ * A computer-version of a Labyrinth-player.  Since this is such a simple game,
  * it just sends "+" and "-" commands with equal probability, at an average
  * rate of one per second.
  *
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
- * @version September 2013
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
+ * @version 3/1/19
  */
 public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         implements Runnable{
@@ -36,7 +37,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
     private int possibleRotation;
 
     /**
-     * Constructor for objects of class CounterComputerPlayer1
+     * Constructor for objects of class LabyrinthComputerPlayer1
      *
      * @param name
      * 		the player's name
@@ -54,7 +55,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-        // ignore the message if it's not a CounterState message
+        // ignore the message if it's not a LabyrinthState message
         if (info instanceof LabyrinthGameState) {
             this.state = (LabyrinthGameState) info;
         }
