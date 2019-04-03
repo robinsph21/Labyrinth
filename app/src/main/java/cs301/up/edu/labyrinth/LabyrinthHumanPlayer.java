@@ -166,7 +166,6 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 break;
         }
 
-        //TODO: numCards - 1 for displaying?
         //Update Number of Treasures
         int numCards = state.getPlayerDeckSize(Player.RED);
         this.playerRedDeck.getXmlObj().setImageResource(number[numCards]);
@@ -440,13 +439,18 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                     //If treasure, set the background to tile treasure
                     ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
                             setBackgroundResource(allTreasures[treasure]);
+
+                    //If pawns, display them
+                    if (current.getPawn()[4]) {
+                        ourGameBoard.getBoardSpot(i + 1, j + 1).getXmlObj().
+                                setImageResource(R.drawable.empty);
+                    }
+
+                    //TODO Change xmlobject changed to the highlight one
                     //If current treasure, highlight it
                     if (treasureIndex == treasure) {
                         ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
-                                setImageResource(R.drawable.highlight);
-                    } else if (current.getPawn()[4]) {
-                        ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
-                                setImageResource(R.drawable.empty);
+                                setBackgroundResource(R.drawable.highlight);
                     }
                 }
 
