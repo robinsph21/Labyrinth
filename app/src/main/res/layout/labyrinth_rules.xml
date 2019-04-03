@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="65dp"
-        android:src="@drawable/rules_slide_1" />
+        android:src="@drawable/rules_slide_0" />
 
     <ImageButton
         android:id="@+id/rules_previous"
