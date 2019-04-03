@@ -10,6 +10,7 @@ public class Board {
 
     private static final int LENGTH = 9;
     private BoardSpot[][] gameBoard = new BoardSpot[LENGTH][LENGTH];
+    private BoardSpot[][] gameBoardHighlights = new BoardSpot[LENGTH][LENGTH];
     private Game game;
 
     /**
@@ -62,6 +63,14 @@ public class Board {
                         activity.getResources().getIdentifier
                                 ("cell_" + i + j, "id",
                                         activity.getPackageName()));
+                ImageView highlightObj = activity.findViewById(
+                        activity.getResources().getIdentifier
+                                ("cell_" + i + j + "x", "id",
+                                        activity.getPackageName()));
+                if (i != 0 && i != 8 && j != 0 && j!= 8) {
+                    gameBoardHighlights[i][j] = new BoardSpot(highlightObj,i,j);
+                }
+
                 if (i == 0 || i == 8) {
                     /*Make appropriate top and bottom rows BoardEdge clickable*/
                     switch (j) {
@@ -122,6 +131,10 @@ public class Board {
 
     public BoardSpot getBoardSpot(int locX, int locY) {
         return gameBoard[locX][locY];
+    }
+
+    public BoardSpot getHighlightSpot(int locX, int locY) {
+        return gameBoardHighlights[locX][locY];
     }
 
     public void setGame(Game game) {

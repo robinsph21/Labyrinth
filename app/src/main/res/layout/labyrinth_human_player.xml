@@ -1372,7 +1372,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/empty"
                     android:scaleType="fitXY"
-                    android:src="@drawable/pawn_green" />
+                    android:src="@drawable/empty" />
             </FrameLayout>
 
             <FrameLayout
@@ -1492,7 +1492,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/empty"
                     android:scaleType="fitXY"
-                    android:src="@drawable/pawn_blue" />
+                    android:src="@drawable/empty" />
             </FrameLayout>
 
             <ImageView

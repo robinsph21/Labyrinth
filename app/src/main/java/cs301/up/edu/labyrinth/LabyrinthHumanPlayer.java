@@ -31,7 +31,6 @@ import android.widget.Toast;
  */
 public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
-    //TODO: Add highlight with pawn images
 
     /* instance variables */
     private Board ourGameBoard;
@@ -440,25 +439,24 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                     ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
                             setBackgroundResource(allTreasures[treasure]);
 
-                    //If pawns, display them
+                    //If no pawns, display none
                     if (current.getPawn()[4]) {
                         ourGameBoard.getBoardSpot(i + 1, j + 1).getXmlObj().
                                 setImageResource(R.drawable.empty);
                     }
-
-                    //TODO Change xmlobject changed to the highlight one
-                    //If current treasure, highlight it
-                    if (treasureIndex == treasure) {
-                        ourGameBoard.getBoardSpot(i+1, j+1).getXmlObj().
-                                setBackgroundResource(R.drawable.highlight);
-                    }
                 }
-
-
+                //If current treasure, highlight it
+                try {
+                    if (treasureIndex == treasure) {
+                        ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
+                                setBackgroundResource(R.drawable.highlight);
+                    } else {
+                        ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
+                                setBackgroundResource(R.drawable.empty);
+                    }
+                } catch (NullPointerException e) {}
             }
         }
-
-
     }
 
 
