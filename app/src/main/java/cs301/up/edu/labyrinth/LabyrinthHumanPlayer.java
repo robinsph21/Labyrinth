@@ -454,7 +454,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                         ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
                                 setBackgroundResource(R.drawable.empty);
                     }
-                } catch (NullPointerException e) {}
+                } catch (NullPointerException e) {
+                    ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
+                            setBackgroundResource(R.drawable.empty);
+                }
             }
         }
     }
