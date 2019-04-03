@@ -14,7 +14,7 @@ public class RulesSwitch extends XMLObject {
     private GamePlayer player;
 
     private static int counter = 0;
-    private final static int MAX_SLIDES = 2;
+    private final static int MAX_SLIDES = 5;
 
     public RulesSwitch(View v, boolean isNext, ImageView display,
                        GameMainActivity activity, GamePlayer player) {
@@ -41,10 +41,19 @@ public class RulesSwitch extends XMLObject {
         }
         switch (counter) {
             case 0:
-                this.display.setImageResource(R.drawable.rules_slide_1);
+                this.display.setImageResource(R.drawable.rules_slide_0);
                 break;
             case 1:
-                this.display.setImageResource(R.drawable.empty);
+                this.display.setImageResource(R.drawable.rules_slide_1);
+                break;
+            case 2:
+                this.display.setImageResource(R.drawable.rules_slide_2);
+                break;
+            case 3:
+                this.display.setImageResource(R.drawable.rules_slide_3);
+                break;
+            case 4:
+                this.display.setImageResource(R.drawable.rules_slide_4);
                 break;
         }
     }
