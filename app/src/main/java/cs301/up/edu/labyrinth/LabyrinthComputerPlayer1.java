@@ -19,22 +19,23 @@ import cs301.up.edu.labyrinth.enums.Arrow;
 import cs301.up.edu.labyrinth.enums.Player;
 
 /**
- * A computer-version of a counter-player.  Since this is such a simple game,
- * it just sends "+" and "-" commands with equal probability, at an average
- * rate of one per second.
+ * A computer-version of a Labyrinth-player. This player will randomly insert
+ * a tile into the board, and try and move one space in a random direction.
  *
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
- * @version September 2013
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
+ * @version 3/1/19
  */
 public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
 
     //Instance Variables
     private LabyrinthGameState state;
-    private List<GameAction> queue = new ArrayList<>();
+    private List<GameAction> queue = new ArrayList<>(); //Queue of AI move
+                                                        //actions
 
     /**
-     * Constructor for objects of class CounterComputerPlayer1
+     * Constructor for objects of class LabyrinthComputerPlayer1
      *
      * @param name
      * 		the player's name
@@ -52,20 +53,27 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-        // ignore the message if it's not a CounterState message
+        //Ignore the message if it's not a LabyrinthState message
         if (info instanceof LabyrinthGameState) {
             this.state = (LabyrinthGameState) info;
         }
+        //Make sure it is the correct player's turn
         if (state.getPlayerTurn().ordinal() == playerNum) {
+            //If there are any actions in the queue
             if (this.queue.size() > 0) {
                 try {
+                    //Slow down so a human can watch the AI take actions
                     Thread.sleep(500);
                 } catch (Exception e) {
 
                 }
+                //Send the action action
                 this.game.sendAction(this.pop());
+            //If there are no actions in the queue
             } else {
+                //Ignore the message if it's not a LabyrinthState message
                 if (info instanceof LabyrinthGameState) {
+                    //Calculate the actions to take
                     this.state = (LabyrinthGameState) info;
                     this.calculateNextMoves();
                     this.game.sendAction(this.pop());
@@ -80,6 +88,10 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
 
     }
 
+    /**
+     * Method to calculate AI moves. Will randomly insert a tile, and randomly
+     * move one space in a new direction
+     */
     private void calculateNextMoves() {
         //Figure out actions and push to queue
 
@@ -119,11 +131,19 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
         this.push(endTurn);
     }
 
+    /**
+     * Method to add an action to the action queue
+     * @param action The action to add
+     */
     private void push(GameAction action) {
         this.queue.add(action);
     }
 
 
+    /**
+     * Method to remove an action from the queue
+     * @return The updated queue
+     */
     private GameAction pop() {
         if (this.queue.size() > 0) {
             return this.queue.remove(0);
@@ -132,18 +152,25 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
         }
     }
 
+    /**
+     * Method to test the AI player. Called from the test package
+     */
     public void test() {
+        //Set the correct states
         LabyrinthGameState testState = new LabyrinthGameState();
         this.state = testState;
 
+        //Make some moves
         this.calculateNextMoves();
 
+        //Make sure the correct actions are in the queue
         assert (queue.size() == 4);
         assert (queue.get(0) instanceof LabyrinthRotateAction);
         assert (queue.get(1) instanceof LabyrinthSlideTileAction);
         assert (queue.get(2) instanceof LabyrinthMovePawnAction);
         assert (queue.get(3) instanceof LabyrinthEndTurnAction);
 
+        //Send the move actions and assert that they are the expected actions
         LabyrinthRotateAction move1 = (LabyrinthRotateAction)pop();
         assert (move1.isClockwise());
 
@@ -157,6 +184,7 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
         LabyrinthEndTurnAction move4 = (LabyrinthEndTurnAction) pop();
         assert (move4 != null);
 
+        //Make sure the queue is empty after all the moves are made
         assert (queue.size() == 0);
     }
 }

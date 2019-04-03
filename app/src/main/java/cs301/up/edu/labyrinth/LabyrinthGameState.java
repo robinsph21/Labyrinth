@@ -48,7 +48,6 @@ public class LabyrinthGameState extends GameState {
      * Constructor used to initialize a gamestate. It creates the gameboard by
      * randomizing the starting player, randomizing player decks, and randomizing
      * specific pieces on the board.
-     *
      */
     public LabyrinthGameState() {
 
@@ -76,17 +75,32 @@ public class LabyrinthGameState extends GameState {
         this.shiftedLabyrinthThisTurn = false;
         this.foundTreasureThisTurn = false;
 
+        //The 1st time the constructor is called the there is no previous state
         this.prevState = null;
     }
 
+    /**
+     * Getter for the disabled arrow
+     * @return The disabled arrow
+     */
     public Arrow getDisabledArrow() {
         return this.disabledArrow;
     }
 
+    /**
+     * Getter for currentTile
+     * @return The currentTile
+     */
     public Tile getCurrentTile() {
         return this.currentTile;
     }
 
+    /**
+     * Get the current treasure for the passsed in player
+     * @param playerID ID for the player who's treasure you want
+     * @return The current treasure if there is one or NULL if  the player deck
+     *          is empty
+     */
     public TreasureType getCurrentTreasure(int playerID) {
         List<TreasureType> temp = treasureDecks.get(playerID);
         if (temp.size() > 0) {
@@ -96,6 +110,12 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    /**
+     * Get the information about a passed in tile
+     * @param x x loc of tile
+     * @param y y loc of tile
+     * @return The tile
+     */
     public Tile getTile(int x, int y) {
         return this.gameBoard[x][y];
     }
@@ -109,6 +129,10 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    /**
+     * Set the previous state
+     * @param state the state to be set
+     */
     public void setPrevState(LabyrinthGameState state) {
         this.prevState = state;
     }
@@ -156,7 +180,7 @@ public class LabyrinthGameState extends GameState {
         for (int i = 0; i < 9; i++) {
             cornerTreasures.add(TreasureType.NONE);
         }
-
+        //These treasures will always be on a corner tile
         cornerTreasures.add(TreasureType.OWL);
         cornerTreasures.add(TreasureType.SPIDER);
         cornerTreasures.add(TreasureType.BOW);
@@ -164,6 +188,7 @@ public class LabyrinthGameState extends GameState {
         cornerTreasures.add(TreasureType.MOTH);
         cornerTreasures.add(TreasureType.FOX);
 
+        //These treasures will always be on a intersection tile
         intersectionTreasures.add(TreasureType.URN);
         intersectionTreasures.add(TreasureType.BAT);
         intersectionTreasures.add(TreasureType.GOBLET);
@@ -176,6 +201,7 @@ public class LabyrinthGameState extends GameState {
         for (int i = 0; i < NUM_RANDOM_TILES; i++) {
             int randomRotation = (new Random().nextInt(4))*90;
 
+            //Add tiles to the the random arraylist
             if (numIntersection > 0) {
                 randomPieces.add(new Tile(TileType.INTERSECTION, randomRotation,
                         intersectionTreasures.remove(0), this.gameBoard));
@@ -208,7 +234,7 @@ public class LabyrinthGameState extends GameState {
         // Set current tile to last piece
         this.currentTile = randomPieces.remove(0);
 
-        // Non-movable pieces
+        // The following code sets the locations of Non-movable tiles
         this.gameBoard[0][0] = new Tile(
                 TileType.RED_ENTRY,
                 0,
@@ -237,7 +263,7 @@ public class LabyrinthGameState extends GameState {
                 this.gameBoard,
                 0,6);
 
-        // Below is the setting of the fixed tiles on the board
+        // The following code sets the locations for fixed tiles
         this.gameBoard[0][2] = new Tile(
                 TileType.INTERSECTION,
                 90,
@@ -323,7 +349,7 @@ public class LabyrinthGameState extends GameState {
                 6,4);
 
 
-        // Check connections for each tile
+        // Update connections for each tile
         this.updateTiles();
 
     }
@@ -425,6 +451,13 @@ public class LabyrinthGameState extends GameState {
         }
     }
 
+    /**
+     * This method will find the passed in player's current treasure location on
+     * the on the board. (Only used by AI)
+     *
+     * @param p The player who's treasure you want to find
+     * @return The x,y location of the passed in players current treasure
+     */
     public int[] findTreasureLoc(Player p) {
         for (Tile[] row : gameBoard) {
             for (Tile spot : row) {
@@ -437,7 +470,6 @@ public class LabyrinthGameState extends GameState {
     }
 
     /**
-     *
      * Get current player turn
      *
      * @return whos turn it is
@@ -500,13 +532,17 @@ public class LabyrinthGameState extends GameState {
      * Update the connections of all tiles on the board
      */
     private void updateTiles() {
+        //Loop through each row and column
         for (Tile[] row1 : this.gameBoard) {
             for (Tile spot1 : row1) {
+                //Helper method to determine connections
                 spot1.calculateConnections();
             }
         }
+        //Loop through each row and column
         for (Tile[] row2 : this.gameBoard) {
             for (Tile spot2 : row2) {
+                //Helper method to determine connections
                 spot2.calculateConnectedTiles();
             }
         }
@@ -556,14 +592,17 @@ public class LabyrinthGameState extends GameState {
     public Tile getPlayerLoc(Player p) {
         Tile playerTile = null;
         boolean found = false;
+        //Loop through each row and column on the board
         for (Tile[] row : this.gameBoard) {
             for ( Tile spot : row) {
+                //Check to see if the passed in player has been found
                 if (spot.getPawn()[p.ordinal()]) {
                     playerTile = spot;
                     found = true;
                     break;
                 }
             }
+            // Break if we found the player
             if (found) break;
         }
         return playerTile;
@@ -590,7 +629,9 @@ public class LabyrinthGameState extends GameState {
      * @return true if you can rotate
      */
     public boolean checkRotate(boolean clockwise) {
+        //Player can only rotate a tile if they have NOT inserted a tile yet
         if (!this.shiftedLabyrinthThisTurn) {
+            //Determine which way to rotate the currentTile
             if (clockwise) {
                 this.currentTile.rotateClockwise();
             } else {
@@ -608,15 +649,21 @@ public class LabyrinthGameState extends GameState {
      * @return true if it ended
      */
     public boolean checkEndTurn() {
+        //If a player has inserted a tile, they may end their turn
         if (this.shiftedLabyrinthThisTurn) {
+            //It is now a new player's turn, so reset variables used to
+            //determine in a player can end turn
             this.shiftedLabyrinthThisTurn = false;
             this.foundTreasureThisTurn = false;
             switch (this.playerTurn) {
+                //Tell gameState which player's turn is next
                 case RED: this.playerTurn = Player.YELLOW; break;
                 case YELLOW: this.playerTurn = Player.BLUE; break;
                 case BLUE: this.playerTurn = Player.GREEN; break;
                 case GREEN: this.playerTurn = Player.RED; break;
             }
+            //Set variable which allows player to reset to beginning of their
+            //turn
             this.prevState = new LabyrinthGameState(this);
             return true;
         } else {
@@ -633,6 +680,7 @@ public class LabyrinthGameState extends GameState {
         if (this.prevState == null) {
             return false;
         } else {
+            //Reset all gameState variables to value at beginning of player turn
             LabyrinthGameState temp = new LabyrinthGameState(this.prevState);
             this.playerTurn = temp.playerTurn;
             this.gameBoard = temp.gameBoard;
@@ -653,9 +701,17 @@ public class LabyrinthGameState extends GameState {
      * @return true if you can slide it
      */
     public boolean checkSlideTile(Arrow clickedArrow) {
+        //Check to make sure user didn't press the disabled arrow and they
+        //haven't shifted the labyrinth yet.
         if (clickedArrow != this.disabledArrow && !shiftedLabyrinthThisTurn) {
             Tile tempTile = this.currentTile; //Tile to slide in
 
+            //Large switch statement to determine which arrow was pressed.
+            //Once inside the switch statement the following occurs
+            //1) "insert" currentTile adjacent to the the pressed arrow
+            //2) shift all other tiles over
+            //3) remove the tile opposite the arrow and save it to currentTile.
+            //NOTE: These steps are same for every arrow in the following switch
             switch (clickedArrow){
                 case LEFT_TOP:
                     this.currentTile = this.gameBoard[6][1];
@@ -810,9 +866,14 @@ public class LabyrinthGameState extends GameState {
                     this.gameBoard[5][6].setLoc(5,6);
                     break;
                 }
-
+            //Array to determine which pawns are on the currentTle
             boolean[] temp = this.currentTile.getPawn();
 
+            //Switch Steps:
+            //1) Disable the arrow opposite the pressed arrow
+            //2) If there is a pawn on the tile that is pushed out,
+            //   move it to the tile adjacent to the pressed arrow.
+            //NOTE: These steps are the same for every case in the switch
             switch (clickedArrow) {
                 case LEFT_TOP: {
                     this.disabledArrow = Arrow.RIGHT_TOP;
@@ -923,9 +984,10 @@ public class LabyrinthGameState extends GameState {
                 } break;
 
             }
-
+            //Update tile connections
             this.updateTiles();
 
+            //Tell the gameState that the board has been shifted.
             this.shiftedLabyrinthThisTurn = true;
 
             return true;
@@ -965,11 +1027,16 @@ public class LabyrinthGameState extends GameState {
                 temp2[4] = false;
 
 
+                //Get current players' treasure objective
                 TreasureType yourTreasure = this.getCurrentTreasure(
                         playerTurn.ordinal());
+                //Make sure there is treasure in the players deck
                 if (yourTreasure != null) {
+                    //Check to see if the tile contains the players treasure
                     if (this.gameBoard[locX][locY].getTreasure() ==
                             yourTreasure) {
+                        //Update the tile and player's treasure deck if a
+                        //treasure was collected.
                         this.gameBoard[locX][locY].setTreasure(TreasureType.NONE);
                         this.treasureDecks.get(this.playerTurn.ordinal()).remove(0);
                         this.updateDeckSizes();

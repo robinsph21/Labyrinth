@@ -133,7 +133,7 @@ public class Tile implements Serializable {
     }
 
     /**
-     * Helper method to determine while tiles are surrounding this tile
+     * Helper method to determine which tiles are surrounding this tile
      */
     public void calculateConnectedTiles() {
 
