@@ -5,9 +5,15 @@ import android.widget.ImageView;
 import cs301.up.edu.game.Game;
 import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.game.GamePlayer;
-
+/**
+ * Defines the Board as it is seen in the GUI. Made up of BoardSpots and
+ * BoardEdges
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
+ * Date: 2/27/2019
+ */
 public class Board {
 
+    /* Instance Variables */
     private static final int LENGTH = 9;
     private BoardSpot[][] gameBoard = new BoardSpot[LENGTH][LENGTH];
     private BoardSpot[][] gameBoardHighlights = new BoardSpot[LENGTH][LENGTH];
@@ -129,14 +135,31 @@ public class Board {
         }
     }
 
+    /**
+     * Method to get the boardspot at a specific location
+     * in the board
+     * @param locX x-coordinate of the spot
+     * @param locY y-coordinate of the spot
+     * @return the BoardSpot
+     */
     public BoardSpot getBoardSpot(int locX, int locY) {
         return gameBoard[locX][locY];
     }
 
+    /**
+     * Method to return a highlighted BoardSpot
+     * @param locX x-coordinate of the spot
+     * @param locY y-coordinate of the spot
+     * @return the BoardSpot
+     */
     public BoardSpot getHighlightSpot(int locX, int locY) {
         return gameBoardHighlights[locX][locY];
     }
 
+    /**
+     * Mutator for setting the game of each part of the board
+     * @param game
+     */
     public void setGame(Game game) {
         this.game = game;
         for (int i = 0; i < 9; i++) {
@@ -146,6 +169,10 @@ public class Board {
         }
     }
 
+    /**
+     * Accessor for the board's game
+     * @return
+     */
     public Game getGame() {
         return this.game;
     }

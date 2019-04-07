@@ -18,22 +18,23 @@ public class BoardTile extends BoardSpot {
 
     /* Instance Variables */
     private boolean fixed;
-    private TreasureType treasure;
+    private TreasureType treasure; //the type of treasure on the tile
     private GamePlayer player;
     private Player pawn;
 
-    //TODO: Finish Commenting this
+
     /**
      * Ctor for a BoardTile
      * @param v the imageview of each boardtile
-     * @param locX the x-coordinate
-     * @param locY
-     * @param fixed
-     * @param player
-     * @param game
+     * @param locX the x-coordinate of the tile on the board
+     * @param locY the y-coordinate of the tile on the board
+     * @param fixed a boolean of whether the tile is fixed or movable
+     * @param player the player viewing the GUI
+     * @param game the current game
      */
     public BoardTile(View v, int locX, int locY, boolean fixed,
                      GamePlayer player, Game game) {
+        //calling parent constructor
         super(v, locX,locY);
         this.fixed = fixed;
         this.player = player;
@@ -41,26 +42,50 @@ public class BoardTile extends BoardSpot {
         this.getXmlObj().setOnClickListener(this);
     }
 
+    /**
+     * An accessor for the fixed boolean
+     * @return
+     */
     public boolean isFixed() {
         return this.fixed;
     }
 
+    /**
+     * An accessor for the treasure type
+     * @return
+     */
     public TreasureType getTreasure() {
         return this.treasure;
     }
 
+    /**
+     * Mutator for the treasure type
+     * @param treasure
+     */
     public void setTreasure(TreasureType treasure) {
         this.treasure = treasure;
     }
 
+    /**
+     * Accessor for the type of pawn on the tile
+     * @return
+     */
     public Player getPawn() {
         return this.pawn;
     }
 
+    /**
+     * Mutator for the pawn on the tile
+     * @param pawn
+     */
     public void setPawn(Player pawn) {
         this.pawn = pawn;
     }
 
+    /**
+     * Required on click method
+     * @param v the view being clicked
+     */
     @Override
     public void onClick(View v) {
         // if we are not yet connected to a game, ignore
@@ -69,9 +94,11 @@ public class BoardTile extends BoardSpot {
         // Construct the action and send it to the game
         GameAction action = null;
 
+        //make the action a new movement action
         action = new LabyrinthMovePawnAction(this.player,
                 this.getLocX() - 1, this.getLocY() - 1);
 
+        //send the action
         game.sendAction(action);
     }
 }
