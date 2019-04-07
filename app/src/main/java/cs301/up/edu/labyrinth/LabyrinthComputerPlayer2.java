@@ -16,9 +16,9 @@ import cs301.up.edu.labyrinth.enums.Player;
 import static java.lang.Math.sqrt;
 
 /**
- * A computer-version of a Labyrinth-player.  Since this is such a simple game,
- * it just sends "+" and "-" commands with equal probability, at an average
- * rate of one per second.
+ * A computer-version of a Labyrinth-player. This si the smarter AI
+ * that will generate all of its possible moves for a turn and
+ * evaluate each one based on a heuristic we made
  *
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
@@ -76,8 +76,17 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
 
     }
 
+    /**
+     * Run method for the threads that are spawned to calculate
+     * AI possible moves
+     */
     public void run() {
+        //Start the root of the tree that will hold all possible AI moves
         AINode root = new AINode(this.state);
+
+        //make all 4 possible rotations of the current tile
+        //and spawn a thread to calculate the rest of the
+        //possible move actions
         switch (this.possibleRotation) {
             case 0:
                 this.possibleRotation++;
@@ -116,6 +125,12 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
 
     }
 
+    /**
+     * This method will call a method to generate all
+     * the moves the AI can make, and store them, then
+     * call another method to decide which is the
+     * best move, then generate the final move action
+     */
     private void calculateActions() {
 
         //Generate All Possible Moves In Tree
@@ -134,6 +149,12 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         generateActions(move);
     }
 
+    /**
+     * Method to generate all the possible moves the AI
+     * can make
+     * @param root the root of the actions tree
+     * @param i based on the rotation number of the node
+     */
     private void generateMoves(AINode root, int i) {
 
         //Make All Rotates
@@ -166,7 +187,11 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
     }
 
 
-
+    /**
+     * Will generate the game actions corresponding to the movement
+     * actions decided earlier and send them to the gamestate
+     * @param move the array of move choices of the AI
+     */
     private void generateActions(double[] move) {
         //Rotate Actions
         for (int i = 0; i <= move[0]; i++) {
@@ -228,6 +253,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         double typeTileVal = 0;
         double numberOfConnectionsVal = 0;
 
+        //calculating your treasure points
         treasureVal = (6.0 - (double)(state.getPlayerDeckSize(
                 Player.values()[playerNum])))/6.0*treasureValTotal;
 
@@ -241,6 +267,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
                     / 10.0 * nearTreasureValTotal;
         }
 
+        //calculating points for the type of tile it can end on
         switch (state.getPlayerLoc(Player.values()[playerNum]).getType()) {
             case STRAIGHT:
                 typeTileVal = 5.0 / 10.0 * typeTileValTotal;
@@ -253,36 +280,49 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
                 break;
         }
 
+        //calculating points based on # of connections created
         numberOfConnectionsVal = ((double)generatePossibleMoveActions(state).size()
                 /49.0*numberOfConnectionsValTotal);
 
+        //calculating final score
         score = (treasureVal + nearTreasureVal +
                 typeTileVal + numberOfConnectionsVal)/100.0;
 
         return score;
     }
 
+    /**
+     * Calculates distance between any 2 given tiles
+     * @param pos1 the x&y pos of one tile
+     * @param pos2 the x&y pos of another tile
+     * @return the distance between them
+     */
     private double findDistance(int[] pos1, int[] pos2) {
         return sqrt((pos1[0]-pos2[0])*(pos1[0]-pos2[0])+
                 (pos1[1]-pos2[1])*(pos1[1]-pos2[1]));
     }
 
+    /**
+     * Calculate which board corner is home
+     * based on the player number
+     * @return the x&y pos of the home corner
+     */
     private int[] findHome() {
         int[] loc = new int[2];
         switch (playerNum) {
-            case 0:
+            case 0: //player RED's home
                 loc[0] = 0;
                 loc[1] = 0;
                 break;
-            case 1:
+            case 1: //player YELLOW's home
                 loc[0] = 6;
                 loc[1] = 0;
                 break;
-            case 2:
+            case 2: //player GREEN's home
                 loc[0] = 6;
                 loc[1] = 6;
                 break;
-            case 3:
+            case 3: //player BLUE's home
                 loc[0] = 0;
                 loc[1] = 6;
                 break;
@@ -294,6 +334,12 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         return loc;
     }
 
+    /**
+     * Will generate an ArrayList of every possible locations on the board
+     * that the player can move to
+     * @param state the current state of the game
+     * @return an arraylist of integer coordinates
+     */
     private List<int[]> generatePossibleMoveActions(LabyrinthGameState state) {
         List<Tile> tiles = new ArrayList<>();
         Tile orig = state.getPlayerLoc(Player.values()[playerNum]);
@@ -309,6 +355,12 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         return locations;
     }
 
+    /**
+     * Will recursively look for available locations to move to
+     * and add them to the instance array list of availableSpots
+     * @param orig
+     * @param availableSpots
+     */
     private void calculatePossibleMoves(Tile orig, List<Tile> availableSpots) {
         for (Tile spot : orig.getConnectedTiles()) {
             if (spot != null) {
@@ -326,11 +378,19 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
      * Queue Stuff
      */
 
+    /**
+     * Method for pushing actions onto the queue
+     * @param action the action to be pushed
+     */
     private void push(GameAction action) {
         this.queue.add(action);
     }
 
 
+    /**
+     * Method to pull actions off the top of the queue
+     * @return the action returned
+     */
     private GameAction pull() {
         if (this.queue.size() > 0) {
             return this.queue.remove(0);
@@ -339,6 +399,9 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         }
     }
 
+    /**
+     * Unit tests run on the AI
+     */
     public void test() {
 
     }
