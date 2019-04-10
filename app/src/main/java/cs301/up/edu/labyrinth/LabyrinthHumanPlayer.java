@@ -446,15 +446,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                     }
                 }
                 //If current treasure, highlight it
-                try {
-                    if (treasureIndex == treasure) {
-                        ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
-                                setBackgroundResource(R.drawable.highlight);
-                    } else {
-                        ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
-                                setBackgroundResource(R.drawable.empty);
-                    }
-                } catch (NullPointerException e) {
+                if (treasureIndex == treasure && treasureIndex != 0) {
+                    ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
+                            setBackgroundResource(R.drawable.highlight);
+                } else {
                     ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
                             setBackgroundResource(R.drawable.empty);
                 }
