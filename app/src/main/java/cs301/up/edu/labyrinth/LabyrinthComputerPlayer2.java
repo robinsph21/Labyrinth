@@ -243,10 +243,10 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         double score = 0;
 
         //Assign Percentages of Score
-        final double treasureValTotal = 80; //Based on number of treasures left
+        final double treasureValTotal = 75; //Based on number of treasures left
         final double nearTreasureValTotal = 15; //Based on proximity to treasure
-        final double typeTileValTotal = 1; //Based on which tile you are on
-        final double numberOfConnectionsValTotal = 4; //Based on how many places you can move
+        final double typeTileValTotal = 3; //Based on which tile you are on
+        final double numberOfConnectionsValTotal = 7; //Based on how many places you can move
 
         double treasureVal = 0;
         double nearTreasureVal = 0;
@@ -397,12 +397,5 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         } else {
             return null;
         }
-    }
-
-    /**
-     * Unit tests run on the AI
-     */
-    public void test() {
-
     }
 }
