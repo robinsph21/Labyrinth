@@ -136,7 +136,8 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
      */
     public void updateDisplay() {
 
-        //Update Decks
+        //Draw greyed-out image for all players deck. We highlight the current
+        // players deck below
         this.playerRedDeck.getXmlObj().setBackgroundResource
                 (R.drawable.card_back_red_greyed);
         this.playerYellowDeck.getXmlObj().setBackgroundResource
@@ -146,6 +147,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
         this.playerGreenDeck.getXmlObj().setBackgroundResource
                 (R.drawable.card_back_green_greyed);
 
+        // Determine which players turn it is and highlight their deck
         switch (this.state.getPlayerTurn()) {
             case RED:
                 this.playerRedDeck.getXmlObj().setBackgroundResource
@@ -165,7 +167,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 break;
         }
 
-        //Update Number of Treasures
+        //Update Number of Treasures in players deck
         int numCards = state.getPlayerDeckSize(Player.RED);
         this.playerRedDeck.getXmlObj().setImageResource(number[numCards]);
 
@@ -206,7 +208,8 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
 
         //Update clickable arrows
 
-        //All arrows clickable and showing
+        // Set the images for all all arrows, we remove the disabled arrow image
+        // later
         for (BoardEdge member : arrows) {
             member.setClickable(true);
             switch (member.getThisArrow()) {
@@ -260,7 +263,10 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             }
 
         }
-
+        // The following are the steps for the below switch statement
+        // 1) Determine which arrow is disabled
+        // 2) make the disabled arrow not clickable
+        // 3) remove clickable image
         switch (state.getDisabledArrow()) {
             case LEFT_TOP: {
                 arrows[Arrow.LEFT_TOP.ordinal()].setClickable(false);
@@ -335,7 +341,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             } break;
         }
 
-        // Update gameBoard
+        // Loop through the board so it can be updated
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 Tile current = this.state.getTile(i,j);
@@ -345,83 +351,113 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
                         setRotation(rotation);
 
-                // Check if pawn on tile
+                // all four pawns could be on one spot so we use an array to
+                // to hold all the pawns
                 boolean[] pawn = current.getPawn();
+                // Check to see which pawns are on current tile
                 if (pawn[4]) {
+                    //all four pawns are on this tile
                     ourGameBoard.getBoardSpot(i+1,j+1).getXmlObj().
                             setImageResource(allPlayers[4]);
                 } else if (pawn[0]) {
+                    // the red Player is on this tile, need to figure out if any
+                    // other players are present and apply appropriate image
+                    // stored in multiplePlayers array
                     if (pawn[1]) {
+                        // Yellow player is also on this tile
                         if (pawn[2]) {
+                            // Blue player is also on this tile
                             if (pawn[3]) {
+                                // Green player is also on this tile
+                                // all players present
                                 ourGameBoard.getBoardSpot(i+1,j+1).
                                         getXmlObj().
                                         setImageResource(multiplePlayers[0]);
                             } else {
+                                // red yellow blue present
                                 ourGameBoard.getBoardSpot(i+1,j+1).
                                         getXmlObj().
                                         setImageResource(multiplePlayers[1]);
                             }
                         } else if (pawn[3]){
+                            // red yellow green present
                             ourGameBoard.getBoardSpot(i+1,j+1).
                                     getXmlObj().
                                     setImageResource(multiplePlayers[2]);
                         } else {
+                            // red yellow present
                             ourGameBoard.getBoardSpot(i+1,j+1).
                                     getXmlObj().
                                     setImageResource(multiplePlayers[3]);
                         }
                     } else if (pawn[2]) {
                         if (pawn[3]) {
+                            // red green blue present
                             ourGameBoard.getBoardSpot(i+1,j+1).
                                     getXmlObj().
                                     setImageResource(multiplePlayers[4]);
                         } else {
+                            // red blue present
                             ourGameBoard.getBoardSpot(i+1,j+1).
                                     getXmlObj().
                                     setImageResource(multiplePlayers[5]);
                         }
                     } else if (pawn[3]) {
+                        // red green present
                         ourGameBoard.getBoardSpot(i+1,j+1).
                                 getXmlObj().
                                 setImageResource(multiplePlayers[6]);
                     } else {
+                        //only red
                         ourGameBoard.getBoardSpot(i+1,j+1).
                                 getXmlObj().
                                 setImageResource(allPlayers[0]);
                     }
                 } else if (pawn[1]) {
+                    // Yellow player is on this tile, need to figure out if any
+                    // other players are present and apply appropriate image
+                    // stored in multiplePlayers array
                     if (pawn[2]) {
                         if (pawn[3]) {
+                            // yellow green blue present
                             ourGameBoard.getBoardSpot(i+1,j+1).
                                     getXmlObj().
                                     setImageResource(multiplePlayers[7]);
                         } else {
+                            // yellow blue present
                             ourGameBoard.getBoardSpot(i+1,j+1).
                                     getXmlObj().
                                     setImageResource(multiplePlayers[8]);
                         }
                     } else if (pawn[3]) {
+                        // yellow green present
                         ourGameBoard.getBoardSpot(i+1,j+1).
                                 getXmlObj().
                                 setImageResource(multiplePlayers[9]);
                     } else {
+                        //only yellow
                         ourGameBoard.getBoardSpot(i+1,j+1).
                                 getXmlObj().
                                 setImageResource(allPlayers[1]);
                     }
 
                 } else if (pawn[2]) {
+                    // Blue player is on this tile, need to figure out if any
+                    // other players are present and apply appropriate image
+                    // stored in multiplePlayers array
                     if (pawn[3]) {
+                        // green blue present
                         ourGameBoard.getBoardSpot(i+1,j+1).
                                 getXmlObj().
                                 setImageResource(multiplePlayers[10]);
                     } else {
+                        //only blue is present
                         ourGameBoard.getBoardSpot(i+1,j+1).
                                 getXmlObj().
                                 setImageResource(allPlayers[2]);
                     }
                 } else if (pawn[3]) {
+                    // Green player is on this tile
                     ourGameBoard.getBoardSpot(i+1,j+1).
                             getXmlObj().
                             setImageResource(allPlayers[3]);
@@ -445,10 +481,11 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                                 setImageResource(R.drawable.empty);
                     }
                 }
-                //If current treasure, highlight it
+                //If the next tile contains the current treasure, highlight it
                 if (treasureIndex == treasure && treasureIndex != 0) {
                     ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
                             setBackgroundResource(R.drawable.highlight);
+                //the next tile is not players current tile, so don't highlight
                 } else {
                     ourGameBoard.getHighlightSpot(i + 1, j + 1).getXmlObj().
                             setBackgroundResource(R.drawable.empty);
@@ -485,19 +522,26 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
             this.state = (LabyrinthGameState) info;
             updateDisplay();
 
+        // Human tried to make an action when it wasn't their turn
         } else if (info instanceof NotYourTurnInfo) {
             Toast.makeText(this.myActivity, "Not Your Turn!",
                     Toast.LENGTH_SHORT).show();
 
+        // Human tried to make an illegal move
         } else if (info instanceof IllegalMoveInfo) {
             Toast.makeText(this.myActivity, "Illegal Move!!",
                     Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * Set the decks based on which number the human player has chosen
+     */
     private void setDecks() {
+        //Determine which player number the human has chosen
         switch (this.playerNum) {
             case 0:
+                // the human has chosen red
                 playerRedDeck = new PlayerDeck(this.yourDeck, Player.RED);
 
                 playerYellowDeck = new PlayerDeck(this.opponent1Deck, Player.YELLOW);
@@ -507,6 +551,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
                 break;
             case 1:
+                // the human has chosen yellow
                 playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
 
                 playerYellowDeck = new PlayerDeck(this.yourDeck, Player.YELLOW);
@@ -516,6 +561,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
                 break;
             case 2:
+                // the human has chosen Blue
                 playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
 
                 playerYellowDeck = new PlayerDeck(this.opponent2Deck, Player.YELLOW);
@@ -525,6 +571,7 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 playerGreenDeck = new PlayerDeck(this.opponent3Deck, Player.GREEN);
                 break;
             case 3:
+                // the human has chosen Green
                 playerRedDeck = new PlayerDeck(this.opponent1Deck, Player.RED);
 
                 playerYellowDeck = new PlayerDeck(this.opponent2Deck, Player.YELLOW);
@@ -567,42 +614,50 @@ public class LabyrinthHumanPlayer extends GameHumanPlayer {
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
 
-
+        //board to be shown
         ourGameBoard = new Board(this, this.game, this.myActivity);
 
+        // Set help button
         rulesHelpButton = new RulesHelp(this.myActivity.findViewById
                 (R.id.rulesHelpButton),
                 this, this.game, this.myActivity);
 
+        // Set player and opponents decks
         yourDeck = this.myActivity.findViewById(R.id.yourDeck);
         opponent1Deck = this.myActivity.findViewById(R.id.oponent1Deck);
         opponent2Deck = this.myActivity.findViewById(R.id.oponent2Deck);
         opponent3Deck = this.myActivity.findViewById(R.id.oponent3Deck);
 
+        //Set current treasure goal
         currentTreasure = new TreasureGoal(this.myActivity.findViewById
                 (R.id.currentTreasure));
 
+        // set rotate clockwise button
         rotateClockwise = new Rotate(this.myActivity.findViewById
                 (R.id.rotateClockwise), true,
                 this, this.game);
 
+        // set rotate counter clockwise button
         rotateCounterClockwise = new Rotate(this.myActivity.findViewById
                 (R.id.rotateCounterClockwise), false,
                 this, this.game);
 
+        // Set current tile
         currentTile = new BoardTile(this.myActivity.
                 findViewById(R.id.currentTile),-1,-1,false,
                 this,this.game);
 
+        // Set end turn button
         endTurn = new EndTurn(this.myActivity.findViewById
                 (R.id.endTurn),
                 this, this.game);
 
+        // Set reset button
         reset = new Reset(this.myActivity.findViewById
                 (R.id.reset),
                 this, this.game);
 
-
+        // Set all arrow images
         arrows[0] = (BoardEdge)ourGameBoard.getBoardSpot(2,0);
         arrows[1] = (BoardEdge)ourGameBoard.getBoardSpot(4,0);
         arrows[2] = (BoardEdge)ourGameBoard.getBoardSpot(6,0);
