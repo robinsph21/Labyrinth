@@ -89,8 +89,8 @@ public class LabyrinthComputerPlayer1 extends GameComputerPlayer {
     }
 
     /**
-     * Method to calculate AI moves. Will randomly insert a tile, and randomly
-     * move one space in a new direction
+     * Method to calculate AI moves. Will randomly insert a tile, and will
+     * move to first available space it can reach
      */
     private void calculateNextMoves() {
         //Figure out actions and push to queue

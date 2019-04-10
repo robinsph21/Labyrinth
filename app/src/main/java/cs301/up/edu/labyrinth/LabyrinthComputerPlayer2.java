@@ -16,7 +16,7 @@ import cs301.up.edu.labyrinth.enums.Player;
 import static java.lang.Math.sqrt;
 
 /**
- * A computer-version of a Labyrinth-player. This si the smarter AI
+ * A computer-version of a Labyrinth-player. This is the smarter AI
  * that will generate all of its possible moves for a turn and
  * evaluate each one based on a heuristic we made
  *
@@ -78,7 +78,8 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
 
     /**
      * Run method for the threads that are spawned to calculate
-     * AI possible moves
+     * AI possible moves, a new thread is spawned after each
+     * current tile rotation
      */
     public void run() {
         //Start the root of the tree that will hold all possible AI moves
@@ -154,6 +155,21 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
      * can make
      * @param root the root of the actions tree
      * @param i based on the rotation number of the node
+     *
+     *  Here is a representation of the AI's action tree
+     *                           (root node of AI actions)
+     *                         /        |        \         \
+     *                       /          |         \         \
+     * current tile       not         one        two        three
+     *  rotations:       rotated    rotation    rotations   rotations
+     *                 (0 degrees)   (90 deg)    (180 deg)   (270 deg)
+     *                 / |      \       |            |           |
+     *               /   | (10)  \  (12 pos)      (12 pos)    (12 pos)
+     *              /    |  ...   \     |            |           |
+     *           (all possible locations to slide tile in for each rotation)
+     *              /   |
+     *            /     |    .... a lot of possible nodes
+     *          (all possible places to move to after sliding in tile)
      */
     private void generateMoves(AINode root, int i) {
 
@@ -163,7 +179,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
             rotateNode.getState().checkRotate(true);
         }
 
-        //Check Slides
+        //Checks all possible slide locations
         for (int j = 0; j < 12; j++ ) {
             if (rotateNode.getState().getDisabledArrow().ordinal() == j) {
                 continue;
@@ -171,7 +187,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
             AINode slideNode = new AINode(rotateNode.copyState());
             slideNode.getState().checkSlideTile(Arrow.values()[j]);
 
-            //Check Moves
+            //Checks all possible move locations for each slide location
             List<int[]> movePlaces = generatePossibleMoveActions(
                     slideNode.getState());
             for (int[] spot : movePlaces) {
@@ -245,7 +261,7 @@ public class LabyrinthComputerPlayer2 extends GameComputerPlayer
         //Assign Percentages of Score
         final double treasureValTotal = 80; //Based on number of treasures left
         final double nearTreasureValTotal = 15; //Based on proximity to treasure
-        final double typeTileValTotal = 1; //Based on which tile you are on
+        final double typeTileValTotal = 1; //Based on which tile type you are on
         final double numberOfConnectionsValTotal = 4; //Based on how many places you can move
 
         double treasureVal = 0;
