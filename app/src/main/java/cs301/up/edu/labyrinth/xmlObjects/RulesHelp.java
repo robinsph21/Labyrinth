@@ -60,7 +60,16 @@ public class RulesHelp extends XMLObject {
                 true,
                 (ImageView)this.activity.findViewById(R.id.rules_slide),
                 activity, player);
+        //creates a RulesReturn listener for the top bar or bottom X so
+        //the player can return to the game without scrolling through
+        //all the rules.
+        RulesReturn exitRules = new RulesReturn(
+                this.activity.findViewById(R.id.rules_return),
+                activity, player);
 
+        RulesReturn titleBar = new RulesReturn(
+                this.activity.findViewById(R.id.rules_title),
+                activity, player);
     }
 
     /**
