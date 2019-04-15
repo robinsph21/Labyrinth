@@ -7,6 +7,8 @@ import cs301.up.edu.game.Game;
 import cs301.up.edu.game.GameMainActivity;
 import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.R;
+import cs301.up.edu.labyrinth.enums.RulesButtons;
+
 /**
  * Defines the Rules/Help button at the top of the GUI that will
  * take the player to a page with all of the rules of the game
@@ -52,23 +54,27 @@ public class RulesHelp extends XMLObject {
         //arrows in the rules layout
         RulesSwitch prev = new RulesSwitch(
                 this.activity.findViewById(R.id.rules_previous),
-                false,
+                RulesButtons.PREVIOUS,
                 (ImageView)this.activity.findViewById(R.id.rules_slide),
                 activity, player);
         RulesSwitch next = new RulesSwitch(
                 this.activity.findViewById(R.id.rules_next),
-                true,
+                RulesButtons.NEXT,
                 (ImageView)this.activity.findViewById(R.id.rules_slide),
                 activity, player);
         //creates a RulesReturn listener for the top bar or bottom X so
         //the player can return to the game without scrolling through
         //all the rules.
-        RulesReturn exitRules = new RulesReturn(
-                this.activity.findViewById(R.id.rules_return),
+        RulesSwitch title = new RulesSwitch(
+                this.activity.findViewById(R.id.rules_title),
+                RulesButtons.EXIT,
+                (ImageView)this.activity.findViewById(R.id.rules_slide),
                 activity, player);
 
-        RulesReturn titleBar = new RulesReturn(
-                this.activity.findViewById(R.id.rules_title),
+        RulesSwitch exit = new RulesSwitch(
+                this.activity.findViewById(R.id.rules_return),
+                RulesButtons.EXIT,
+                (ImageView)this.activity.findViewById(R.id.rules_slide),
                 activity, player);
     }
 
