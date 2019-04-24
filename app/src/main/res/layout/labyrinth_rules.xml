@@ -9,6 +9,14 @@
     android:background="@drawable/rules_background"
     android:orientation="horizontal">
 
+    <Button
+        android:id="@+id/rules_title"
+        android:layout_width="925dp"
+        android:layout_height="110dp"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/empty" />
+
     <ImageView
         android:id="@+id/rules_slide"
         android:layout_width="wrap_content"
@@ -17,16 +25,23 @@
         android:layout_marginTop="65dp"
         android:src="@drawable/rules_slide_0" />
 
-    <ImageButton
+    <Button
         android:id="@+id/rules_previous"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="match_parent"
         android:background="@drawable/empty" />
 
-    <ImageButton
+    <Button
         android:id="@+id/rules_next"
-        android:layout_width="150dp"
-        android:layout_height="match_parent"
+        android:layout_width="130dp"
+        android:layout_height="670dp"
         android:layout_gravity="right"
+        android:background="@drawable/empty" />
+
+    <Button
+        android:id="@+id/rules_return"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="bottom|right"
         android:background="@drawable/empty" />
 </FrameLayout>

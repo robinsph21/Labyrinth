@@ -13,7 +13,16 @@ import cs301.up.edu.game.config.GamePlayerType;
 
 /**
  * this is the primary activity for Labyrinth game
- * 
+ * Beta Release Statement: Our game is fully working and all game features are
+ *      implemented. All rules are implemented with
+ *      any combination of AI's and humans (as long as there are 4
+ *      players). Network play is working as well for 4 human players.
+ *      The only issue found in the beta was people requested a more
+ *      clear exit button from the rules menu, but we did not add
+ *      any additional buttons. To exit the rules players hit the back
+ *      arrow on the first slide. We have no known/obvious bugs that have
+ *      been found in our testing/alpha release session
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * @author Andrew M. Nuxoll
  * @author Steven R. Vegdahl
  * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
