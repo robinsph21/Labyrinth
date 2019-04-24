@@ -18,7 +18,6 @@ public class RulesSwitch extends XMLObject {
 
     /* Instance Variables */
 
-
     private RulesButtons rulesButton;
     private ImageView display;
     private GameMainActivity activity;
@@ -32,7 +31,8 @@ public class RulesSwitch extends XMLObject {
     /**
      * Ctor for the RulesSwitch
      * @param v the view that the RuleSwitch is listening for
-     * @param rulesButton a boolean to determine if it the left or right arrow (left = false)
+     * @param rulesButton a boolean to determine if it the left or right arrow
+     *                    (left = false)
      * @param display the imageview that will be replaced to see each new rule
      * @param activity the current players game activity
      * @param player the id of the player who is trying to look at the rules

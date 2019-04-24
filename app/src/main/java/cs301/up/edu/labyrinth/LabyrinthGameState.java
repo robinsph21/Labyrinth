@@ -45,8 +45,8 @@ public class LabyrinthGameState extends GameState {
 
     /**
      * Constructor used to initialize a gamestate. It creates the gameboard by
-     * randomizing the starting player, randomizing player decks, and randomizing
-     * specific pieces on the board.
+     * randomizing the starting player, randomizing player decks, and
+     * randomizing specific pieces on the board.
      */
     public LabyrinthGameState() {
 

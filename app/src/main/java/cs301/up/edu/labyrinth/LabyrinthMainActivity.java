@@ -13,7 +13,7 @@ import cs301.up.edu.game.config.GamePlayerType;
 
 /**
  * this is the primary activity for Labyrinth game
- * Beta Release Statement: Our game is fully working and all game features are
+ * Final Release Statement: Our game is fully working and all game features are
  *      implemented. All rules are implemented with
  *      any combination of AI's and humans (as long as there are 4
  *      players). Network play is working as well for 4 human players.
@@ -89,10 +89,14 @@ public class LabyrinthMainActivity extends GameMainActivity {
 				PORT_NUMBER);
 
 		// Add the default players to the configuration
-		defaultConfig.addPlayer("Human", 0); // player 1: a human player
-		defaultConfig.addPlayer("Computer 1", 2); // player 2: an easy computer player
-		defaultConfig.addPlayer("Computer 2", 2); // player 3: an easy computer player
-		defaultConfig.addPlayer("Computer 3", 2); // player 4: a hard computer player
+		// player 1: a human player
+		defaultConfig.addPlayer("Human", 0);
+		// player 2: an easy computer player
+		defaultConfig.addPlayer("Computer 1", 2);
+		// player 3: an easy computer player
+		defaultConfig.addPlayer("Computer 2", 2);
+		// player 4: a hard computer player
+		defaultConfig.addPlayer("Computer 3", 2);
 		
 		// Set the default remote-player setup:
 		// - player name: "Remote Player"

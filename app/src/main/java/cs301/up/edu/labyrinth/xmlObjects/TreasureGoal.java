@@ -9,7 +9,6 @@ import android.widget.ImageView;
  * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * Date: 2/27/2019
  */
-
 public class TreasureGoal extends XMLObject{
 
     /**
@@ -21,6 +20,9 @@ public class TreasureGoal extends XMLObject{
     }
 
     @Override
+    /**
+     * Use the super's getter for this object
+     */
     public ImageView getXmlObj() {
         return (ImageView)super.getXmlObj();
     }

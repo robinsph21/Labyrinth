@@ -20,11 +20,12 @@ public class Board {
     private Game game;
 
     /**
-     * Constructor for our board. Our board is a 9x9 grid. All tiles on the outside of the grid are
-     * of type BoardEdge, all other cells are of type BoardTile. BoardTiles and BoardEdges have
-     * different properties based on their position. The below logic initializes the properties of
-     * cells to the correct values.
-     * In the below diagram, cell status can been determined based on the following legend.
+     * Constructor for our board. Our board is a 9x9 grid. All tiles on the
+     * outside of the grid are of type BoardEdge, all other cells are of type
+     * BoardTile. BoardTiles and BoardEdges have different properties based on
+     * their position. The below logic initializes the properties of cells to
+     * the correct values. In the below diagram, cell status can been determined
+     * based on the following legend.
      *
      * LEGEND
      * |   | - Denotes BoardTiles
@@ -99,7 +100,8 @@ public class Board {
                     }
                 } else if (j == 0 || j == 8) {
                     switch (i) {
-                        /*Make appropriate left and right columns BoardEdge clickable*/
+                        /*Make appropriate left and right columns BoardEdge
+                        clickable*/
                         case 2:
                             gameBoard[i][j] = new BoardEdge(imageObj,
                                     i, j, true,

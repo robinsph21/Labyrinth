@@ -12,9 +12,9 @@ import cs301.up.edu.labyrinth.actions.LabyrinthRotateAction;
 import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
 
 /**
- * A class that represents the state of a game. In our , the only
- * relevant piece of information is the value of the game's counter. The
- * CounterState object is therefore very simple.
+ * A class that represents the state of a game. In our , the only relevant piece
+ * of information is the value of the game's counter. The CounterState object is
+ * therefore very simple.
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
