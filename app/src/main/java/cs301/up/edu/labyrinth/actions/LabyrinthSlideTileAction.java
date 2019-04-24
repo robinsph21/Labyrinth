@@ -5,8 +5,8 @@ import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
 
 /**
- * A LabyrinthSlideTileAction is an action that is a "move" the game: either increasing
- * or decreasing the counter value.
+ * A LabyrinthSlideTileAction is an action that is a "move" the game: this is an action
+ * to slide the players current tile into the labyrinth
  *
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll

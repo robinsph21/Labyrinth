@@ -4,8 +4,9 @@ import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
 
 /**
- * A LabyrinthRotateAction is an action that is a "move" the game: either increasing
- * or decreasing the counter value.
+ * A LabyrinthRotateAction is an action that is a "move" the game: this action
+ * is an action to rotate the players current tile that they slide
+ * into the labyrinth
  *
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
