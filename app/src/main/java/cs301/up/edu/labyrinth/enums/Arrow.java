@@ -1,7 +1,7 @@
 package cs301.up.edu.labyrinth.enums;
 
 /**
- * Defines an arrow enumeration that represents one of the arrows on the board
+ * Defines an arrow enumeration that represents one of the arrows on the edge board
  *
  * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * Date: 2/27/2019
