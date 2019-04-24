@@ -8,7 +8,8 @@ import cs301.up.edu.labyrinth.enums.TreasureType;
 
 /**
  * Defines a board tile. The gameboard is made up of these tile objects.
- * They contain all information about a specific space.
+ * They contain all information about a specific space such as the type of
+ * tile it is and if it has a treasure.
  *
  * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * Date: 2/27/2019

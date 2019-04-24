@@ -25,6 +25,7 @@ import cs301.up.edu.game.config.GamePlayerType;
  * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * @author Andrew M. Nuxoll
  * @author Steven R. Vegdahl
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * @version July 2013
  */
 public class LabyrinthMainActivity extends GameMainActivity {

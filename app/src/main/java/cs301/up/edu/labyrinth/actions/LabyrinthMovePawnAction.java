@@ -4,8 +4,8 @@ import cs301.up.edu.game.GamePlayer;
 import cs301.up.edu.game.actionMsg.GameAction;
 
 /**
- * A LabyrinthMovePawnAction is an action that is a "move" the game: either increasing
- * or decreasing the counter value.
+ * A LabyrinthMovePawnAction is an action that is a "move" the game: the player
+ * clicks a tile on the board to move there
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
