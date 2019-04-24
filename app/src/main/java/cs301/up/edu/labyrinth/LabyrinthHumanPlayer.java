@@ -27,6 +27,7 @@ import android.widget.Toast;
  *
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * @version July 2013
  */
 public class LabyrinthHumanPlayer extends GameHumanPlayer {

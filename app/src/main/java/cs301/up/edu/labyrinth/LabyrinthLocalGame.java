@@ -18,6 +18,7 @@ import cs301.up.edu.labyrinth.actions.LabyrinthSlideTileAction;
  * 
  * @author Steven R. Vegdahl
  * @author Andrew M. Nuxoll
+ * @author Erik Torkelson, Spencer Nelson, Spencer Rose, Philip Robinson
  * @version July 2013
  */
 public class LabyrinthLocalGame extends LocalGame {
